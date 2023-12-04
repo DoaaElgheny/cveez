@@ -1,0 +1,35 @@
+<section class="modal-section">
+  <div class="modal-title">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.svg" alt="" srcset="" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="/assets/imgs/video-img.png" alt="" srcset="" />
+    <h3>
+      {{ "jobSeeker.please" | translate }}
+    </h3>
+    <p>
+      {{ "jobSeeker.VideoTitle" | translate }}
+    </p>
+    <a [href]="videoURl" target="_blank" [download]="videoURl">
+      {{ videoURl }}
+    </a>
+    <div class="copy-video">
+      <p >
+        <a [href]="videoLink" target="_blank">{{videoLink}}</a>
+        </p>
+      <!-- <button (click)="copy()" value="click to copy">
+        <img src="/assets/imgs/copy-new.svg" alt="" srcset="" />
+      </button> -->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="AcceptState()">
+      {{ "jobSeeker.Accept" | translate }}
+    </button>
+    <button (click)="RejectState()">
+      {{ "jobSeeker.Reject" | translate }}
+    </button>
+  </div>
+</section>

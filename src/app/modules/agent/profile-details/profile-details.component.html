@@ -1,0 +1,438 @@
+<div class="page-title mt-5" >
+  <h3 style="cursor: pointer" (click)="backClicked()" *ngIf="iSBackBtn==='true'">
+    <a class="back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+      </svg>
+    </a>
+    <span class="mx-2">
+      {{ "myOrderJobSeeker.back" | translate }}
+    </span>
+  </h3>
+</div>
+<div class="mt-5" style="height: 10px;"></div>
+ 
+<section class="profile-view">
+  <div class="page-content">
+    <div class="card-body py-3">
+      <div class="user-info">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12">
+            <div class="user-data">
+              <ng-container>
+                <div class="video-layout" *ngIf="
+                    userData?.vedioStatus === thevideoStatus.Accepted &&
+                    userData?.vedioAttachementFileStorageURL !== null
+                  " (click)="showVideo()">
+                  <img src="/assets/imgs/ic_play.svg" alt="" />
+                </div>
+                <div class="view-img">
+                  <img *ngIf="userData?.attachementFileStorageURL === null" src="/assets/imgs/user.svg" alt="" srcset=""
+                    (click)="showVideo()" />
+                  <img *ngIf="userData?.attachementFileStorageURL !== null" [src]="userData?.attachementFileStorageURL"
+                    alt="" srcset="" class="img-user" (click)="showVideo()" />
+                  <!-- <button>
+              <img src="/assets/imgs/camera.svg" alt="" srcset="" />
+            </button> -->
+                </div>
+              </ng-container>
+              <div class="user-details">
+                <h3 *ngIf="userData?.fullName !== null">
+                  {{ userData?.fullName }}
+                </h3>
+                <h3 *ngIf="userData?.fullName === null">-</h3>
+
+                <!-- <div *ngFor="let specialization of userData?.specializations">
+                                <strong>
+                                    {{ theLanguage=== 'ar'?(specialization?.nameAr?specialization?.nameAr:'-')
+                                    :(specialization?.nameEn?specialization?.nameEn:'-' )}}
+                                </strong>
+                            </div> -->
+
+                <!-- <div *ngFor="let Title of userData?.titles"> -->
+                <h5>
+                  {{
+                  theLanguage === "ar"
+                  ? userData?.titles[0].nameAr
+                  ? userData?.titles[0].nameAr
+                  : "-"
+                  : userData?.titles[0].nameEn
+                  ? userData?.titles[0].nameEn
+                  : "-"
+                  }}
+                </h5>
+                <!-- </div> -->
+              </div>
+            </div>
+            <ng-container *ngIf="userData?.isDownloadCV && iSdownloadCv !== 'false'">
+              <p class="ss" [ngStyle]="{ color: 'green' }"
+                *ngIf="condtionsToCurrentUser?.paymentType === this.payment.Paied">
+                {{
+                "myOrderJobSeeker.TheNumberOfCVSUploadsYouHaveRemaining"
+                | translate
+                }}({{ numberofUpdatedValue
+                }}<span>/ <span>{{ numberOfOriginalValue }}</span></span>)
+              </p>
+            </ng-container>
+            <p *ngIf="
+                condtionsToCurrentUser?.paymentType === this.payment.Expired
+              ">
+              <span class="expired" (click)="openRenewalPackage()">{{ "myOrderJobSeeker.timeOut" | translate }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body py-3 mt-5">
+      <div class="sec-title">
+        <h3>
+          {{ "viewProfileuser.CV" | translate }}
+        </h3>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <span>
+            <img class="img-video" src="/assets/imgs/user.svg" alt="" srcset="" />
+            <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+            <strong class="mx-3" *ngIf="
+                userData?.cvAttachementFileStorageURL !== null &&
+                userData?.isDownloadCV  && iSdownloadCv !== 'false'
+              ">
+              <a download style="cursor: pointer; color: blue" (click)="downloadCv(userData?.id)">{{
+                "viewProfileuser.AccessTheCVHere" | translate }}
+              </a>
+            </strong>
+            <strong class="mx-3" *ngIf="
+                userData?.cvAttachementFileStorageURL !== null &&
+                !userData?.isDownloadCV && iSdownloadCv === 'true'
+              ">
+              <a>{{ "viewProfileuser.AccessTheCVHere" | translate }} </a>
+            </strong> 
+            <strong class="mx-3" *ngIf="
+                userData?.cvAttachementFileStorageURL !== null &&
+                iSdownloadCv === 'false'
+              ">
+              <a download style="cursor: pointer; color: blue" (click)="downloadCvFromMyOrder(userData?.id)">{{
+                "viewProfileuser.AccessTheCVHere" | translate }}
+              </a>
+            </strong>
+
+            <strong class="mx-3" *ngIf="userData?.cvAttachementFileStorageURL === null">
+              -
+            </strong>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body py-3">
+      <div class="sec-title main-title">
+        <h3>
+          {{ "viewProfileuser.personalInformation" | translate }}
+        </h3>
+        <!-- <div class="action-edit-btn">
+            <button class="dropdown-item" (click)="openSeekerInfo()">
+              <img src="/assets/imgs/edit-icon.svg" alt="" srcset="" />
+            </button>
+          </div> -->
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.dateOfBirth" | translate }}
+            </span>
+            <strong *ngIf="userData?.birthDate !== null">
+              {{ userData?.birthDate | date : "dd/MM/yyyy" }}</strong>
+            <strong *ngIf="userData?.birthDate === null"> -</strong>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.gender" | translate }}
+            </span>
+            <strong *ngIf="userData?.gender !== null">
+              <span *ngIf="userData?.gender === 2">
+                {{ "viewProfileuser.male" | translate }}
+              </span>
+              <span *ngIf="userData?.gender === 3">
+                {{ "viewProfileuser.female" | translate }}
+              </span>
+            </strong>
+            <strong *ngIf="userData?.gender === null">-</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Nationality" | translate }}
+            </span>
+            <strong>
+              {{
+              theLanguage === "ar"
+              ? userData?.nationality?.nameAr
+              ? userData?.nationality?.nameAr
+              : "-"
+              : userData?.nationality?.nameEn
+              ? userData?.nationality?.nameEn
+              : "-"
+              }}
+            </strong>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Country" | translate }}
+            </span>
+            <div class="facility-info">
+              <strong>
+                {{
+                theLanguage === "ar"
+                ? userData?.country.nameAr
+                ? userData?.country.nameAr
+                : "-"
+                : userData?.country.nameEn
+                ? userData?.country.nameEn
+                : "-"
+                }}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body py-3">
+      <div class="sec-title main-title">
+        <h3>
+          {{ "viewProfileuser.BackgroundInformation" | translate }}
+        </h3>
+        <div class="action-edit-btn"></div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Jobtitle" | translate }}
+            </span>
+            <div *ngFor="let Title of userData?.titles">
+              <div>
+                <strong>
+                  {{
+                  theLanguage === "ar"
+                  ? Title?.nameAr
+                  ? Title?.nameAr
+                  : "-"
+                  : Title?.nameEn
+                  ? Title?.nameEn
+                  : "-"
+                  }}
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Specialization" | translate }}
+            </span>
+
+            <div *ngFor="let specialization of userData?.specializations">
+              <strong>
+                {{
+                theLanguage === "ar"
+                ? specialization?.nameAr
+                ? specialization?.nameAr
+                : "-"
+                : specialization?.nameEn
+                ? specialization?.nameEn
+                : "-"
+                }}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.CareerLevel" | translate }}
+            </span>
+            <strong>
+              {{
+              theLanguage === "ar"
+              ? userData?.jobLevel.nameAr
+              ? userData?.jobLevel?.nameAr
+              : "-"
+              : userData?.jobLevel.nameEn
+              ? userData?.jobLevel.nameEn
+              : "-"
+              }}
+            </strong>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.YearsOfExperience" | translate }}
+            </span>
+
+            <div>
+              <strong>
+                {{
+                theLanguage === "ar"
+                ? userData?.yearsExperience.nameAr
+                ? userData?.yearsExperience.nameAr
+                : "-"
+                : userData?.yearsExperience.nameEn
+                ? userData?.yearsExperience.nameEn
+                : "-"
+                }}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.qualification" | translate }}
+            </span>
+            <div *ngFor="let qualification of userData?.qualifications">
+              <div *ngIf="theLanguage === 'en'">
+                <strong *ngIf="qualification?.nameEn !== null">
+                  {{
+                  theLanguage === "ar"
+                  ? qualification?.nameAr
+                  ? qualification?.nameAr
+                  : "-"
+                  : qualification?.nameEn
+                  ? qualification?.nameEn
+                  : "-"
+                  }}
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body py-3">
+      <div class="sec-title">
+        <h3>
+          {{ "viewProfileuser.UserAccountLink" | translate }}
+        </h3>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-12 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.UserLinkedInLink" | translate }}
+            </span>
+            <strong *ngIf="userData?.linkedIn !== null">
+              <a target="_blank" [href]="userData?.linkedIn">
+                {{'viewProfileuser.Clickheretoview'|translate}}
+              </a>
+            </strong>
+            <strong *ngIf="userData?.linkedIn === null"> - </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="sec-title">
+        <h3>
+          {{ "viewProfileuser.skills" | translate }}
+        </h3>
+      </div>
+      <div class="skilsss py-3">
+        <div *ngFor="let Skill of userSkills; index as i" class="facility-info sas">
+          <span>
+            <!-- <img src="/assets/imgs/poilts.svg" alt="" srcset="" /> -->
+            <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+            <strong class="mx-3" *ngIf="Skill?.number !== null">
+              {{ Skill?.number }}
+            </strong>
+            <strong class="mx-3" *ngIf="Skill?.number === null"> - </strong>
+          </span>
+
+          <strong *ngIf="i === userSkills.length"> - </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body py-3">
+      <div class="sec-title">
+        <h3>
+          {{ "viewProfileuser.Summary" | translate }}
+        </h3>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-12 my-4">
+          <span>
+            <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+            <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+            <strong class="mx-3" *ngIf="userData?.summary !== null">
+              {{ userData?.summary }}
+            </strong>
+            <strong class="mx-3" *ngIf="userData?.summary === null"> - </strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="
+        userData?.vedioStatus === thevideoStatus.Accepted &&
+        userData?.linkVedio !== null &&
+        userData?.linkVedio !== ''
+      " class="card-body py-3">
+      <div *ngIf="
+          userData?.vedioStatus === thevideoStatus.Accepted &&
+          userData?.linkVedio !== null &&
+          userData?.linkVedio !== ''
+        " class="">
+        <div *ngIf="
+            userData?.vedioStatus === thevideoStatus.Accepted &&
+            userData?.linkVedio !== null
+          " class="sec-title">
+          <h3>
+            {{ "viewProfileuser.IntroductoryVideo" | translate }}
+          </h3>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col-lg-6 my-4">
+            <span>
+              <img class="img-video" src="/assets/imgs/user.svg" alt="" srcset="" />
+              <strong class="mx-3">
+                <a target="_blank" [href]="userData?.linkVedio" download>{{ "viewProfileuser.theVideoLink" | translate
+                  }}
+                </a>
+              </strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

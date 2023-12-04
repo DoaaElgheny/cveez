@@ -1,0 +1,357 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "./assets/sass/style.scss";
+// Replace above style with this css file to enable RTL styles
+// @import './assets/sass/plugins.scss';
+// // @import "./assets/css/style.rtl.css";
+
+// @import "./assets/sass/style.angular.scss";
+
+//English @import "./assets/sass/style.scss";
+
+//arabic
+// @import "./assets/css/style.rtl.css";
+
+// @import "/node_modules/flag-icons/css/flag-icons.min.css";
+:root {
+  --color: #0274b3;
+}
+
+@import "./assets/sass/style.scss";
+
+@import "./assets/sass/plugins.scss";
+@import "./assets/sass/style.angular.scss";
+
+// Fonts Import
+@font-face {
+  font-family: "Light";
+  src: url("/assets/fonts/ArbFONTS-DINNEXTLTARABIC-LIGHT-1.ttf");
+}
+@font-face {
+  font-family: "light";
+  src: url("/assets/fonts/light.ttf");
+}
+@font-face {
+  font-family: "Regular";
+  src: url("/assets/fonts/ArbFONTS-DINNextLTArabic-Regular-2.ttf");
+}
+@font-face {
+  font-family: "medium";
+  src: url("/assets/fonts/ArbFONTS-DINNextLTArabic-Medium-2.ttf");
+}
+@font-face {
+  font-family: "bold";
+  src: url("/assets/fonts/ArbFONTS-DINNextLTArabic-Bold-2.ttf");
+}
+
+body {
+  // direction: rtl;
+  font-family: "Regular";
+}
+
+.app-content {
+  padding: 35px;
+  background: #f0f0f0;
+  padding-top: 100px !important;
+  min-height: 100vh;
+}
+/*Our themes*/
+
+.genral-button {
+  background-color: #1293c3;
+  color: var(--kt-primary-inverse);
+  height: 50px;
+  border-radius: 9px;
+  border: #1293c3;
+}
+
+.genral-light-button {
+  height: 50px;
+  border-radius: 9px;
+  color: var(--kt-primary);
+  border-color: var(--kt-primary-light);
+  background-color: var(--kt-primary-light);
+}
+
+.button-size {
+  padding: 0% 15% 0% 15%;
+}
+
+.back-button {
+  // padding: 0% 15% 0% 15%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  cursor: pointer;
+  /* align-items: center; */
+}
+
+.app-sidebar {
+  background-color: #06104a !important;
+}
+
+.app-toolbar {
+  display: none;
+}
+
+.table-design {
+  margin-top: 40px;
+  border: 1px solid #d6d2d2;
+  border-radius: 25px;
+  text-align: center;
+  table {
+    thead {
+      background: #fcf0da;
+      padding: 20px;
+      tr {
+        th {
+          color: #363636;
+          font-size: 16px;
+          font-family: "Semibold";
+          padding: 15px !important;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #d6d2d2;
+        &:last-child {
+          border: none;
+        }
+        button {
+          all: unset;
+          cursor: pointer;
+        }
+        .form-switch {
+          display: inline-block;
+        }
+        .form-check-input:checked {
+          background-color: #0274b3;
+          border: none;
+        }
+      }
+    }
+  }
+  .table tr,
+  .table th,
+  .table td {
+    vertical-align: baseline;
+  }
+}
+
+.toast-container {
+  position: fixed !important;
+}
+
+.modal-dialog.modal-dialog-centered.modal-sm {
+  max-width: 480px;
+}
+
+.pagi-sec {
+  // display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  justify-content: center;
+  .pagination {
+    padding: 0;
+  }
+  p {
+    margin: 0;
+  }
+  .page-item {
+    margin: 3px;
+    &.active {
+      .page-link {
+        background: #0274b3;
+      }
+    }
+    .page-link {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+    }
+  }
+}
+
+td .d-flex .form-check label {
+  margin: 0 !important;
+}
+
+[data-kt-app-sidebar-minimize="on"][data-kt-app-sidebar-hoverable="true"]
+  .app-sidebar:not(:hover)
+  .app-sidebar-menu
+  .menu-title
+  span {
+  opacity: 0 !important;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+[data-kt-app-sidebar-minimize="on"][data-kt-app-sidebar-hoverable="true"]
+  .app-sidebar:not(:hover)
+  .app-sidebar-menu
+  .menu-title
+  svg,
+[data-kt-app-sidebar-minimize="on"][data-kt-app-sidebar-hoverable="true"]
+  .app-sidebar:not(:hover)
+  .app-sidebar-menu
+  .menu-title {
+  opacity: 1 !important;
+}
+
+.form-check-input:checked {
+  background-color: #0274b3;
+  border-color: #0274b3;
+}
+
+.modal-dialog.modal-md {
+  max-width: 651px;
+}
+
+.multiselect-dropdown .dropdown-btn {
+  display: inline-block;
+
+  border: 1px solid #e6e6e6 !important;
+  width: 100%;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.52857143;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 4px;
+  min-height: 43px;
+  padding-top: 10px;
+  background: #fff;
+}
+
+.new-uoload {
+  .upload {
+    all: unset !important;
+    .label-txt {
+      white-space: nowrap !important;
+      font-weight: 200;
+    }
+  }
+  .drag-div {
+    border: 1px solid #e4e6ef !important;
+    padding: 4px;
+    border-radius: 5px !important;
+  }
+}
+
+.input-container {
+  color: var(--kt-input-color) !important;
+  border: 1px solid var(--kt-input-border-color) !important;
+  height: 43.2px !important;
+  border-radius: 0.475rem !important;
+  .phoneInput {
+    border: none;
+    outline: none;
+  }
+}
+// .btn.btn-icon.btn-active-color-primary.w-35px.h-35px {
+//   display: none;
+// }
+
+.job-title {
+  app-saved-job {
+    button {
+      margin: 0 !important;
+    }
+  }
+}
+
+body[dir="rtl"] {
+  .nav-header .dropdown-menu {
+    right: unset !important;
+    left: 0 !important;
+  }
+  .job-card.active::before {
+    right: unset !important;
+    left: -9px;
+    border: 1px solid rgb(38, 123, 255) !important;
+    border-right: 0 !important;
+    border-top: 0 !important;
+  }
+  .cameraSection {
+    left: 45px !important;
+    right: unset !important;
+  }
+  .profile-view .page-content .user-info .action-edit-btn {
+    right: unset !important;
+    left: 0 !important;
+  }
+  @media (min-width: 992px) {
+    .profile-view .page-content .facility-info.border-sec {
+      border-left: 1px solid #bcbcbc !important;
+      border-right: 0px solid #bcbcbc !important;
+      padding-right: 0 !important;
+      padding-left: 16px;
+    }
+  }
+  @media (min-width: 992px) {
+    .profile-view .page-content .user-info .main-info {
+      border-left: 1px solid #bcbcbc !important;
+      border-right: 0px solid #bcbcbc !important;
+    }
+  }
+}
+
+body {
+  background: #f0f0f0;
+}
+
+.iput-sec {
+  button {
+    background-color: transparent;
+    border: none;
+    padding-inline-end: 10px;
+  }
+}
+
+.ta-results {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 100%;
+}
+
+.follow-agent-btn {
+  img {
+    width: 35px;
+  }
+}
+
+.center-auth-content {
+  background-image: url(/assets/imgs/background.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center right;
+  min-height: calc(100vh - 189.68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 5%;
+}
+
+.btn-group.show .dropdown-toggle {
+  box-shadow: none !important;
+}
+
+.privacy-page {
+  position: relative;
+  .home-class {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.filter-parent-sect {
+  @media(max-width: 992px) {
+    margin-bottom: 5rem;
+  }
+}

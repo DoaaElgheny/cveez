@@ -1,0 +1,111 @@
+.modal-header {
+	border: none;
+	padding-bottom: 0;
+	justify-content: flex-end;
+	button {
+	  font-size: large;
+	}
+  }
+
+  /* ============ post-topbar =========== */
+
+.post-topbar {
+	width: 100%;
+	
+	background-color: #fff;
+	border-radius: 15px;
+
+	button {
+		border: 0px;
+		background: transparent;
+		font-size: 18px;
+		color: #17272F;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: unset;
+		img {
+			margin-left: 7px;
+			margin-right: 7px;
+		}
+	}
+}
+.uploaded-images {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 20px;
+  
+	.img-item {
+	  margin-inline-end: 10px;
+	  margin-bottom: 10px;
+	  position: relative;
+	  border-radius: 10px;
+	  overflow: hidden;
+  
+	  .uplado-img {
+		width: 60px;
+		height: 60px;
+	  }
+  
+	  .action {
+		background-color: #0000004d;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		// padding: 10px;
+		text-align: end;
+  img{width: 15px;}
+		button {
+		  all: unset;
+		  cursor: pointer;
+		}
+	  }
+	}
+  }
+.user-picy {
+	display: flex;
+	justify-items: center;
+}
+
+.user-picy img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin:5px
+}
+.title{
+	margin-left: 21px
+}
+.content {
+margin:20px 8px 8px 9px;
+font-size: 15px;
+    outline: none;
+    border-radius: 1px;
+	text-align: start;
+}
+.content[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #AAA; 
+}
+.user-picy span {
+	margin-top: 10px;
+	color: #AAA;
+	font-size: 14px;
+	font-size: 12px;
+    font-weight: 500;
+
+}
+.modal-action{
+	display: flex;
+    margin: 10px;
+	
+}
+.post-btn{
+	height: 37px;
+    width: 104px;
+    text-align: center;
+    background: #0274B3;
+}

@@ -1,0 +1,137 @@
+<div class="col-lg-12 my-5 expired-mode" *ngIf="!ShowOpportunityCondition ">
+  <div class="text-center expired-mode-content">
+    <img src="/assets/imgs/login.svg" alt="" />
+    <h1 *ngIf="!ShowOpportunityCondition">
+      {{ "Search.SubscriptionRenew" | translate }}
+    </h1>
+    <h5 *ngIf="!ShowOpportunityCondition">
+      {{ "Search.RenewText" | translate }}
+    </h5>
+    <button
+      *ngIf="!ShowOpportunityCondition"
+      (click)="router.navigate(['/client/payment-package'])"
+    >
+      {{ "Search.SubscriptionRenew" | translate }}
+    </button>
+    <h1 *ngIf="ShowOpportunityCondition ">
+      {{ "Search.SubscriptionUpgrade" | translate }}
+    </h1>
+    <h5 *ngIf="ShowOpportunityCondition ">
+      {{ "Search.UpgradeText" | translate }}
+    </h5>
+    <button
+      *ngIf="ShowOpportunityCondition "
+      (click)="router.navigate(['/client/payment-package'])"
+    >
+      {{ "Search.SubscriptionUpgrade" | translate }}
+    </button>
+  </div>
+</div>
+<!-- <div class="col-lg-12 my-5 expired-mode" *ngIf="yearsExperienceId===null">
+  <div class="text-center expired-mode-content">
+    <img src="/assets/imgs/login.svg" alt="" />
+    <h5 style="padding-top: 25px;">
+      {{ "Search.completePlease" | translate }}
+    </h5>
+   
+    <button
+      
+      (click)="router.navigate(['/auth/complete-job-seeker'])"
+    >
+      {{ "Header.NotComplete" | translate }}
+    </button>
+
+  </div>
+</div> -->
+<div *ngIf="ShowOpportunityCondition">
+  <section class="top-search">
+    <div class="title">
+      <h2>{{ "myOrderJobSeeker.searchMyOrder" | translate }}</h2>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-5 my-3">
+          <div class="iput-sec">
+            <img class="mx-2" src="/assets/imgs/seac.svg" alt="" srcset="" />
+            <input
+              type="text"
+              (keyup)="page = 1; formSearchInput = true; getAllOrdersData()"
+              [placeholder]="'myOrderJobSeeker.searchByName' | translate"
+              [(ngModel)]="searchText"
+            />
+            <button
+              *ngIf="searchText !== ''"
+              (click)="searchText = ''; getAllOrdersData()"
+            >
+              x
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-3 my-3">
+          <div class="iput-sec">
+            <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" />
+            <input
+              type="text"
+              [placeholder]="'myOrderJobSeeker.date' | translate"
+              [(ngModel)]="date"
+              onfocus="(this.type='date')"
+              (input)="page = 1; forSearchInput = false; getAllOrdersData()"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-orders">
+    <div class="row">
+      <div *ngIf="allOrder?.length === 0">
+        <img
+          style="
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 250px;
+          "
+          src="assets/imgs/icons/no-results.png"
+        />
+
+        <h1 style="text-align: center; padding-top: 15px">
+          {{ "jobSeeker.ResultNotFound" | translate }}
+        </h1>
+      </div>
+    </div>
+    <div class="row" *ngIf="allOrder.length !== 0">
+      <div class="col-lg-4 my-5">
+        <div class="job-list">
+          <ng-container *ngFor="let itemOrder of allOrder">
+            <app-job-card
+              [item]="itemOrder"
+              [ShowOpportunityCondition]="ShowOpportunityCondition"
+              [id]="itemOrder.opportunityId"
+              [logoConditions]="logoConditions"
+              (bindValue)="details($event)"
+              [isDetails]="isDetails"
+            ></app-job-card>
+          </ng-container>
+        </div>
+      </div>
+      <div
+        class="col-lg-8"
+        style="margin-top: 4.5rem !important"
+        *ngIf="
+          orderDetails && allOrder.length !== 0 && ShowOpportunityCondition
+        "
+      >
+        <app-job-details
+          [orderDetails]="orderDetails"
+          [logoConditions]="logoConditions"
+         
+          [forApply]="false"
+          (bindValue)="reload($event)"
+        ></app-job-details>
+      </div>
+    </div>
+  </section>
+</div>

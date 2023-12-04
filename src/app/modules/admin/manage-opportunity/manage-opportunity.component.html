@@ -1,0 +1,368 @@
+<div class="page-title">
+  <h3>{{ "ManageOpportunity.ManageOpportunity" | translate }}</h3>
+</div>
+
+<div class="card-header search-top border-0 py-10">
+  <div class="row">
+    <div class="col-lg-8 mb-3">
+      <div class="input-img">
+        <img src="/assets/imgs/search.svg" alt="" srcset="" />
+        <input
+          style="width: 100%"
+          class="form-control"
+          type="text"
+          (keyup)="page = 1; fromSearchInput = true; getListData()"
+          [placeholder]="'ManageOpportunity.Searching' | translate"
+          [(ngModel)]="AgentName"
+        />
+        <button
+          *ngIf="AgentName !== ''"
+          (click)="AgentName = ''; getListData()"
+        >
+          x
+        </button>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="reset-btn">
+        <button (click)="fromSearchInput = false; rest()" class="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-counterclockwise"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+            />
+            <path
+              d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+            />
+          </svg>
+          {{ "Buttons.Reset" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-3 mb-3">
+      <input
+        style="width: 100%; height: 43.55px"
+        class="form-control"
+        type="text"
+        [placeholder]="'ManageOpportunity.PublishedDate' | translate"
+        [(ngModel)]="PublishedDate"
+        onfocus="(this.type='date')"
+        (input)="page = 1; fromSearchInput = false; getListData()"
+      />
+    </div>
+
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="ClassificationId"
+            (change)="page = 1; fromSearchInput = false; getListData()"
+          >
+            <option selected disabled value="">
+              {{ "ManageOpportunity.OpportunityClassification" | translate }}
+            </option>
+            <option value="">
+              {{ "ManageOpportunity.All" | translate }}
+            </option>
+            <option
+              *ngFor="let classification of allClassifications"
+              [value]="classification.id"
+            >
+              {{ classification.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="AcceptanceState"
+            (change)="page = 1; fromSearchInput = false; getListData()"
+          >
+            <option selected disabled value="">
+              {{ "ManageOpportunity.AcceptanceDecision" | translate }}
+            </option>
+            <option [value]="opportunityAcceptanceState.All">
+              {{ "ManageOpportunity.All" | translate }}
+            </option>
+            <option [value]="opportunityAcceptanceState.UnderStudying">
+              {{ "ManageOpportunity.UnderStudying" | translate }}
+            </option>
+            <option [value]="opportunityAcceptanceState.Accepted">
+              {{ "ManageOpportunity.Accepted" | translate }}
+            </option>
+            <option [value]="opportunityAcceptanceState.Rejected">
+              {{ "ManageOpportunity.Rejected" | translate }}
+            </option>
+            <option [value]="opportunityAcceptanceState.Closed">
+              {{ "ManageOpportunity.Closed" | translate }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="State"
+            (change)="page = 1; fromSearchInput = false; getListData()"
+          >
+            <option selected disabled value="">
+              {{ "ManageOpportunity.OpportunityState" | translate }}
+            </option>
+            <option [value]="opportunityState.All">
+              {{ "ManageOpportunity.All" | translate }}
+            </option>
+            <option [value]="opportunityState.Available">
+              {{ "ManageOpportunity.Available" | translate }}
+            </option>
+            <option [value]="opportunityState.NotAvailable">
+              {{ "ManageOpportunity.NotAvailable" | translate }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card members-page">
+  <div class="card-body py-3">
+    <div *ngIf="allOpportunities.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <div class="table-responsive" *ngIf="allOpportunities.length !== 0">
+      <table class="table align-middle gs-0 gy-4">
+        <thead>
+          <tr class="text-center bg-light">
+            <th class="min-w-95px">#</th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.AgentName" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.OpportunityClassification" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.CreationDate" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.PublishedDate" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.AcceptanceDecision" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.OpportunityState" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.OpportunityVisibility" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "ManageOpportunity.Actions" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let opportunity of allOpportunities">
+            <td>
+              <img
+                class="building-img"
+                [src]="
+                  opportunity.logoImageStorageFileUrl
+                    ? opportunity.logoImageStorageFileUrl
+                    : '/assets/imgs/company-default-logo.jpeg'
+                "
+                alt=""
+                srcset=""
+              />
+            </td>
+            <td>{{ opportunity.agentName }}</td>
+            <td>{{ opportunity.classification }}</td>
+            <td>{{ opportunity.creationDate | date : "dd/MM/yyyy" }}</td>
+            <td>{{ opportunity.publishedDate | date : "dd/MM/yyyy" }}</td>
+            <td>
+              <span
+                *ngIf="
+                  opportunity.acceptanceState ===
+                  opportunityAcceptanceState.Accepted
+                "
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                {{ "ManageOpportunity.Accepted" | translate }}
+              </span>
+              <span
+                *ngIf="
+                  opportunity.acceptanceState ===
+                  opportunityAcceptanceState.UnderStudying
+                "
+                class="badge badge-light-primary fs-7 fw-bold"
+              >
+                {{ "ManageOpportunity.UnderStudying" | translate }}
+              </span>
+              <span
+                *ngIf="
+                  opportunity.acceptanceState ===
+                  opportunityAcceptanceState.Rejected
+                "
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "ManageOpportunity.Rejected" | translate }}
+              </span>
+              <span
+                *ngIf="
+                  opportunity.acceptanceState ===
+                  opportunityAcceptanceState.Closed
+                "
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "ManageOpportunity.Closed" | translate }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <div
+                  class="form-check form-switch w-100 px-2"
+                  style="
+                    padding-right: 0.5rem !important;
+                    padding-left: 0.5rem !important;
+                  "
+                >
+                  <label class="switch form-check-label" [for]="opportunity.id">
+                    <input
+                      class="form-check-input m-0"
+                      type="checkbox"
+                      [checked]="
+                        opportunity.state === opportunityState.Available
+                      "
+                      [id]="opportunity.id"
+                      (change)="changeOpportunityState(opportunity)"
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <div
+                  class="form-check form-switch w-100 px-2"
+                  style="
+                    padding-left: 0.5rem !important;
+                    padding-right: 0.5rem !important;
+                  "
+                >
+                  <label
+                    class="switch form-check-label"
+                    [for]="'Visuable' + opportunity.id"
+                  >
+                    <input
+                      class="form-check-input m-0"
+                      type="checkbox"
+                      [checked]="!opportunity.isHideByAdmin"
+                      [id]="'Visuable' + opportunity.id"
+                      (change)="changeOpportunityVisiablty(opportunity)"
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div ngbDropdown class="btn-group">
+                <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                  <button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      class="bi bi-three-dots-vertical"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <ul class="option p-0 list-unstyled m-0 px-2">
+                    <li
+                      role="menuitem"
+                      *ngIf="
+                        opportunity.acceptanceState ===
+                        opportunityAcceptanceState.UnderStudying
+                      "
+                    >
+                      <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                      <button
+                        class="dropdown-item"
+                        (click)="openAcceptanceDecisionModal(opportunity)"
+                      >
+                        {{ "ManageOpportunity.AcceptanceDecision" | translate }}
+                      </button>
+                    </li>
+
+                    <!-- <li role="menuitem">
+                      <img src="/assets/imgs/is2.png" alt="" srcset="" />
+                      <button
+                        class="dropdown-item"
+                        (click)="openEditOpportunityModal(opportunity)"
+                      >
+                        {{ "Buttons.Edit" | translate }}
+                      </button>
+                    </li> -->
+                    <li role="menuitem">
+                      <img src="/assets/imgs/is2.png" alt="" srcset="" />
+                      <button
+                        class="dropdown-item"
+                        (click)="Edit(opportunity)"
+                      >
+                      {{ "ManageOpportunity.EditOpportunityAdmin" | translate }}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagi-sec">
+        <p>{{ "jobSeeker.totalCount" | translate }} : {{ totalCount }}</p>
+        <ngb-pagination
+          [collectionSize]="totalCount"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="getListData()"
+          class="pagination p-0 my-4 d-flex justify-content-center"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,206 @@
+<div class="modal-header modal-section">
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="title text-center">
+  <h1>{{ "ManageDiscountCode.AddNewCode" | translate }}</h1>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addForm">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="form-group">
+          <label for="" class="mb-3">{{
+            "ManageDiscountCode.MarketPartnerName" | translate
+          }}</label
+          ><span class="text-danger mx-2 fs-2">*</span>
+          <select
+            class="form-select"
+            formControlName="marketingPartnerId"
+            aria-label="Default select example"
+          >
+            <option selected disabled value="">
+              {{ "ManageDiscountCode.MarketPartnerName" | translate }}
+            </option>
+            <option *ngFor="let partner of partners" [value]="partner.id">
+              {{ partner.name }}
+            </option>
+          </select>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Validation.ThisFieldIsRequired' | translate,
+              control: addForm.controls['marketingPartnerId']
+            }"
+          ></ng-container>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="form-group">
+          <label for="" class="mb-3">
+            {{ "ManageDiscountCode.Code" | translate }} </label
+          ><span class="text-danger mx-2 fs-2">*</span>
+          <input
+            type="text"
+            class="form-control"
+            [placeholder]="'ManageDiscountCode.Code' | translate"
+            formControlName="code"
+            aria-label=""
+          />
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Validation.ThisFieldIsRequired' | translate,
+              control: addForm.controls['code']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'minlength',
+              message: 'ManageDiscountCode.CodeLength' | translate,
+              control: addForm.controls['code']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'pattern',
+              message: 'ManageDiscountCode.CodePatternNotCorrect' | translate,
+              control: addForm.controls['code']
+            }"
+          ></ng-container>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <div class="form-group">
+          <label class="mb-3">
+            {{ "ManageDiscountCode.DiscountCondtion" | translate }} </label
+          ><span class="text-danger mx-2 fs-2">*</span>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="form-check w-100">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="flexRadioDefault1"
+                    formControlName="discountCondtion"
+                    [value]="discountCoundtion.Rate"
+                    checked
+                    (change)="setInputReady(discountCoundtion.Rate)"
+                  />
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    {{ "ManageDiscountCode.Rate" | translate }}
+                  </label>
+                </div>
+                <input
+                  type="number"
+                  id="rate"
+                  class="form-control num-input"
+                  formControlName="rate"
+                  [placeholder]="'ManageDiscountCode.DiscountRate' | translate"
+                />
+              </div>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'min',
+                  message:
+                    'ManageDiscountCode.TheFieldNumberValueLimit' | translate,
+                  control: addForm.controls['rate']
+                }"
+              ></ng-container>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'max',
+                  message:
+                    'ManageDiscountCode.TheFieldNumberValueLimit' | translate,
+                  control: addForm.controls['rate']
+                }"
+              ></ng-container>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="form-check w-100">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="flexRadioDefault2"
+                    formControlName="discountCondtion"
+                    [value]="discountCoundtion.Duration"
+                    (change)="setInputReady(discountCoundtion.Duration)"
+                  />
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    {{ "ManageDiscountCode.Duration" | translate }}
+                  </label>
+                </div>
+                <input
+                  type="number"
+                  class="form-control num-input"
+                  id="duration"
+                  formControlName="duration"
+                  [placeholder]="'ManageDiscountCode.DurationDay' | translate"
+                />
+              </div>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'min',
+                  message:
+                    'ManageDiscountCode.TheValueEnteredMustBeAPositiveNumber'
+                    | translate,
+                  control: addForm.controls['duration']
+                }"
+              ></ng-container>
+            </div>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'NotChoosed',
+                message:
+                  'ManageDiscountCode.YouShouldFillOneOfBothFields' | translate,
+                control: addForm.controls['rate']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="submit" class="" (click)="submit()">
+    {{ "Buttons.Save" | translate }}
+  </button>
+  <button type="button" class="" (click)="activeModal.close('Close click')">
+    {{ "Buttons.Cancel" | translate }}
+  </button>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

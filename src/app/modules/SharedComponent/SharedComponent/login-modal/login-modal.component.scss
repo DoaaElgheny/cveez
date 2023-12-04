@@ -1,0 +1,42 @@
+.link {
+  cursor: pointer
+}
+
+.close {
+  text-align: end;
+  button {
+    all: unset;
+    cursor: pointer;
+    padding: 20px;
+    padding-bottom: 0;
+  }
+}
+
+h1 {
+  color: #292929;
+  margin: 20px 0;
+  margin-bottom: 10px;
+}
+h5 {
+  color: #494949;
+  font-weight: 100;
+  margin-bottom: 25px;
+}
+
+button {
+  background: #0274B3;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  min-width: 200px;
+  height: 45px;
+  margin-bottom: 15px;
+}
+
+.register-p {
+  margin-bottom: 3rem;
+  p {
+    color: #989898;
+    font-size: 16px;
+  }
+}

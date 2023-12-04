@@ -1,0 +1,68 @@
+<section class="get-changed">
+  <div class="center-auth-content">
+    <div class="form-title text-center">
+      <h2>{{ "forgetPassword.PasswordResetLinkWillBeSent" | translate }}</h2>
+      <p class="mb-5">{{ "forgetPassword.MailTo" | translate }}: {{ email }}</p>
+      <div class="img-view mb-5">
+        <img
+          src="/assets/imgs/ic_Varification-email.svg"
+          alt="varify-img"
+          srcset=""
+        />
+      </div>
+      <p class="resend">
+        {{ "forgetPassword.DoNotReceiveEmail" | translate }}
+        <a
+          class="link-class"
+          [ngStyle]="{ cursor: 'pointer' }"
+          (click)="submit()"
+          >{{ "forgetPassword.ResendEmail" | translate }}</a
+        >
+      </p>
+    </div>
+    <p class="resends">
+      {{ "forgetPassword.DidYouHaveAnAccount" | translate }}
+      <a href="/auth/login">{{ "forgetPassword.SignIn" | translate }}</a>
+    </p>
+  </div>
+  <div class="form-action one">
+    <div class="container">
+      <button
+        type="submit"
+        id="kt_sign_in_submit"
+        class="btn btn-primary"
+        (click)="submit()"
+      >
+        <span class="indicator-progress">
+          {{ "Shared.PleaseWait" | translate }}
+          <span
+            class="spinner-border spinner-border-sm align-middle ms-2"
+          ></span>
+        </span>
+
+        <span class="indicator-label">
+          {{ "forgetPassword.Resend" | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

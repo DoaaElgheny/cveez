@@ -1,0 +1,214 @@
+<section class="modal-section">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <h1 class="text-center">
+    {{ "ManageDiscountCode.AddMarketPartner" | translate }}
+  </h1>
+  <div class="modal-body">
+    <form [formGroup]="addForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label class="mb-3" for="">{{
+              "ManageDiscountCode.MarketPartnerName" | translate
+            }}</label
+            ><span class="text-danger mx-2 fs-2">*</span>
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'ManageDiscountCode.MarketPartnerName' | translate"
+              formControlName="name"
+              aria-label=""
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Validation.ThisFieldIsRequired' | translate,
+                control: addForm.controls['name']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'minlength',
+                message: 'Validation.NameMinLength' | translate,
+                control: addForm.controls['name']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'maxlength',
+                message: 'Validation.NameMaxLength' | translate,
+                control: addForm.controls['name']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label class="mb-3" for="">{{
+              "SharedFields.Email" | translate
+            }}</label
+            ><span class="text-danger mx-2 fs-2">*</span>
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'Validation.EmailPlaceholder' | translate"
+              formControlName="email"
+              aria-label=""
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Validation.ThisFieldIsRequired' | translate,
+                control: addForm.controls['email']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'pattern',
+                message: 'Validation.EmailPattern' | translate,
+                control: addForm.controls['email']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label class="mb-3" for="">
+              {{ "SharedFields.MobileNumber" | translate }} </label
+            ><span class="text-danger mx-2 fs-2">*</span>
+            <intl-telephone-input
+              #mobile
+              [preferredCountries]="[CountryISO.Pakistan, CountryISO.India]"
+              [selectedCountryISO]="CountryISO[selectedCountryIso]"
+              [enablePlaceholder]="true"
+              [searchCountryFlag]="true"
+              [separateDialCode]="false"
+              [enableAutoCountrySelect]="true"
+              [searchCountryField]="SearchCountryField.All"
+              [phoneValidation]="true"
+              [numberFormat]="PhoneNumberFormat.International"
+              [inputId]="'mobileNumber'"
+              [customPlaceholder]="mobileNumber"
+              (onChange)="onInputChange($event)"
+            >
+            </intl-telephone-input>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Validation.ThisFieldIsRequired' | translate,
+                control: addForm.controls['mobileNumber']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'maxlength',
+                message: 'Validation.MobileMaxLength' | translate,
+                control: addForm.controls['mobileNumber']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'minlength',
+                message: 'Validation.MobileMinLength' | translate,
+                control: addForm.controls['mobileNumber']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'pattern',
+                message: 'Validation.MobilePattern' | translate,
+                control: addForm.controls['mobileNumber']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label class="mb-3" for="">{{
+              "ManageDiscountCode.CommissionRate" | translate
+            }}</label
+            ><span class="text-danger mx-2 fs-2">*</span>
+            <input
+              type="number"
+              class="form-control"
+              [placeholder]="'ManageDiscountCode.CommissionRate' | translate"
+              formControlName="rate"
+              aria-label=""
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Validation.ThisFieldIsRequired' | translate,
+                control: addForm.controls['rate']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'min',
+                message:
+                  'ManageDiscountCode.TheFieldNumberValueLimit' | translate,
+                control: addForm.controls['rate']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'max',
+                message:
+                  'ManageDiscountCode.TheFieldNumberValueLimit' | translate,
+                control: addForm.controls['rate']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="" (click)="submit()">
+      {{ "Buttons.Save" | translate }}
+    </button>
+    <button type="button" class="" (click)="activeModal.close('Close click')">
+      {{ "Buttons.Cancel" | translate }}
+    </button>
+    <ng-template
+      #formError
+      let-control="control"
+      let-message="message"
+      let-validation="validation"
+    >
+      <ng-container
+        *ngIf="
+          control.hasError(validation) && (control.dirty || control.touched)
+        "
+      >
+        <div class="fv-plugins-message-container">
+          <div class="fv-help-block">
+            <span role="alert">
+              {{ message }}
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</section>

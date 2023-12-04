@@ -1,0 +1,265 @@
+<div class="page-title">
+  <h3>
+    {{ "managePackage.managePackage" | translate }} /
+    <span> {{ "MangeSubscriber.SubscriptionManagement" | translate }} </span>
+  </h3>
+</div>
+
+<div class="card-header search-top border-0 py-10">
+  <div class="row">
+    <div class="col-lg-8 mb-3">
+      <div class="input-img">
+        <img src="/assets/imgs/search.svg" alt="" srcset="" />
+        <button
+          *ngIf="searchText !== ''"
+          (click)="searchText = ''; getSubscriberPackages()"
+        >
+          x
+        </button>
+        <input
+          [(ngModel)]="searchText"
+          (keyup)="page = 1; fromSearchInput = true; getSubscriberPackages()"
+          style="width: 100%"
+          class="form-control"
+          type="text"
+          [placeholder]="'MangeSubscriber.SearchByTheSubscriber' | translate"
+        />
+      </div>
+    </div>
+    <div class="col-lg-1 mb-3">
+      <div class="reset-bt">
+        <button (click)="fromSearchInput = false; rest()" class="col-lg-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-counterclockwise"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+            />
+            <path
+              d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+            />
+          </svg>
+          {{ "Buttons.Reset" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-between mt-4">
+    <div class="col-lg-3 mb-3">
+      <input
+        onfocus="(this.type='date')"
+        class="form-control date"
+        ngbDatepicker
+        #d="ngbDatepicker"
+        aria-label=""
+        [(ngModel)]="dateText1"
+        (change)="page = 1; fromSearchInput = false; getSubscriberPackages()"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title=" enter the start date "
+        [placeholder]="'MangeSubscriber.SubscriptionStartDate' | translate"
+      />
+    </div>
+    <div class="col-lg-3 mb-3">
+      <input
+        onfocus="(this.type='date')"
+        class="form-control date"
+        ngbDatepicker
+        #d="ngbDatepicker"
+        aria-label=""
+        [(ngModel)]="dateText2"
+        (change)="page = 1; fromSearchInput = false; getSubscriberPackages()"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title=" enter the end date "
+        [placeholder]="'MangeSubscriber.SubscriptionEndDate' | translate"
+      />
+    </div>
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-6 mb-3">
+          <select
+            [(ngModel)]="packageId"
+            (change)="page = 1; fromSearchInput = false; getSubscriberPackages()"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected disabled value="" selected>
+              {{ "MangeSubscriber.PackageName" | translate }}
+            </option>
+            <option value="">{{ "ManageDiscountCode.All" | translate }}</option>
+            <option *ngFor="let package of packageList" [value]="package.id">
+              {{ package.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-6 mb-3">
+          <select
+            [(ngModel)]="thesubscriptionValidity"
+            (change)="page = 1; fromSearchInput = false; getSubscriberPackages()"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected disabled value="1" selected>
+              {{ "MangeSubscriber.SubscriptionValidity" | translate }}
+            </option>
+            <option value="1">
+              {{ "ManageDiscountCode.All" | translate }}
+            </option>
+            <option value="2">
+              {{ "MangeSubscriber.permanent" | translate }}
+            </option>
+            <option value="3">
+              {{ "MangeSubscriber.Finished" | translate }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card members-page">
+  <div class="card-body py-3">
+    <div *ngIf="theSubscriberPackages?.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <div class="table-responsive" *ngIf="theSubscriberPackages?.length > 0">
+      <table class="table align-middle gs-0 gy-4">
+        <thead>
+          <tr class="text-center bg-light">
+            <th class="min-w-125px">
+              {{ "MangeSubscriber.SubscriberName" | translate }}
+            </th>
+            <th class="min-w-125px">
+              {{ "MangeSubscriber.SubscriberType" | translate }}
+            </th>
+            <th class="min-w-125px">
+              {{ "MangeSubscriber.PackageName" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.PackagePrice" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.DiscountValue" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.TotalPrice" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.SubscriptionStartDate" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.SubscriptionEndDate" | translate }}
+            </th>
+            <th class="min-w-95px">
+              {{ "MangeSubscriber.SubscriptionValidity" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let subscriberPackage of theSubscriberPackages"
+            class="text-center"
+          >
+            <td>
+              {{ subscriberPackage?.subscriberName }}
+            </td>
+            <td>
+              <!-- <span *ngIf="theSubscribersType.All === subscriberPackage.subscribersType">
+                                جميع المشتركين
+                            </span> -->
+              <span
+                *ngIf="
+                  subscriberPackage?.subscribersType ===
+                  theSubscribersType?.JobSeeker
+                "
+              >
+                {{ "managePackage.jobSeeker" | translate }}
+              </span>
+              <span
+                *ngIf="
+                  subscriberPackage?.subscribersType === theSubscribersType?.Agent
+                "
+              >
+                {{ "managePackage.facility" | translate }}
+              </span>
+            </td>
+            <td>
+              {{ subscriberPackage?.packageName }}
+            </td>
+            <td>
+              {{ subscriberPackage?.orderCost }}
+            </td>
+            <td>
+              {{ subscriberPackage?.discount }}
+            </td>
+            <td>
+              {{ subscriberPackage?.totalOrderCost }}
+            </td>
+            <td>
+              {{
+                subscriberPackage?.startSubscriptionDate | date : "dd/MM/yyyy"
+              }}
+            </td>
+            <td>
+              {{ subscriberPackage?.endSubscriptionDate | date : "dd/MM/yyyy" }}
+            </td>
+
+            <td>
+              <span
+                *ngIf="
+                  subscriberPackage?.subscriptionValidity ===
+                  subscriptionValidity.Active
+                "
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                {{ "MangeSubscriber.permanent" | translate }}
+              </span>
+              <!-- <span class="badge badge-light-primary fs-7 fw-bold">
+                                {{ "MangeAgent.underStuding" | translate }}
+                            </span> -->
+              <span
+                *ngIf="
+                  subscriberPackage?.subscriptionValidity ===
+                  subscriptionValidity.Expired
+                "
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "MangeSubscriber.Finished" | translate }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ngb-pagination
+      [collectionSize]="totalCount"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="getSubscriberPackages()"
+      class="pagination p-0 my-4 d-flex justify-content-center"
+    >
+    </ngb-pagination>
+  </div>
+</div>

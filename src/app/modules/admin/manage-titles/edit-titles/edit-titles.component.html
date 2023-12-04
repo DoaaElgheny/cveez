@@ -1,0 +1,124 @@
+<section class="modal-section">
+  <div class="modal-title">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.svg" alt="" srcset="" />
+    </button>
+    <h3 *ngIf="!title">
+      {{ "ManageTitles.AddATitle" | translate }}
+    </h3>
+    <h3 *ngIf="title">
+      {{ "ManageTitles.EditTitle" | translate }}
+    </h3>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addForm">
+      <div class="row">
+        <div class="form-group">
+          <label>{{ "ManageTitles.ArabicName" | translate }}</label>
+          <span class="text-danger mx-2 fs-2">*</span>
+          <input
+            type="text"
+            *ngIf="!title"
+            class="form-control"
+            [placeholder]="'ManageTitles.ArabicName' | translate"
+            formControlName="nameAr"
+            aria-label=""
+          />
+          <ng-multiselect-dropdown
+            formControlName="nameArId"
+            *ngIf="title"
+            [placeholder]="'SharedFields.SelectOption' | translate"
+            [settings]="dropdownSettingsSingle"
+            [data]="allTitles"
+            #arabicTitle
+            (onSelect)="onItemSelectSingle($event, 'nameAr', arabicTitle)"
+            (onDeSelect)="onItemDeSelectSingle('nameAr', arabicTitle)"
+            (input)="onSearchResultt(arabicTitle, 'nameAr')"
+          >
+          </ng-multiselect-dropdown>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Validation.ThisFieldIsRequired' | translate,
+              control: addForm.controls['nameAr']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'pattern',
+              message: 'manageClassification.inArabic' | translate,
+              control: addForm.controls['nameAr']
+            }"
+          ></ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>{{ "ManageTitles.EnglishName" | translate }}</label>
+          <span class="text-danger mx-2 fs-2">*</span>
+          <input
+            type="text"
+            *ngIf="!title"
+            class="form-control"
+            [placeholder]="'ManageTitles.EnglishName' | translate"
+            formControlName="nameEn"
+            aria-label=""
+          />
+          <ng-multiselect-dropdown
+            formControlName="nameEnId"
+            *ngIf="title"
+            [placeholder]="'SharedFields.SelectOption' | translate"
+            [settings]="dropdownSettingsSingleEnglish"
+            [data]="allTitles"
+            #englishTitle
+            (onSelect)="onItemSelectSingle($event, 'nameEn', englishTitle)"
+            (onDeSelect)="onItemDeSelectSingle('nameEn', englishTitle)"
+            (input)="onSearchResultt(englishTitle, 'nameEn')"
+          >
+          </ng-multiselect-dropdown>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Validation.ThisFieldIsRequired' | translate,
+              control: addForm.controls['nameEn']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'pattern',
+              message: 'manageClassification.inEnglish' | translate,
+              control: addForm.controls['nameEn']
+            }"
+          ></ng-container>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="submit()">
+      {{ "ManageTitles.SaveAndAccept" | translate }}
+    </button>
+  </div>
+</section>
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,150 @@
+<section class="payment-package">
+  <div class="container">
+    <div class="page-title">
+      <h3 *ngIf="router.url.includes('/auth')">
+        {{ "jobSeeker.HurryUpToSignUp" | translate }}
+      </h3>
+      <h3 *ngIf="router.url.includes('/client')">
+        {{ "viewProfileuser.accountPromotion" | translate }}
+      </h3>
+      <p *ngIf="router.url.includes('/auth')">
+        {{ "jobSeeker.PackageSubTitle" | translate }}
+      </p>
+      <p *ngIf="router.url.includes('/client')">
+        {{ "viewProfileuser.PackageSubTitle" | translate }}
+      </p>
+     
+    </div>
+    <div class="secret ">
+      
+        <img  class="lock" src="../../../../assets/imgs/secert.svg"> 
+      <p >{{ "packageButton.paymentTitle" | translate }}</p>
+      <img class="pay" src="../../../../assets/imgs/masterCard.svg"> 
+      <img class="pay" src="../../../../assets/imgs/visa.svg"> 
+      
+      
+     </div>
+    <div class="page-content" >
+      <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-6 my-4" *ngFor="let package of packages">
+          <div
+            class="payment-card h-100"
+            (click)="packageId = package.id; " style="cursor: pointer;"
+            [id]="package.id"
+            [ngClass]="{ active: package.isSelected }"
+            (mouseover)="addActiveClass(package.id)"
+            (mouseout)="removeActiveClass(package.id)"
+          >
+            <div class="title">
+              <h5>{{ package.name }}</h5>
+              <h1>
+                <bdi>
+                  <sup>$</sup>
+                  <strong>{{ package.price }}</strong>
+                  <span>
+                    / {{ package.subscriptionPeriod }}
+                  
+                  </span>
+                  <span *ngIf="package.durationPackage===durationPackage.Month">
+                  
+                   {{ "jobSeeker.month" | translate }}
+                  </span>
+                  <span *ngIf="package.durationPackage===durationPackage.Day">
+                    {{ "managePackage.Day" | translate }}
+                  </span>
+                  <span *ngIf="package.durationPackage===durationPackage.Week">
+                  
+                   
+                    {{ "managePackage.Week" | translate }}
+                  </span>
+                  
+                </bdi>
+              </h1>
+              <p>
+                {{ package.description }}
+              </p>
+            </div>
+            <div class="body d-flex align-items-center">
+              <ul>
+                <li *ngFor="let condition of package?.packageCondations">
+                  <img src="/assets/imgs/list.svg" alt="list-item" srcset="" />
+                  <span>{{ condition.condation }}: {{ condition.value }}</span>
+                </li>
+                <li *ngIf="package?.packageCondations?.length === 0">
+                  <img src="/assets/imgs/list.svg" alt="list-item" srcset="" />
+                  <span>{{ "jobSeeker.NoConditions" | translate }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer" id="select-package">
+              <button
+              *ngIf="package.price===0"
+                (click)="packageId = package.id; selectPackage(package.id,package.price)"
+              >
+                {{ "packageButton.Startnow" | translate }}
+              </button>
+              <button
+              *ngIf="package.price!==0"
+                (click)="packageId = package.id; selectPackage(package.id,package.price)"
+              >
+                {{ "packageButton.Subscribenow" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="discount-code mt-10" >
+        <h5>
+          {{ "viewProfileuser.DiscountCodeDescription" | translate }}
+        </h5>
+        <input
+          type="text"
+          class="form-control mx-3"
+          [(ngModel)]="code"
+          placeholder="CXY33"
+        />
+        <button (click)="submitDiscountCode()">
+          {{ "viewProfileuser.VerifyCode" | translate }}
+        </button>
+      </div>
+      <div class="message mb-10">
+        <span
+          class="success"
+          *ngIf="
+            dicountCodeResult?.discountCondtion === discoundCondtion.Rate
+          "
+        >
+          {{ "viewProfileuser.YouGotADiscount" | translate }}
+          {{ dicountCodeResult?.rate }} %
+          {{
+            "viewProfileuser.OfTheTotalPackageTheCurrentAmountIs" | translate
+          }}
+          {{ dicountCodeResult?.packagePrice }}
+        </span>
+        <span
+          class="success"
+          *ngIf="
+            dicountCodeResult?.discountCondtion === discoundCondtion.Duration
+          "
+        >
+          {{
+            "viewProfileuser.YouGotAFreeExtensionOnThePackageForUpTo"
+              | translate
+          }}
+          {{ dicountCodeResult?.duration }}
+          {{ "viewProfileuser.Days" | translate }}
+        </span>
+        <span class="error" id="error"></span>
+      </div> -->
+      <!-- <div class="page-footer">
+        <button (click)="submit()">
+       
+          {{ "viewProfileuser.BuyNow" | translate }}
+        </button>
+        <button (click)="redirectTo()">
+          {{ "Buttons.Cancel" | translate }}
+        </button>
+      </div> -->
+    </div>
+  </div>
+</section>

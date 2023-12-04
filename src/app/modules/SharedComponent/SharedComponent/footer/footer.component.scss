@@ -1,0 +1,62 @@
+footer {
+  background-color: #042e5f;
+  padding: 3rem 0;
+  padding-bottom: 20px;
+  margin-top: 3rem;
+  h4 {
+    color: #d9d9d9;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  p {
+    color: #d9d9d9;
+    font-size: 15px;
+    // margin: 20px 0;
+  }
+  .scoial-links {
+    ul {
+      display: flex;
+      align-items: center;
+      li {
+        margin: 5px;
+        margin-inline-start: 0px;
+        a {
+          background: rgba(105, 154, 252, 0.21);
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      line-height: 33px;
+      a {
+        color: #d9d9d9;
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.app-download {
+  display: flex;
+  margin-top: 20px;
+  a {
+    display: inline-block;
+    margin-inline-end: 5px;
+    img {
+      width: 100%;
+      max-width: 110px;
+    }
+  }
+}

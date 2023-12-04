@@ -1,0 +1,135 @@
+<app-header></app-header>
+<section class="notification-container container mt-5">
+  <div class="d-flex gap-5">
+    <div class="title">
+      <h2>{{ "notificationComponent.Notification" | translate }}</h2>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row justify-content-between row-content">
+      <div class="col-lg-12">
+        <div class="row w-50">
+          <div class="col-lg-6 my-3">
+            <div class="iput-sec">
+              <!-- <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" /> -->
+              <input
+                onfocus="(this.type='date')"
+                class="form-control date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                aria-label=""
+                [(ngModel)]="dateText1"
+                (change)="page = 1; getUserAllNotifications()"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title=" enter the start date "
+                [placeholder]="'manageContactUs.fromDate' | translate"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 my-3">
+            <div class="iput-sec">
+              <!-- <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" /> -->
+              <input
+                onfocus="(this.type='date')"
+                class="form-control date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                aria-label=""
+                [(ngModel)]="dateText2"
+                (change)="page = 1; getUserAllNotifications()"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title=" enter the end date "
+                [placeholder]="'manageContactUs.toDate' | translate"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="notification-text">
+              <div *ngIf="allNotifications.length === 0">
+                <img
+                  style="
+                    text-align: center;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: 250px;
+                  "
+                  src="assets/imgs/icons/no-results.png"
+                />
+
+                <h1 style="text-align: center; padding-top: 15px">
+                  {{ "jobSeeker.ResultNotFound" | translate }}
+                </h1>
+              </div>
+              <ul class="notification-lists">
+                <li *ngFor="let Notification of allNotifications">
+                  <span
+                    *ngIf="Notification.isRead === false"
+                    class="rounded read"
+                  ></span>
+                  <img
+                    class="notif-img"
+                    src="assets/imgs/notification-icon.png"
+                    alt=""
+                    srcset=""
+                  />
+                  <a
+                    *ngIf="Notification.redirectUrl !== null"
+                    [routerLink]="['/' + Notification.redirectUrl]"
+                  >
+                    <!-- <p d-inline-block >
+                     <span>الأشعارات</span>
+                      {{Notification.details
+                      }}
+                      <span class="d-block">{{Notification.date | date}}</span>
+                    </p> -->
+                    <p style="color: gray" class="d-inline-block">
+                      <span style="color: black">
+                        {{ Notification.title }}
+                      </span>
+                      
+                      {{ Notification.details }}
+                      <span class="d-block">{{
+                        Notification.date | date
+                      }}</span>
+                    </p>
+                  </a>
+                  <a *ngIf="Notification.redirectUrl === null">
+                    <p d-inline-block>
+                      <span style="color: black">
+                        {{ Notification.title }}
+                      </span>
+                      {{ Notification.details }}
+                      <span class="d-block">{{
+                        Notification.date | date
+                      }}</span>
+                    </p>
+                  </a>
+                </li>
+              </ul>
+              <!--  -->
+              <div class="pagi-sec">
+                <ngb-pagination
+                  [collectionSize]="totalCount"
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  [maxSize]="15"
+                  (pageChange)="getUserAllNotifications()"
+                  class="pagination p-0 my-4 d-flex justify-content-center"
+                >
+                </ngb-pagination>
+              </div>
+              <!--  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

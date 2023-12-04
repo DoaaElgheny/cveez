@@ -1,0 +1,85 @@
+<div class="close">
+  <button (click)="closeFunction()">
+    <img src="/assets/imgs/error.png" alt="" srcset="" />
+  </button>
+</div>
+
+<div class="text-center" *ngIf="!currentUserOfLogin">
+  <img src="/assets/imgs/login.svg" alt="" />
+  <h1 *ngIf="!expiredMode">{{ "Search.LoginTitle" | translate }}</h1>
+  <h5 *ngIf="!expiredMode">{{ "Search.LoginSubTitle" | translate }}</h5>
+  <button *ngIf="!expiredMode" (click)="router.navigate(['/auth/login']); closeFunction()">
+    {{ "Search.SignIn" | translate }}
+  </button>
+  <div *ngIf="!expiredMode" class="register-p">
+    <p>
+      {{ "LogIn.notMember" | translate }}
+      <a class="link" (click)="
+          router.navigate(['/auth/job-seeker-registration']); closeFunction()
+        ">
+        {{ "LogIn.createaccount" | translate }}</a>
+    </p>
+  </div>
+  <h1 *ngIf="expiredMode ">{{ "Search.SubscriptionRenew" | translate }}</h1>
+  <h5 *ngIf="expiredMode && expiredText === null">
+    {{ "Search.RenewText" | translate }}
+  </h5>
+  <h5 *ngIf="expiredMode && expiredText !== null">
+    {{ expiredText }}
+  </h5>
+  <button *ngIf="expiredMode" (click)="router.navigate(['/client/payment-package']); closeFunction()">
+    {{ "Search.SubscriptionRenew" | translate }}
+  </button>
+</div>
+
+<!-- <ng-container *ngIf="currentUserOfLogin">
+  <ng-container [ngSwitch]="currentUserOfLogin.roles[0] ===
+  roles.cveezJobSeeker && yearsExperienceId===null">
+    <some-element *ngSwitchCase="true">
+      <div class="col-lg-12 my-5 expired-mode">
+        <div class="text-center expired-mode-content">
+          <img src="/assets/imgs/login.svg" alt="" />
+          <h5 style="padding-top: 25px;">
+            {{ "Search.completePlease" | translate }}
+          </h5>
+
+          <button (click)="router.navigate(['/auth/complete-job-seeker']);closeFunction()">
+            {{ "Header.NotComplete" | translate }}
+          </button>
+
+        </div>
+      </div>
+    </some-element>
+
+
+    <some-element *ngSwitchDefault>
+      <div class="text-center">
+        <img src="/assets/imgs/login.svg" alt="" />
+        <h1 *ngIf="!expiredMode">{{ "Search.LoginTitle" | translate }}</h1>
+        <h5 *ngIf="!expiredMode">{{ "Search.LoginSubTitle" | translate }}</h5>
+        <button *ngIf="!expiredMode" (click)="router.navigate(['/auth/login']); closeFunction()">
+          {{ "Search.SignIn" | translate }}
+        </button>
+        <div *ngIf="!expiredMode" class="register-p">
+          <p>
+            {{ "LogIn.notMember" | translate }}
+            <a class="link" (click)="
+            router.navigate(['/auth/job-seeker-registration']); closeFunction()
+          ">
+              {{ "LogIn.createaccount" | translate }}</a>
+          </p>
+        </div>
+        <h1 *ngIf="expiredMode ">{{ "Search.SubscriptionRenew" | translate }}</h1>
+        <h5 *ngIf="expiredMode && expiredText === null">
+          {{ "Search.RenewText" | translate }}
+        </h5>
+        <h5 *ngIf="expiredMode && expiredText !== null">
+          {{ expiredText }}
+        </h5>
+        <button *ngIf="expiredMode" (click)="router.navigate(['/client/payment-package']); closeFunction()">
+          {{ "Search.SubscriptionRenew" | translate }}
+        </button>
+      </div>
+    </some-element>
+  </ng-container>
+</ng-container> -->

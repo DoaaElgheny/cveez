@@ -1,0 +1,101 @@
+
+  <!--backButton:Ending-->
+  <div class="close">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.png" alt="" srcset="">
+    </button>
+  </div>
+  <!--begin::Form-->
+  <div class="body-size">
+    <form class="form w-100" [formGroup]="codeCharactersForm" novalidate="novalidate" id="kt_login_signin_form"
+      (ngSubmit)="submit()">
+      <!-- begin::Heading-->
+      <div class="text-center">
+        <h1 class="text-dark fw-bolder mb-3">
+          {{
+            "otpPage.title" | translate
+          }}
+        </h1>
+        <div class="text-gray-500 fw-semibold fs-6">
+          {{
+            "otpPage.subTitle" | translate
+          }}
+          <br>
+{{formvalue.agentRepresentativeEmail}}
+</div>
+<img class="mt-10 mb-10" src="./assets/imgs/ic_Varification-email.png" alt="" />
+      </div>
+
+      <div class="d-flex justify-content-center flex-wrap gap-2 fs-base fw-semibold mb-8">
+        <!--begin::inputs-->
+        <div class="chart-place">
+          <div class="d-flex" style="direction: ltr;">
+
+            <input formControlName="char1" type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''"
+              maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value=""
+              inputmode="text" (keyup)="movetoNext($event)">
+
+            <input formControlName="char2" type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''"
+              maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value=""
+              inputmode="text" (keyup)="movetoNext($event)">
+
+            <input formControlName="char3" type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''"
+              maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value=""
+              inputmode="text" (keyup)="movetoNext($event)">
+
+            <input formControlName="char4" type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''"
+              maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value=""
+              inputmode="text" (keyup)="movetoNext($event)">
+
+
+
+          </div>
+        </div>
+        <!--end::inputs-->
+      </div>
+      <!--end::Wrapper-->
+      <div class="button-size">
+        <div class="d-grid mb-2">
+          <button type="submit" id="kt_sign_in_submit" class="genral-button">
+
+            <span class="indicator-progress">
+              {{
+                "Shared.PleaseWait" | translate
+              }}
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+
+
+            <span class="indicator-label">{{
+              "Shared.Continue" | translate
+            }}</span>
+
+          </button>
+        </div>
+      </div>
+      <!--end::Action-->
+      <div class="text-gray-500 fw-semibold text-center mb-10 fs-6">
+        {{
+          "otpPage.resendEmail" | translate
+        }}
+        <a class="resend" (click)="resendCode()">
+          {{
+            "otpPage.resendLink" | translate
+          }}
+        </a>
+      </div>
+    </form>
+  </div>
+  <!--end::Form-->
+
+
+
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </ng-container>
+  </ng-template>

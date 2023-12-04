@@ -1,0 +1,109 @@
+.page-title {
+  text-align: center;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px 2px rgba(80, 80, 80, 0.25);
+  img {
+      width: 140px;
+      padding: 14px 0;
+  }
+}
+.activate-account {
+  text-align: center;
+  .icon {
+    // margin-top: 42px;
+    margin-bottom: 35px;
+  }
+  .title {
+    h4 {
+      color: #333333;
+      font-size: 25px;
+      margin-bottom: 30px;
+      // font-family: 'Semibold'; 
+    }
+  }
+  .content {
+    h5 {
+      // margin-bottom: 30px;
+      // font-family: 'Light';
+      font-weight: 100;
+      span {
+        color: #7D7D7D;
+        font-size: 18px;
+      }
+    }
+    .not-rec { 
+      text-align: start;
+      margin-bottom: 22px;
+      font-family: 'Light';
+      a {
+        color: #323232;
+        font-size: 20px;
+        text-decoration: none;
+      }
+    }
+    .action {
+      button {
+        margin: 5px;
+        cursor: pointer !important;
+        color: #fff;
+        background: var(--color);
+        border-radius: 5px; 
+        font-size: 16px;
+        border: none;
+        min-width: 210px;
+        line-height: 0;
+        padding: 10px;
+        min-height: 43px;
+    }
+    }
+    .sign-up {
+      p {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 16px;
+        font-family: 'Regular';
+        a {
+          color: #5F114F;
+        }
+      }
+    }
+  }
+}
+
+.activate-account {
+  // position: relative;
+  // min-height: 95vh;
+  // padding-bottom: 100px;
+  .action {
+    background-color: #fff;
+    padding: 15px 0;
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+    // width: 100%;
+  }
+}
+
+.actions {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  padding: 18px;
+  text-align: center;
+  height: 96px;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  button {
+    margin: 5px;
+    cursor: pointer !important;
+    color: #fff;
+    background: var(--color);
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    min-width: 210px;
+    line-height: 0;
+    padding: 10px;
+    min-height: 43px;
+  }
+}

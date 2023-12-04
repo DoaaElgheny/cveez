@@ -1,0 +1,10 @@
+.modal-section {
+  padding: 20px;
+  .modal-title {
+    text-align: end;
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+  }
+}

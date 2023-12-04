@@ -1,0 +1,207 @@
+<div class="page-title">
+  <div class="">
+    <h3>
+      {{ "managePackage.managePackage" | translate }} /
+      <span> {{ "managePackage.availablePackages" | translate }} </span>
+    </h3>
+  </div>
+</div>
+<div class="card-header search-top border-0 py-10">
+  <div class="">
+    <div class="row justify-content-between">
+      <div class="col-lg-6 mb-3">
+        <div class="input-img">
+          <img src="/assets/imgs/search.svg" alt="" srcset="" />
+          <button
+            *ngIf="searchText !== ''"
+            (click)="searchText = ''; getUserAllPackages()"
+          >
+            x
+          </button>
+          <input
+            style="width: 100%"
+            class="form-control"
+            type="text"
+            (keyup)="page = 1; fromSearchInput = true; getUserAllPackages();"
+            [placeholder]="'managePackage.search' | translate"
+            [(ngModel)]="searchText"
+          />
+        </div>
+      </div>
+      <!-- <div class="col-lg-2">
+        <div class="action">
+          <button>
+            اضافة باقة جديدة
+            <span class="mx-2"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-plus-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div> -->
+      <div class="col-lg-3 col-md-3 mb-3">
+        <div class="action">
+          <button (click)="openModal()">
+            {{ "managePackage.addPackage" | translate }}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-plus-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-content">
+  <div class="row">
+    <div *ngIf="allPakages.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <div class="col-lg-6 col-xl-4 col-md-6 my-3" *ngFor="let pakage of allPakages">
+      <div class="package-card">
+        <div>
+          <div class="title">
+            <div>
+              <h4>{{ pakage.name }}</h4>
+
+              <h6 *ngIf="theSubscribersType.All === pakage.subscribersType">
+                {{ "managePackage.subscribers" | translate }}
+              </h6>
+              <h6
+                *ngIf="theSubscribersType.JobSeeker === pakage.subscribersType"
+              >
+                {{ "managePackage.jobSeeker" | translate }}
+              </h6>
+              <h6 *ngIf="theSubscribersType.Agent === pakage.subscribersType">
+                {{ "managePackage.facility" | translate }}
+              </h6>
+              <!-- subscriptionPeriod -->
+              <!-- <h6 *ngIf="pakage.subscribersType === theSubscribersType.All">جميع المشتركين</h6>
+              <h6 *ngIf="pakage.subscribersType === 2">باحث عن عمل</h6>
+              <h6 *ngIf="pakage.subscribersType === 3">المنشاة</h6> -->
+            </div>
+            <div class="action">
+              <div class="form-check form-switch px-2">
+                <label class="switch form-check-label" [for]="pakage.id">
+                  <input
+                    (change)="changePackageToggleType(pakage)"
+                    class="form-check-input"
+                    type="checkbox"
+                    [checked]="pakage.packageType === 2"
+                    [id]="pakage.id"
+                  />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <!-- <button>
+                <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+              </button> -->
+              <div ngbDropdown class="btn-group">
+                <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                  <button>
+                    <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+                  </button>
+                </div>
+
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <ul class="option p-0 list-unstyled m-0 px-2">
+                    <li role="menuitem">
+                      <button
+                        (click)="openModal(pakage.id)"
+                        class="dropdown-item"
+                      >
+                        <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                        {{ "managePackage.edit" | translate }}
+                      </button>
+                    </li>
+
+                    <!-- <li role="menuitem">
+                      <a
+                        class=""
+                        (click)="deletePackage(pakage.id, pakage.name)"
+                      >
+                      <img src="/assets/imgs/is3.png" alt="" srcset="">
+                        <span class="mx-2">{{ "managePackage.delete" | translate }}</span>
+                      </a>
+                    </li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="body">
+            <p>
+              {{ pakage.description }}
+            </p>
+          </div>
+        </div>
+        <div class="footer">
+          <h6>{{ pakage.subscriptionPeriod }}
+            <span *ngIf="pakage.durationPackage===durationPackage.Month">
+                  
+              {{ "jobSeeker.month" | translate }}
+             </span>
+             <span *ngIf="pakage.durationPackage===durationPackage.Day">
+               {{ "managePackage.Day" | translate }}
+             </span>
+             <span *ngIf="pakage.durationPackage===durationPackage.Week">
+             
+              
+               {{ "managePackage.Week" | translate }}
+             </span>
+            </h6>
+          <p>
+            <span class="mx-2">
+              {{ pakage.price }}
+            </span>
+            <img src="/assets/imgs/Money.svg" alt="" srcset="" />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngb-pagination
+    [collectionSize]="totalCount"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="getUserAllPackages()"
+    class="pagination p-0 my-4 d-flex justify-content-center"
+  >
+  </ngb-pagination>
+</div>
+
+<!--
+<div class="table-responsive" *ngIf="allMembers.length !== 0"> -->

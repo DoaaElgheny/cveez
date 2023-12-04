@@ -1,0 +1,45 @@
+.error-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/assets/imgs/err-bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .content {
+      text-align: center;
+      img {
+        max-width: 300px;
+      }
+      h3 {
+        color: #0D0D0D;
+        font-size: 40px;
+        font-family: 'Semibold';
+        margin-top: 30px;
+        font-weight: bold;
+      }
+      p {
+        color: #838383;
+        font-family: 'Regular';
+        font-size: 18px;
+      }
+      a {
+        display: inline-block;
+        background: #962C80;
+        color: #fff;
+        min-width: 150px;
+        margin-top: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: 'Regular';
+        border: 1px solid #962C80;
+        transition: all .3s;
+        &:hover {
+          color: #962C80;
+          background-color: transparent;
+        }
+      }
+    }
+  }

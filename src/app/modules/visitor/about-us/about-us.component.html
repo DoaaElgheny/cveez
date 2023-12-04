@@ -1,0 +1,437 @@
+<section class="about-us">
+  <div class="about-us">
+    <ngb-carousel
+      #ngcarousel
+      [showNavigationArrows]="false"
+      [showNavigationIndicators]="false"
+    >
+      <ng-template ngbSlide *ngFor="let item of images">
+        <div
+          class="picsum-img-wrapper home"
+          [ngStyle]="{ 'background-image': 'url(' + item + ')' }"
+        >
+          <div class="overlay"></div>
+        </div>
+        <div class="carousel-caption">
+          <div class="content">
+            <h1>
+              {{ "Home.TheEasiestWayToGet" | translate }}
+              <span>{{ "Home.YourNewJob" | translate }}</span>
+            </h1>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+
+    <div class="owel-buttons">
+      <button (click)="prevFun()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+          />
+        </svg>
+      </button>
+      <button (click)="nextFun()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="about-us">
+  <section class="about-us">
+    <div class="page-header">
+      <div class="container">
+        <div class="nav-sec">
+          <app-header></app-header>
+        </div>
+        <h2>{{ "aboutUs.sectionOneTitle" | translate }}</h2>
+        <p>
+          {{ "aboutUs.sectionOne" | translate }}
+        </p>
+      </div>
+    </div>
+    <section class="about-accord">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 my-3">
+            <div class="accordion-img">
+              <img
+                class="w-100"
+                src="/assets/imgs/about-mg.jpg"
+                alt=""
+                srcset=""
+              />
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-6 my-3">
+            <div class="about-accordion">
+              <div class="title">
+                <h3>
+                  {{ "Footer.aboutUs" | translate }}
+                </h3>
+                <p>
+                  {{ "aboutUs.sectionTwoP1" | translate }}
+                </p>
+              </div>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      {{ "aboutUs.sectionTwoButton1" | translate }}
+                      <!-- It is recruitment and staffing platform designed to
+                      streamline the hiring -->
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse show "
+                    data-bs-parent="#accordionExample"
+                    
+                  >
+                    <div class="accordion-body">
+                      <p>
+                        {{ "aboutUs.sectionTwoButton1P" | translate }}
+                        <!-- process and connect top talent with the right employers.
+                        With advanced AI-powered features, our application uses
+                        the technologies to match candidates with job openings
+                        based on their skills, experience, and preferences. -->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      {{ "aboutUs.sectionTwoButton2" | translate }}
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseTwo"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      <p>
+                        {{ "aboutUs.sectionTwoButton2P" | translate }}
+                        <!-- process and connect top talent with the right employers.
+                        With advanced AI-powered features, our application uses
+                        the technologies to match candidates with job openings
+                        based on their skills, experience, and preferences. -->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                    >
+                      {{ "aboutUs.sectionTwoButton3" | translate }}
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseThree"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      <p>
+                        {{ "aboutUs.sectionTwoButton3P" | translate }}
+
+                        <!-- process and connect top talent with the right employers.
+                        With advanced AI-powered features, our application uses
+                        the technologies to match candidates with job openings
+                        based on their skills, experience, and preferences. -->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="about-imgs">
+      <div class="container">
+        <img class="w-100" src="/assets/imgs/about-imgs.svg" alt="" srcset="" />
+      </div>
+    </div>
+    <section class="why-choose">
+      <div class="container">
+        <div class="title">
+          <h5>{{ "aboutUs.firstTitle" | translate }} !</h5>
+          <h2>
+            {{ "aboutUs.whyChooseCVEEEZ" | translate }}
+          </h2>
+          <p>
+            {{ "aboutUs.whyUsText" | translate }}
+          </p>
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-md-6 my-3">
+              <div class="choose-card">
+                <div class="num">
+                  <img src="/assets/imgs/1.svg" alt="" srcset="" />
+                </div>
+                <div class="info">
+                  <h3>
+                    {{ "aboutUs.visionStatement" | translate }}
+                  </h3>
+                  <p>
+                    {{ "aboutUs.visionStatementText" | translate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-3">
+              <div class="choose-card">
+                <div class="num">
+                  <img src="/assets/imgs/2.svg" alt="" srcset="" />
+                </div>
+                <div class="info">
+                  <h3>
+                    {{ "aboutUs.missionStatement" | translate }}
+                  </h3>
+                  <p>
+                    {{ "aboutUs.missionStatementText" | translate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-3">
+              <div class="choose-card">
+                <div class="num">
+                  <img src="/assets/imgs/3.svg" alt="" srcset="" />
+                </div>
+                <div class="info">
+                  <h3>
+                    {{ "aboutUs.aimStatement" | translate }}
+                  </h3>
+                  <p>
+                    {{ "aboutUs.aimStatementText" | translate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-3">
+              <div class="choose-card">
+                <div class="num">
+                  <img src="/assets/imgs/4.svg" alt="" srcset="" />
+                </div>
+                <div class="info">
+                  <h3>
+                    {{ "aboutUs.commitmentStatement" | translate }}
+                  </h3>
+                  <p>
+                    {{ "aboutUs.commitmentStatementText" | translate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="carousel-sec">
+      <div class="container">
+        <div class="title">
+          <h3>
+            {{ "aboutUs.featuresOfCVEEEZ" | translate }}
+          </h3>
+        </div>
+        <div class="content">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <p>
+                  {{ "aboutUs.messageImgText" | translate }}
+                </p>
+                <h4>
+                  {{ "aboutUs.messageImgTitle" | translate }}
+                </h4>
+              </div>
+              <div class="carousel-item">
+                <p>
+                  {{ "aboutUs.handImgText" | translate }}
+                </p>
+                <h4>
+                  {{ "aboutUs.handImgTitle" | translate }}
+                </h4>
+              </div>
+              <div class="carousel-item">
+                <p>
+                  {{ "aboutUs.redStarImgText" | translate }}
+                </p>
+                <h4>
+                  {{ "aboutUs.redStarImgTitle" | translate }}
+                </h4>
+              </div>
+              <div class="carousel-item">
+                <p>
+                  {{ "aboutUs.yellowImgText" | translate }}
+                </p>
+                <h4>
+                  {{ "aboutUs.yellowImgTitle" | translate }}
+                </h4>
+              </div>
+              <div class="carousel-item">
+                <p>
+                  {{ "aboutUs.blueImgText" | translate }}
+                </p>
+                <h4>
+                  {{ "aboutUs.blueImgTitle" | translate }}
+                </h4>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-left"
+              >
+                <path
+                  _ngcontent-eca-c119=""
+                  fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                class="bi bi-arrow-right"
+              >
+                <path
+                  _ngcontent-eca-c119=""
+                  fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                ></path>
+              </svg>
+            </button>
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              >
+                <img src="/assets/imgs/img4.jpeg" alt="" srcset="" />
+              </button>
+
+              <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            >
+              <img src="/assets/imgs/img2.svg" alt="" srcset="" />
+            </button>
+
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              >
+                <img src="/assets/imgs/img3.svg" alt="" srcset="" />
+              </button>
+
+          
+
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="3"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 4"
+              >
+                <img src="/assets/imgs/img5.jpeg" alt="" srcset="" />
+              </button>
+             
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="4"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 5"
+              >
+                <img src="/assets/imgs/img1.svg" alt="" srcset="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="footer" id="contact-us">
+  <app-footer></app-footer>
+</section>

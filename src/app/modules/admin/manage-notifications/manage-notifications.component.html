@@ -1,0 +1,395 @@
+<section class="top-search">
+  <div class="d-flex gap-5">
+    <div class="title">
+      <h2>
+        <!-- {{ "manageContactUs.ComplaintsAndMessagesManagement" | translate }} -->
+        <!-- ادارة الأشعارات -->
+        {{ "ManageNotifications.namenotificationManagement" | translate }}
+      </h2>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row justify-content-between">
+      <!-- search here -->
+      <!-- <div class="col-lg-6 mb-3">
+        <div class="input-img">
+          <img src="/assets/imgs/search.svg" alt="" srcset="" />
+          <button
+            *ngIf="searchText !== ''"
+            (click)="searchText = ''; getMangeNotification()"
+          >
+            x
+          </button>
+          <input
+            style="width: 100%"
+            class="form-control"
+            type="text"
+            (keyup)="page = 1; getMangeNotification()"
+            [placeholder]="
+              'ManageNotifications.SearchByNotificationTitle' | translate
+            "
+            [(ngModel)]="searchText"
+          />
+        </div>
+      </div> -->
+      <div class="col-lg-6 mb-3">
+        <div class="input-img notif">
+          <img src="/assets/imgs/search.svg" alt="" srcset="" />
+          <button
+            *ngIf="searchText !== ''"
+            (click)="searchText = ''; getMangeNotification()"
+          >
+            x
+          </button>
+          <input
+            style="width: 100%"
+            class="form-control"
+            type="text"
+            (keyup)="page = 1; fromSearchInput = true; getMangeNotification()"
+            [placeholder]="'MangeAgent.searchingNotification' | translate"
+            [(ngModel)]="searchText"
+          />
+        </div>
+      </div>
+
+      <!-- drop down here -->
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- state type حالة الارسال -->
+          <div class="col-xl-3 col-lg-4 md-6 my-3">
+            <select
+              class="form-select"
+              [(ngModel)]="StateInFiltration"
+              aria-label="Default select example"
+              (change)="page = 1; getMangeNotification()"
+            >
+              <option selected disabled value="">
+                {{ "ManageNotifications.sendingStatus" | translate }}
+              </option>
+              <option [value]="messageState.All">
+                {{ "ManageNotifications.All" | translate }}
+              </option>
+
+              <option [value]="messageState.NotSend">
+                <!-- قيد الارسال< -->
+                {{ "ManageNotifications.Sending" | translate }}
+              </option>
+              <option [value]="messageState.Send">
+                {{ "ManageNotifications.sent" | translate }}
+              </option>
+            </select>
+          </div>
+          <!-- sendWay  نوع الارسال -->
+          <div class="col-xl-3 col-lg-4 md-6 my-3">
+            <select
+              class="form-select"
+              [(ngModel)]="sendWayInFiltration"
+              aria-label="Default select example"
+              (change)="page = 1; getMangeNotification()"
+            >
+              <option selected disabled value="">
+                {{ "ManageNotifications.notificationType" | translate }}
+                <!-- نوع الاشعار -->
+              </option>
+              <option [value]="theSendWay.All">
+                {{ "manageContactUs.All" | translate }}
+              </option>
+
+              <option [value]="theSendWay.Email">
+                {{ "ManageNotifications.Email" | translate }}
+              </option>
+              <option [value]="theSendWay.Portal">
+                {{ "ManageNotifications.Platform" | translate }}
+              </option>
+              <option [value]="theSendWay.Email_Portal">
+                {{ "ManageNotifications.Both" | translate }}
+              </option>
+            </select>
+          </div>
+          <div class="col-xl-3 col-lg-4 md-6 my-3">
+            <select
+              class="form-select"
+              [(ngModel)]="NotifyUserTypeInFiltration"
+              aria-label="Default select example"
+              (change)="page = 1; getMangeNotification()"
+            >
+              <option selected disabled value="">
+                {{ "ManageNotifications.notificationUserType" | translate }}
+              </option>
+              <option [value]="theNotifyUserType.All">
+                {{ "ManageNotifications.allUsers" | translate }}
+              </option>
+              <option [value]="theNotifyUserType.JobSeeker">
+                {{ "ManageNotifications.jobSeeker" | translate }}
+              </option>
+              <option [value]="theNotifyUserType.Agent">
+                {{ "ManageNotifications.Employer" | translate }}
+              </option>
+              <option [value]="theNotifyUserType.AgentAndJobSeeker">
+                {{ "ManageNotifications.Both" | translate }}
+              </option>
+            </select>
+          </div>
+          <div class="col-xl-3 col-lg-4 md-6 my-3">
+            <div class="iput-sec">
+              <!-- <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" /> -->
+              <input
+                onfocus="(this.type='date')"
+                class="form-control date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                aria-label=""
+                [(ngModel)]="dateText2"
+                (change)="page = 1; getMangeNotification()"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title=" enter the end date "
+                [placeholder]="'ManageNotifications.sendingDate' | translate"
+              />
+            </div>
+          </div>
+          <!--  -->
+        </div>
+      </div>
+
+      <div class="form-action">
+        <button class="add-notification" (click)="openModal()">
+          {{ "ManageNotifications.addNotification" | translate }}
+          <!-- add notification -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-plus-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+            />
+          </svg>
+        </button>
+        <div class="reset-btn">
+          <button (click)="fromSearchInput = false; rest()" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-counterclockwise"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+              />
+              <path
+                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+              />
+            </svg>
+            {{ "Buttons.Reset" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="message-cards">
+      <div class="row">
+        <div *ngIf="allManageNotifications.length === 0">
+          <img
+            style="
+              text-align: center;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 250px;
+            "
+            src="assets/imgs/icons/no-results.png"
+          />
+
+          <h1 style="text-align: center; padding-top: 15px">
+            {{ "jobSeeker.ResultNotFound" | translate }}
+          </h1>
+        </div>
+        <div
+          class="col-lg-4 col-sm-6 my-4"
+          *ngFor="let ManageNotification of allManageNotifications"
+        >
+          <div class="message-card h-100">
+            <div class="title pb-4">
+              <div>
+                <h3>{{ ManageNotification.title }}</h3>
+                <div class="row justify-content-between">
+                  <time>{{ ManageNotification.sendDate | date }} </time>
+
+                  <!-- حالة الرسالة -->
+                  <div class="type">
+                    <span
+                      class="badge badge-light-danger fs-7 fw-bold"
+                      *ngIf="ManageNotification.state === messageState.NotSend"
+                    >
+                      {{ "ManageNotifications.Sending" | translate }}
+                      <!-- NotSend -->
+                    </span>
+                    <span
+                      class="badge badge-light-success fs-7 fw-bold"
+                      style="--bs-bg-opacity: 0.5"
+                      *ngIf="ManageNotification.state === messageState.Send"
+                    >
+                      <!-- Send -->
+                      {{ "ManageNotifications.sent" | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div ngbDropdown class="btn-group">
+                <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                  <button>
+                    <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+                  </button>
+                </div>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <ul class="option p-0 list-unstyled m-0 px-2">
+                    <li
+                      role="menuitem"
+                      *ngIf="ManageNotification.state === messageState.NotSend"
+                    >
+                      <button
+                        (click)="openModal(ManageNotification.id)"
+                        class="dropdown-item"
+                      >
+                        <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                        <span class="mx-2">
+                          <!-- edit -->
+                          {{ "manageClassification.edit" | translate }}
+                        </span>
+                      </button>
+                    </li>
+
+                    <li role="menuitem">
+                      <!-- <a
+                        class=""
+                        (click)="
+                          deleteNotiification(
+                            ManageNotification.id,
+                            ManageNotification.title
+                          )
+                        "
+                      >
+
+                      </a> -->
+                      <button
+                        class="dropdown-item"
+                        (click)="
+                          deleteNotiification(
+                            ManageNotification.id,
+                            ManageNotification.title
+                          )
+                        "
+                      >
+                        <img src="/assets/imgs/is3.png" alt="" srcset="" />
+
+                        <span class="mx-2">
+                          {{ "manageClassification.delete" | translate }}
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="content-body">
+              <div
+                class="d-flex justify-content-between align-items-center"
+              ></div>
+              <p>{{ ManageNotification.details }}</p>
+              <!-- <p>
+                <app-read-more
+                  [text]="message.message"
+                  [maxHeight]="39"
+                ></app-read-more>
+
+              </p> -->
+              <div class="action">
+                <!-- *********** -->
+                <!-- نوع الاشعار sendway -->
+                <div class="type">
+                  <span
+                    class="message"
+                    *ngIf="
+                      ManageNotification.sendWay === theSendWay.Email_Portal
+                    "
+                  >
+                    {{ "ManageNotifications.Both" | translate }}
+                    <!-- Email_Portal -->
+                  </span>
+                  <span
+                    class="complain"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="ManageNotification.sendWay === theSendWay.Email"
+                  >
+                    {{ "ManageNotifications.Email" | translate }}
+                    <!-- Email -->
+                  </span>
+                  <span
+                    class="other"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="ManageNotification.sendWay === theSendWay.Portal"
+                  >
+                    {{ "ManageNotifications.Platform" | translate }}
+                    <!-- Portal -->
+                  </span>
+                </div>
+                <!-- نوع المستخدم user type -->
+                <div class="type">
+                  <span
+                    class="message"
+                    *ngIf="
+                      ManageNotification.userType ===
+                      theNotifyUserType.AgentAndJobSeeker
+                    "
+                  >
+                    {{ "ManageNotifications.Both" | translate }}
+                    <!-- AgentAndJobSeeker -->
+                  </span>
+                  <span
+                    class="complain"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="
+                      ManageNotification.userType === theNotifyUserType.Agent
+                    "
+                  >
+                    {{ "ManageNotifications.Employer" | translate }}
+                    <!-- Agent -->
+                  </span>
+                  <span
+                    class="other"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="
+                      ManageNotification.userType ===
+                      theNotifyUserType.JobSeeker
+                    "
+                  >
+                    {{ "ManageNotifications.jobSeeker" | translate }}
+                    <!-- JobSeeker -->
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="pagi-sec">
+  <ngb-pagination
+    [collectionSize]="totalCount"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="getMangeNotification()"
+    class="pagination p-0 my-4 d-flex justify-content-center"
+  >
+  </ngb-pagination>
+</div>

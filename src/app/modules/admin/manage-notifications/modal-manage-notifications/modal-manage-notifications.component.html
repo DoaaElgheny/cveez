@@ -1,0 +1,297 @@
+<!--  -->
+<div class="modal-header">
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="title text-center">
+  <h2 *ngIf="id === undefined">
+    {{ "ManageNotifications.addANewNotification" | translate }}
+  </h2>
+  <h2 *ngIf="id !== undefined">
+    {{ "ManageNotifications.editNotification" | translate }}
+  </h2>
+</div>
+<div class="modal-body">
+  <form [formGroup]="notificationModalForm">
+    <div class="row">
+      <!-- drop down here  -->
+      <!-- user type -->
+      <div class="col-lg-12 my-3">
+        <label for="userType" class="form-label">
+          {{ "ManageNotifications.notificationUserType" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <select
+          formControlName="userType"
+          id="userType"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option [value]="null" selected disabled>
+            {{ "ManageNotifications.notificationUserType" | translate }}
+          </option>
+         
+          <option [value]="theNotifyUserType.JobSeeker">
+            {{ "ManageNotifications.jobSeeker" | translate }}
+          </option>
+          <option [value]="theNotifyUserType.Agent">
+            {{ "ManageNotifications.Employer" | translate }}
+          </option>
+          <option [value]="theNotifyUserType.AgentAndJobSeeker">
+            {{ "ManageNotifications.Both" | translate }}
+          </option>
+        </select>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['userType']
+          }"
+        ></ng-container>
+      </div>
+      <!-- date  -->
+      <div class="col-lg-6 my-3">
+        <label for="sendDate" class="form-label">
+          {{ "ManageNotifications.sendingDate" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <input
+          class="form-control"
+          type="date"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          placeholder="yyyy-mm-dd"
+          formControlName="sendDate"
+          aria-label=""
+          [min]="getCurrentDate()"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['sendDate']
+          }"
+        ></ng-container>
+      </div>
+      <!-- sendWay  نوع الارسال -->
+      <div class="col-lg-6 my-3">
+        <label for="sendWay" class="form-label">
+          {{ "ManageNotifications.notificationType" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <select
+          formControlName="sendWay"
+          id="sendWay"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option [value]="null" selected disabled value="">
+            <!-- {{ "manageContactUs.type" | translate }} -->
+            <!-- نوع الاشعار -->
+            {{ "ManageNotifications.notificationType" | translate }}
+          </option>
+        
+          <option [value]="theSendWay.Email">
+            {{ "ManageNotifications.Email" | translate }}
+          </option>
+          <option [value]="theSendWay.Portal">
+            {{ "ManageNotifications.Platform" | translate }}
+          </option>
+          <option [value]="theSendWay.Email_Portal">
+            {{ "ManageNotifications.Both" | translate }}
+          </option>
+        </select>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['sendWay']
+          }"
+        ></ng-container>
+      </div>
+      <!-- عنوان الاشعار بالعربي والانجليزي -->
+      <div class="col-lg-6 mb-5">
+        <label for="titleAr" class="form-label"
+          >{{
+            "ManageNotifications.notificatioNtitleInArabic" | translate
+          }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <input
+          formControlName="titleAr"
+          id="titleAr"
+          type="email"
+          class="form-control"
+          [placeholder]="
+            'ManageNotifications.notificatioNtitleInArabic' | translate
+          "
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['titleAr']
+          }"
+        ></ng-container>
+        <!-- <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'ManageNotifications.inArabic' | translate,
+            control: notificationModalForm.controls['titleAr']
+          }"
+        ></ng-container> -->
+      </div>
+      <div class="col-lg-6 mb-5">
+        <label for="titleEn" class="form-label">
+          {{
+            "ManageNotifications.notificationTitleInEnglish" | translate
+          }}</label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <input
+          formControlName="titleEn"
+          id="titleEn"
+          type="email"
+          class="form-control"
+          [placeholder]="
+            'ManageNotifications.notificationTitleInEnglish' | translate
+          "
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['titleEn']
+          }"
+        ></ng-container>
+        <!-- <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'ManageNotifications.inEnglish' | translate,
+            control: notificationModalForm.controls['titleEn']
+          }"
+        ></ng-container> -->
+      </div>
+      <!--  -->
+      <!--  -->
+      <!--details  -->
+      <!-- Ar -->
+      <div class="col-lg-12 mb-5">
+        <label for="detailsAr" class="form-label">
+          {{
+            "ManageNotifications.notificationDescriptionInArabic" | translate
+          }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+
+        <textarea
+          formControlName="detailsAr"
+          id="detailsAr"
+          class="form-control"
+          rows="3"
+          [placeholder]="
+            'ManageNotifications.notificationDescriptionInArabic' | translate
+          "
+        ></textarea>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['detailsAr']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'maxlength',
+            message: 'Validation.DescriptionMaxLength' | translate,
+            control: notificationModalForm.controls['detailsAr']
+          }"
+        ></ng-container>
+        <!-- <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'ManageNotifications.inArabic' | translate,
+            control: notificationModalForm.controls['detailsAr']
+          }"
+        ></ng-container> -->
+      </div>
+      <!-- En -->
+      <div class="col-lg-12 mb-5">
+        <label for="detailsEn" class="form-label">
+          {{
+            "ManageNotifications.notificationDescriptionInEnglish" | translate
+          }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <textarea
+          formControlName="detailsEn"
+          id="detailsEn"
+          class="form-control"
+          rows="3"
+          [placeholder]="
+            'ManageNotifications.notificationDescriptionInEnglish' | translate
+          "
+        ></textarea>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: notificationModalForm.controls['detailsEn']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'maxlength',
+            message: 'Validation.DescriptionMaxLength' | translate,
+            control: notificationModalForm.controls['detailsEn']
+          }"
+        ></ng-container>
+        <!-- <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'ManageNotifications.inEnglish' | translate,
+            control: notificationModalForm.controls['detailsEn']
+          }"
+        ></ng-container> -->
+      </div>
+      <!--  -->
+    </div>
+  </form>
+</div>
+
+<div class="page-action">
+  <button type="submit" class="" (click)="saveNotificationForm()">
+    {{ "managePackage.Save" | translate }}
+  </button>
+  <button type="button" class="" (click)="activeModal.close('Close click')">
+    {{ "managePackage.Cancel" | translate }}
+  </button>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

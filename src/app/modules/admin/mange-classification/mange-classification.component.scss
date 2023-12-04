@@ -1,0 +1,117 @@
+.page-title {
+  h3 {
+    color: #333232;
+    font-weight: 400;
+    font-size: 28px;
+    span {
+      color: #6a6a6a;
+      font-size: 18px;
+    }
+  }
+}
+.search-top {
+  padding-bottom: 0;
+  .input-img {
+    position: relative;
+    input {
+      min-height: 43.56px;
+      padding-right: 38px;
+    }
+    img {
+      position: absolute;
+      top: 9px;
+      right: 12px;
+    }
+    button {
+      position: absolute;
+      top: 9px;
+      right: 35px;
+      outline: none;
+      border: 0;
+    }
+  }
+  .form-select {
+    // padding: 0.775rem 1rem 0.775rem 3rem;
+    // background-position: left 1rem center;
+    color: #042f86;
+    font-weight: 600;
+  }
+  .action {
+    button {
+      border: 1px solid #ebebeb;
+      border-radius: 8px;
+      background: #fff;
+      width: 100%;
+      height: 43.56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #042f86;
+      font-weight: 600;
+      font-size: 15px;
+      outline: none;
+    }
+  }
+}
+.page-content {
+  .classification-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      .img {
+        border-radius: 12px;
+        width: 140px;
+        height: 116px;
+        object-fit: cover;
+      }
+      .action {
+        display: flex;
+        align-items: baseline;
+        .form-check-input:checked {
+          background-color: #0274B3;
+          border-color: #0274B3;
+        }
+        button {
+          all: unset;
+          cursor: pointer;
+        }
+      }
+    }
+    .body {
+      h3 {
+        color: #333232;
+        margin-bottom: 10px;
+      }
+      p {
+        color: #a1a1aa;
+      }
+    }
+  }
+}
+.dropdown-toggle::after {
+  all: unset;
+}
+
+.option {
+  li {
+    text-align: start;
+    padding: 5px;
+    a {
+      background-color: #fff;
+      color: #4A4A4A;
+      &:hover {
+        color: #4A4A4A;
+      }
+    }
+    button {
+      color: #4A4A4A;
+      &:hover {
+        color: #4A4A4A;
+      }
+    }
+  }
+}

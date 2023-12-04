@@ -1,0 +1,232 @@
+<div class="page-title">
+  <div class="">
+    <h3>{{ "manageClassification.manageClassification" | translate }}</h3>
+  </div>
+</div>
+<div class="card-header search-top border-0 pt-5">
+  <div class="row justify-content-between">
+    <div class="col-lg-5 col-md-6 mb-3">
+      <div class="input-img">
+        <img src="/assets/imgs/search.svg" alt="" srcset="" />
+        <button
+          *ngIf="searchText !== ''"
+          (click)="searchText = ''; getAllClassification()"
+        >
+          x
+        </button>
+        <!--(click)="searchText = ''; getAllClassification()" -->
+        <!-- هنا معناه ان لما ادوس على زرار ال اكس خلى الانبوت بسترنج فاضي
+           وخلي الداتا كلها تظهر تانى -->
+        <!-- <input style="width: 100%" class="form-control" type="text" /> -->
+        <input
+          style="width: 100%"
+          class="form-control"
+          type="text"
+          (keyup)="page = 1; fromSearchInput = true; getAllClassification()"
+          [placeholder]="'manageClassification.search' | translate"
+          [(ngModel)]="searchText"
+        />
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <!-- <div class="col-lg-2 col-md-3 mb-3">
+      <select class="form-select">
+        <option selected value="">حالة التصنيف</option>
+      </select>
+    </div> -->
+    <div class="col-lg-3 mb-3">
+      <select
+        class="form-select"
+        [(ngModel)]="classificationTypeStatus"
+        aria-label="Default select example"
+        (change)="page = 1; fromSearchInput = false; getAllClassification()"
+      >
+        <option selected disabled value="">
+          {{ "manageClassification.classificationStatus" | translate }}
+        </option>
+        <option [value]="1">
+          {{ "jobSeeker.All" | translate }}
+        </option>
+        <option [value]="2">
+          {{ "MangeAgent.Active" | translate }}
+        </option>
+        <option [value]="3">
+          {{ "MangeAgent.inActive" | translate }}
+        </option>
+      </select>
+    </div>
+    <div class="col-lg-3 col-md-3 mb-3">
+      <div class="action">
+        <button (click)="openModal()">
+          {{ "manageClassification.addClassification" | translate }}
+          <span class="mx-3"></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-plus-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-content py-10">
+  <div class="row">
+    <div *ngIf="allClassification.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <div
+      class="col-lg-4 col-md-6 my-4"
+      *ngFor="let oneClassification of allClassification"
+    >
+      <div class="classification-card h-100">
+        <div class="title">
+          <img
+            class="img"
+            [src]="
+              oneClassification?.attachementFileStorageURL !== null
+                ? oneClassification?.attachementFileStorageURL
+                : 'https://img.freepik.com/free-photo/group-business-people-having-meeting_53876-14814.jpg'
+            "
+            alt=""
+          />
+          <!-- <img  [src]="url!=null?url:'/assets/imgs/user.svg'" alt=""
+      srcset=""> -->
+          <div class="action">
+            <div class="form-check form-switch px-2">
+              <label
+                class="switch form-check-label"
+                [for]="oneClassification.id"
+              >
+                <input
+                  (change)="changState(oneClassification)"
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="oneClassification.type === 2"
+                  [id]="oneClassification.id"
+                />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <!-- <button>
+              <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+            </button> -->
+            <div ngbDropdown class="btn-group">
+              <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                <button>
+                  <!-- <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-three-dots-vertical"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                    />
+                  </svg> -->
+                  <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+                </button>
+              </div>
+
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <ul class="option p-0 list-unstyled m-0 px-2">
+                  <li role="menuitem">
+                    <button
+                      (click)="openModal(oneClassification.id)"
+                      class="dropdown-item"
+                    >
+                      <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                      <span class="mx-2">{{
+                        "manageClassification.edit" | translate
+                      }}</span>
+                    </button>
+                  </li>
+
+                  <li role="menuitem">
+                    <!-- <img src="/assets/imgs/is2.png" alt="" srcset="" />
+                    <button class="dropdown-item">حذف</button> -->
+                    <a
+                      class=""
+                      (click)="
+                        deleteClassification(
+                          oneClassification.id,
+                          oneClassification.name
+                        )
+                      "
+                    >
+                      <img src="/assets/imgs/is3.png" alt="" srcset="" />
+
+                      <span class="mx-2">
+                        {{ "manageClassification.delete" | translate }}
+                      </span>
+                    </a>
+                  </li>
+                  <li
+                    role="menuitem"
+                    *ngIf="oneClassification?.acceptanceState === 3"
+                  >
+                    <button class="dropdown-item">
+                      <img src="/assets/imgs/is3.png" alt="" srcset="" />
+                      {{ "MangeAgent.AccountAcceptance" | translate }}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <h3>
+            {{ oneClassification.name }}
+          </h3>
+          <p>
+            {{ oneClassification.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pagi-sec">
+  <ngb-pagination
+    [collectionSize]="totalCount"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="getAllClassification()"
+    class="pagination p-0 my-4 d-flex justify-content-center"
+  >
+  </ngb-pagination>
+</div>
+
+<!-- (click)="openModal(oneClassification)" -->
+<!-- (click)="
+resendEmail(oneClassification.agentRepresentativeEmail)
+" -->
+<!-- (click)="showDetiles(oneClassification.id)" -->
+<!-- *ngIf="
+oneClassification?.emailState ===
+theEmailStatus.NotConfirmed
+" -->

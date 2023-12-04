@@ -1,0 +1,111 @@
+<div (click)="ShowOpportunityCondition ? showDetails(item) : null" style="cursor: pointer"
+  [ngClass]="id === isDetails ? 'job-card active' : 'job-card'">
+  <div class="job-header">
+    <div class="d-flex align-items-center">
+      <img [src]="
+          item.isHideCompanyName || !logoConditions || !item.logoURL
+            ? '/assets/imgs/company-default-logo.jpeg'
+            : item.logoURL
+        " alt="" />
+      <div>
+        <h4>
+          {{ item.jobTitle }}
+        </h4>
+        <p *ngIf="item.isHideCompanyName === false && logoConditions">
+          {{ item.agent }}
+        </p>
+      </div>
+    </div>
+    <p class="finished" *ngIf="item.acceptanceState === opportunityAcceptanceState.UnderStudying">
+      {{ "ManageOpportunity.UnderStudying" | translate }}
+    </p>
+    <p class="type" *ngIf="item.acceptanceState === opportunityAcceptanceState.Rejected">
+      {{ "ManageOpportunity.Rejected" | translate }}
+    </p>
+    <p class="finished" *ngIf="item.acceptanceState === opportunityAcceptanceState.Closed">
+      {{ "ManageOpportunity.Expired" | translate }}
+    </p>
+    <p class="un" *ngIf="
+        item.acceptanceState === opportunityAcceptanceState.Accepted &&
+        item.state === opportunityState.Available
+      ">
+      {{ "ManageOpportunity.Open" | translate }}
+    </p>
+    <p class="type" *ngIf="
+        item.acceptanceState === opportunityAcceptanceState.Accepted &&
+        item.state === opportunityState.NotAvailable
+      ">
+      {{ "ManageOpportunity.ClosedState" | translate }}
+    </p>
+  </div>
+  <div class="job-body">
+    <!-- <h6>
+    <img src="/assets/imgs/icons/1.svg" alt="" srcset="">
+    <strong class="mx-1">{{'ManageOpportunityAgent.jobLevel'|translate}} :</strong>
+    <bdi>mid level</bdi>
+  </h6> -->
+    <div class="headers">
+      <h6>
+        <img src="/assets/imgs/icons/7.svg" alt="" srcset="" />
+        <strong class="mx-1">
+          {{ "ManageOpportunityAgent.salaryType" | translate }}
+          :</strong>
+        <bdi>{{ item.salaryRange !== null ? item.salaryRange : "--" }}$ </bdi>
+      </h6>
+      <h6>
+        <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+        <strong class="mx-1">{{ "ManageOpportunityAgent.jobType" | translate }} :
+        </strong>
+        <bdi>{{ item.jobType }}</bdi>
+      </h6>
+      <h6>
+        <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+        <strong class="mx-1">{{ "ManageOpportunityAgent.jobLevel" | translate }}:</strong>
+        <bdi>{{ item.jobLevel }}</bdi>
+      </h6>
+      <h6>
+        <img src="/assets/imgs/icons/12.svg" alt="" srcset="" />
+        <strong class="mx-1">
+          {{ "AddOpportunities.jobHours" | translate }} :
+        </strong>
+        <bdi>{{ item.jobHour }} hrs</bdi>
+      </h6>
+    </div>
+    <!-- <div class="cardss">
+      <div class="percent">
+        <svg>
+          <circle cx="40" cy="40" r="40"></circle>
+          <circle cx="40" cy="40" r="40" style="--percent: 30"></circle>
+        </svg>
+        <div class="number">
+          <h3>30<span>%</span></h3>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="job-footer" *ngIf="item.date">
+    <div class="foot-action">
+      <p>
+        <img src="/assets/imgs/date.svg" alt="" srcset="" />
+        <span class="mx-2">
+          {{ "myOrderJobSeeker.date" | translate }} :
+          {{ item.date | date }}
+        </span>
+      </p>
+      <p *ngIf="item.isShow">
+        <img src="/assets/imgs/check-state.svg" alt="" srcset="" />
+        <span class="mx-2">
+          {{ "myOrderJobSeeker.show" | translate }}
+        </span>
+      </p>
+    </div>
+    <!-- <div class="actions">
+      <button *ngIf="!ShowOpportunityCondition"
+       
+        (click)="!ShowOpportunityCondition ? showDetails(item) : null"
+      >
+        {{ "myOrderJobSeeker.shown" | translate }}
+      </button>
+    </div> -->
+  </div>
+</div>

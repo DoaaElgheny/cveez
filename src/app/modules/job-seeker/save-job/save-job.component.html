@@ -1,0 +1,84 @@
+<section class="top-search">
+  <div class="title">
+    <h2>{{ "myOrderJobSeeker.savedJob" | translate }}</h2>
+  </div>
+</section>
+<section class="my-orders">
+  <div class="row">
+    <div *ngIf="allOrder?.length === 0 && ShowOpportunityCondition ">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 my-5">
+      <div class="job-list" *ngIf="allOrder.length !== 0">
+        <ng-container *ngFor="let itemOrder of allOrder">
+          <app-job-card 
+          
+          [logoConditions]="logoConditions" 
+          [ShowOpportunityCondition]="ShowOpportunityCondition"
+            [item]="itemOrder"
+             [id]="itemOrder.id" [isSaved]="true" (bindValue)="details($event)"
+            [isDetails]="isDetails"></app-job-card>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-lg-8 my-5" *ngIf="orderDetails && ShowOpportunityCondition  ">
+      <app-job-details [isApplyShow]="true" [orderDetails]="orderDetails" [logoConditions]="logoConditions" [isSaved]="true"
+        [forApply]="true" (bindValue)="reload($event)"></app-job-details>
+    </div>
+
+    <div class="col-lg-8 my-5 expired-mode" *ngIf="!ShowOpportunityCondition ">
+      <div class="text-center expired-mode-content">
+        <img src="/assets/imgs/login.svg" alt="" />
+        <h1 *ngIf="!ShowOpportunityCondition">
+          {{ "Search.SubscriptionRenew" | translate }}
+        </h1>
+        <h5 *ngIf="!ShowOpportunityCondition">
+          {{ "Search.RenewText" | translate }}
+        </h5>
+        <button *ngIf="!ShowOpportunityCondition" (click)="router.navigate(['/client/payment-package'])">
+          {{ "Search.SubscriptionRenew" | translate }}
+        </button>
+        <h1 *ngIf="ShowOpportunityCondition">
+          {{ "Search.SubscriptionUpgrade" | translate }}
+        </h1>
+        <h5 *ngIf="ShowOpportunityCondition">
+          {{ "Search.UpgradeText" | translate }}
+        </h5>
+        <button *ngIf="ShowOpportunityCondition" (click)="router.navigate(['/client/payment-package'])">
+          {{ "Search.SubscriptionUpgrade" | translate }}
+        </button>
+      </div>
+    </div>
+    <!-- <div class="col-lg-12 my-5 expired-mode" *ngIf="yearsExperienceId===null">
+      <div class="text-center expired-mode-content">
+        <img src="/assets/imgs/login.svg" alt="" />
+        <h5 style="padding-top: 25px;">
+          {{ "Search.completePlease" | translate }}
+        </h5>
+       
+        <button
+          
+          (click)="router.navigate(['/auth/complete-job-seeker'])"
+        >
+          {{ "Header.NotComplete" | translate }}
+        </button>
+    
+      </div>
+    </div> -->
+  </div>
+</section>

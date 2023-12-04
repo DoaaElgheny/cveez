@@ -1,0 +1,216 @@
+.secret{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h3 {
+    color: #333232;
+    font-size: 30px;
+    margin-bottom: 17px;
+  }
+  p {
+    padding-top: 15px;
+    color: #686868;
+    font-size: 18px;
+  }
+  .pay{
+    width: 46px;
+    height: 22px;
+  }
+  .lock{
+  
+    width: 46px;
+    height: 22px;
+  }
+}
+.payment-package {
+  padding: 3rem 0;
+  .page-title {
+    text-align: center;
+    h3 {
+      color: #333232;
+      font-size: 30px;
+      margin-bottom: 17px;
+    }
+    p {
+      color: #686868;
+      font-size: 18px;
+    }
+  }
+  .page-content {
+    margin-top: 15px;
+    .payment-card {
+      background: #f8f8f8;
+      border: 3px solid #ffffff;
+      border-radius: 15px;
+      .title {
+        text-align: center;
+        padding: 20px 15px 25px 15px;
+        min-height: 210px;
+        h5 {
+          color: #464646;
+          font-size: 18px;
+          margin-bottom: 25px;
+        }
+        h1 {
+          margin-bottom: 10px;
+          sup {
+            color: #3d3d3d;
+            font-size: 18px;
+            top: -1.6em;
+          }
+          strong {
+            font-size: 45px;
+            color: #3d3d3d;
+          }
+          span {
+            color: #959595;
+            font-size: 16px;
+          }
+        }
+        p {
+          color: #a5a5a5;
+          font-size: 15px;
+        }
+      }
+      .body {
+        background-color: #fff;
+        // padding: 25px 0;
+        margin-bottom: 25px;
+        min-height: 208px;
+        ul {
+          padding: 0;
+          list-style: none;
+          li {
+            color: #464646;
+            font-size: 14px;
+            margin: 9px 0;
+            display: flex;
+            align-items: flex-start;
+            img {
+              transform: scale(-1, 1);
+            }
+          }
+        }
+      }
+      .footer {
+        text-align: center;
+        button {
+          background: var(--color);
+          border-radius: 25px;
+          border: none;
+          color: #fff;
+          margin-bottom: 25px;
+          width: 60%;
+          padding: 12px;
+          font-size: 18px;
+          transition: all 0.3s;
+          &:hover {
+            transform: translateY(-10px);
+          }
+        }
+      }
+      &.active {
+        background: linear-gradient(180deg, #475ef1 0%, #040534 100%);
+        box-shadow: 10px 8px 15px rgba(7, 9, 61, 0.34);
+        border-radius: 15px;
+        border: none;
+        .title {
+          h5 {
+            color: #fff;
+          }
+          h1 {
+            sup {
+              color: #fff;
+            }
+            strong {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
+          p {
+            color: #fff;
+          }
+        }
+        .body {
+          background: rgba(255, 255, 255, 0.35);
+          ul {
+            li {
+              color: #fff;
+            }
+          }
+        }
+        .footer {
+          button {
+            color: var(--color);
+            background-color: #fff;
+          }
+        }
+      }
+    }
+    .discount-code {
+      display: flex;
+      align-items: center;
+      input {
+        width: 115px;
+      }
+      button {
+        border-radius: 5px;
+        min-width: 140px;
+        border: none;
+        color: #fff;
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        background: #ffffff;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        color: var(--color);
+      }
+    }
+    .message {
+      .success {
+        color: #0dbe92;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 34px;
+        align-items: center;
+        text-align: start;
+      }
+      .error {
+        color: #d10000;
+        font-family: "DIN Next LT Arabic";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 34px;
+        align-items: center;
+        text-align: start;
+      }
+    }
+    .page-footer {
+      border: none;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      button {
+        background: var(--color);
+        border-radius: 5px;
+        min-width: 140px;
+        border: none;
+        color: #fff;
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        &:last-child {
+          background: #ffffff;
+          box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.13);
+          border-radius: 5px;
+          color: var(--color);
+        }
+      }
+    }
+  }
+}

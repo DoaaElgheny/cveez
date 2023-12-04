@@ -1,0 +1,438 @@
+<!-- begin::Header -->
+<div class="page-title">
+  <div class="">
+    <h3>
+      {{ "MangeAgent.UserManagement" | translate }}/
+      <span>{{ "jobSeeker.JobSeekerAccounts" | translate }}</span>
+    </h3>
+  </div>
+</div>
+<!-- end::Header -->
+
+<div class="card-header search-top border-0 py-10">
+  <div class="">
+    <div class="row">
+      <div class="col-lg-8 mb-3">
+        <div class="input-img">
+          <img src="/assets/imgs/search.svg" alt="" srcset="" />
+          <button
+            *ngIf="searchText !== ''"
+            (click)="searchText = ''; getAllJobSeekersData()"
+          >
+            x
+          </button>
+          <input
+            style="width: 100%"
+            class="form-control"
+            type="text"
+            (keyup)="page = 1; fromSearchInput = true; getAllJobSeekersData()"
+            [placeholder]="'jobSeeker.searchByText' | translate"
+            [(ngModel)]="searchText"
+          />
+        </div>
+      </div>
+      <div class="col-lg-2 mb-3 email-btn"><button  (click)="exportSeekers()"> <i class="fas fa-file-excel excel"></i> {{'jobSeeker.exportjobSeeker'|translate}}</button></div>
+      <div class="col-lg-1">
+        <div class="reset-btn">
+          <button (click)="fromSearchInput = false; rest()" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-counterclockwise"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+              />
+              <path
+                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+              />
+            </svg>
+            {{ "Buttons.Reset" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-lg-2 mb-3">
+        <select
+          class="form-select"
+          [(ngModel)]="accountStatus"
+          aria-label="Default select example"
+          (change)="page = 1; fromSearchInput = false; getAllJobSeekersData()"
+        >
+          <option selected disabled value="">
+            {{ "jobSeeker.accountStatus" | translate }}
+          </option>
+          <option [value]="theAccountState.All">
+            {{ "jobSeeker.All" | translate }}
+          </option>
+          <option [value]="theAccountState.Active">
+            {{ "jobSeeker.Active" | translate }}
+          </option>
+          <option [value]="theAccountState.Inactive">
+            {{ "jobSeeker.InActive" | translate }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-2 mb-3">
+        <select
+          class="form-select"
+          [(ngModel)]="emailState"
+          aria-label="Default select example"
+          (change)="page = 1; fromSearchInput = false; getAllJobSeekersData()"
+        >
+          <option selected disabled value="">
+            {{ "MangeAgent.mailStatus" | translate }}
+          </option>
+          <option [value]="theEmailStatus.All">
+            {{ "jobSeeker.All" | translate }}
+          </option>
+          <option [value]="theEmailStatus.Confirmed">
+            {{ "MangeAgent.Active" | translate }}
+          </option>
+          <option [value]="theEmailStatus.NotConfirmed">
+            {{ "MangeAgent.inActive" | translate }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-2 mb-3">
+        <select
+          class="form-select"
+          [(ngModel)]="paymentStatus"
+          aria-label="Default select example"
+          (change)="page = 1; fromSearchInput = false; getAllJobSeekersData()"
+        >
+          <option selected disabled value="">
+            {{ "jobSeeker.SubscriptionStatus" | translate }}
+          </option>
+          <option [value]="thePaymentTypeSearch.All">
+            {{ "jobSeeker.All" | translate }}
+          </option>
+          <option [value]="thePaymentTypeSearch.NotPaied">
+            {{ "jobSeeker.NotSubscribed" | translate }}
+          </option>
+          <option [value]="thePaymentTypeSearch.Paied">
+            {{ "jobSeeker.Subscribed" | translate }}
+          </option>
+          <option [value]="thePaymentTypeSearch.Expired">
+            {{ "jobSeeker.Expired" | translate }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-2 mb-3">
+        <select
+          class="form-select"
+          [(ngModel)]="videoStatus"
+          aria-label="Default select example"
+          (change)="page = 1; fromSearchInput = false; getAllJobSeekersData()"
+        >
+          <option selected disabled value="">
+            {{ "jobSeeker.videoStatus" | translate }}
+          </option>
+          <option [value]="thevideoStatus.All">
+            {{ "jobSeeker.All" | translate }}
+          </option>
+          <option [value]="thevideoStatus.Pending">
+            {{ "jobSeeker.Pending" | translate }}
+          </option>
+          <option [value]="thevideoStatus.Accepted">
+            {{ "jobSeeker.Accepted" | translate }}
+          </option>
+          <option [value]="thevideoStatus.Rejected">
+            {{ "jobSeeker.Rejected" | translate }}
+          </option>
+          <option [value]="thevideoStatus.Unavailable">
+            {{ "jobSeeker.Unavailable" | translate }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-2">
+        <div class="email-btn">
+          <button (click)="ResendSubscriptionReminder(0)" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-envelope-paper"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2H4Zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6v-2.55Zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v5.417Zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267v2.55Zm13 .566v5.734l-4.778-2.867L15 7.383Zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083l6.965 4.18ZM1 13.116V7.383l4.778 2.867L1 13.117Z"
+              />
+            </svg>
+            {{ "jobSeeker.SubscriptionReminder" | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-2 mb-3">
+        <select
+          class="form-select"
+          [(ngModel)]="pageSize"
+          aria-label="Default select example"
+          (change)="page = 1; fromSearchInput = false; getAllJobSeekersData()"
+        >
+          <option selected value="10">
+            {{ "jobSeeker.show" | translate }} 10
+          </option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="60">60</option>
+        </select>
+      </div>
+     
+    </div>
+  </div>
+</div>
+<!-- begin::card -->
+<div class="card members-page">
+  <!-- begin::Body -->
+  <div class="card-body py-3">
+    <div *ngIf="alljobSeekers.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table
+        class="table align-middle gs-0 gy-4"
+        *ngIf="alljobSeekers.length !== 0"
+      >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="text-center bg-light">
+            <th class="min-w-125px">{{ "jobSeeker.name" | translate }}</th>
+            <th class="min-w-125px">{{ "jobSeeker.email" | translate }}</th>
+            <th class="min-w-80px">
+              {{ "jobSeeker.mobileNumber" | translate }}
+            </th>
+            <th class="min-w-80px">
+              {{ "jobSeeker.EmailStatus" | translate }}
+            </th>
+            <th class="min-w-80px">
+              {{ "jobSeeker.videoStatus" | translate }}
+            </th>
+            <th class="min-w-80px">
+              {{ "jobSeeker.accountStatus" | translate }}
+            </th>
+            <th class="min-w-80px">
+              {{ "jobSeeker.SubscriptionStatus" | translate }}
+            </th>
+            <th class="min-w-80px">{{ "jobSeeker.actions" | translate }}</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+
+        <tbody>
+          <tr class="text-center" *ngFor="let theMember of alljobSeekers">
+            <td>{{ theMember.fullName }}</td>
+            <td>{{ theMember.email }}</td>
+            <td style="direction: ltr">
+              +{{ theMember.countryCode }} {{ theMember.mobileNumber }}
+            </td>
+            <td>
+              <span
+                *ngIf="theMember?.emailState === theEmailStatus.Confirmed"
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                <!-- Approved -->
+
+                {{ "jobSeeker.Active" | translate }}
+              </span>
+              <span
+                *ngIf="theMember?.emailState === theEmailStatus.NotConfirmed"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "jobSeeker.InActive" | translate }}
+              </span>
+            </td>
+            <td>
+              <span
+                *ngIf="theMember?.vedioStatus === thevideoStatus.Pending"
+                class="badge badge-light-primary fs-7 fw-bold"
+              >
+                {{ "jobSeeker.Pending" | translate }}
+              </span>
+              <span
+                *ngIf="theMember?.vedioStatus === thevideoStatus.Accepted"
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                {{ "jobSeeker.Accepted" | translate }}
+              </span>
+              <span
+                *ngIf="theMember?.vedioStatus === thevideoStatus.Rejected"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "jobSeeker.Rejected" | translate }}
+              </span>
+              <span
+                *ngIf="theMember?.vedioStatus === thevideoStatus.Unavailable"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "jobSeeker.Unavailable" | translate }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <div class="form-check form-switch">
+                  <label class="switch form-check-label" [for]="theMember.id">
+                    <input
+                      (change)="changAccountState(theMember)"
+                      class="form-check-input"
+                      type="checkbox"
+                      [checked]="theMember.state === 2"
+                      [id]="theMember.id"
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span
+                *ngIf="theMember?.paymentType === thePaymentType.NotPaied"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "jobSeeker.NotSubscribed" | translate }}
+              </span>
+
+              <span
+                *ngIf="theMember?.paymentType === thePaymentType.Paied"
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                {{ "jobSeeker.Subscribed" | translate }}
+              </span>
+
+              <span
+                class="badge badge-secondary fs-7 fw-bold"
+                *ngIf="theMember?.paymentType === thePaymentType.Expired"
+              >
+                {{ "jobSeeker.Expired" | translate }}
+              </span>
+            </td>
+            <td>
+              <div ngbDropdown class="btn-group">
+                <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                  <button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      class="bi bi-three-dots-vertical"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <ul class="option p-0 list-unstyled m-0 px-2">
+                    <li role="menuitem">
+                      <button
+                        (click)="accountDetails(theMember)"
+                        class="dropdown-item"
+                      >
+                        <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "jobSeeker.accountDetails" | translate }}
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      *ngIf="theMember?.paymentType === thePaymentType.NotPaied"
+                      role="menuitem"
+                    >
+                      <button
+                        (click)="ResendSubscriptionReminder(theMember.id)"
+                        class="dropdown-item"
+                      >
+                        <img src="/assets/imgs/email.png" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "jobSeeker.SubscriptionReminder" | translate }}
+                        </span>
+                      </button>
+                    </li>
+
+                    <li
+                      role="menuitem"
+                      *ngIf="
+                        theMember?.emailState === theEmailStatus.NotConfirmed
+                      "
+                    >
+                      <button
+                        class="dropdown-item"
+                        (click)="resendEmail(theMember.email)"
+                      >
+                        <img src="/assets/imgs/email.png" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "jobSeeker.resendEmailButton" | translate }}
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      role="menuitem"
+                      *ngIf="theMember?.vedioStatus === thevideoStatus.Pending"
+                    >
+                      <button
+                        class="dropdown-item"
+                        (click)="openModal(theMember)"
+                      >
+                        <img src="/assets/imgs/video.png" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "jobSeeker.videoStatus" | translate }}
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="8">
+ 
+            
+               <p>{{ "jobSeeker.totalCount" | translate }} :{{ totalCount }}</p>
+               <ngb-pagination
+                 [collectionSize]="totalCount"
+                 [(page)]="page"
+                 [pageSize]="pageSize"
+                 [maxSize]="13"
+                 (pageChange)="getAllJobSeekersData()"
+                 class="pagination p-0 my-4 d-flex justify-content-center"
+               >
+               </ngb-pagination>
+             </td>
+           </tr>
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
+</div>

@@ -1,0 +1,109 @@
+.contact-us {
+  .page-header {
+    background-image: url("/assets/imgs/contact-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    padding-top: 8rem;
+    padding-bottom: 20rem;
+    h2 {
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    p {
+      color: #bdbdbd;
+      font-size: 18px;
+    }
+  }
+  .page-content {
+    background: #ffffff;
+    box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 1125px;
+    margin: auto;
+    margin-top: -160px;
+    margin-bottom: 60px;
+    .form-info {
+      background-image: url("/assets/imgs/inf--bg.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 40px 30px;
+      .title {
+        text-align: center;
+        margin-bottom: 100px;
+        h3 {
+          color: #ffffff;
+          font-size: 30px;
+          font-weight: bold;
+          margin-bottom: 15px;
+        }
+        p {
+          color: #bdbdbd;
+          font-size: 17px;
+        }
+      }
+      .more-info {
+        margin-bottom: 4rem;
+        ul {
+          padding: 0;
+          margin: 0;
+          text-align: left;
+          li {
+            line-height: 45px;
+            a {
+              color: #fff;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .scoial-links {
+        margin-top: 5rem;
+        ul {
+          display: flex;
+          align-items: center;
+          list-style: none;
+          padding: 0;
+          li {
+            margin: 5px;
+            a {
+              background: rgba(105, 154, 252, 0.21);
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    .conact-form {
+      padding: 30px;
+      label {
+        color: #00000087;
+      }
+      .action {
+        text-align: end;
+        button {
+          background: #0274b3;
+          box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.12);
+          border-radius: 5px;
+          color: #fff;
+          border: none;
+          margin-top: 30px;
+          min-width: 150px;
+          min-height: 45px;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

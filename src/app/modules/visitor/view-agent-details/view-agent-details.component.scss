@@ -1,0 +1,151 @@
+.view-agent-details {
+  .view-job {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    .logo-img {
+      margin-top: -70px;
+      background: #d9d9d9;
+      padding: 5px;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 5px #baa8a8;
+      img {
+        width: 75%;
+        object-fit: cover;
+      }
+    }
+    .job-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      h3 {
+        color: #292929;
+        font-size: 25px;
+      }
+      h5 {
+        color: #939393;
+        font-weight: 100;
+        font-size: 15px;
+      }
+      .actions {
+        button {
+          all: unset;
+          cursor: pointer;
+          &:last-child {
+            background: #ffffff;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.17);
+            border-radius: 10px;
+            min-width: 135px;
+            height: 42px;
+            color: #0274b3;
+            text-align: center;
+          }
+        }
+        p {
+          color: #939393;
+          font-size: 15px;
+          margin-top: 8px;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .info {
+      p {
+        color: #bcbcbc;
+        font-size: 15px;
+        max-width: 550px;
+        font-weight: 400;
+        margin-top: 20px;
+      }
+    }
+  }
+  .title {
+    h3 {
+      color: #292929;
+      font-size: 25px;
+      text-align: center;
+    }
+  }
+  .job-cards {
+    margin-bottom: 4rem;
+    .job-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        div {
+          h3 {
+            color: #292929;
+            font-size: 25px;
+          }
+          h5 {
+            color: #939393;
+            font-weight: 100;
+            font-size: 15px;
+          }
+        }
+        .type {
+          p {
+            color: #d42e56;
+            display: inline-block;
+            background: #fee2e2;
+            border-radius: 10px;
+            min-width: 60px;
+            text-align: center;
+            padding: 5px;
+          }
+        }
+      }
+      .card-details {
+        margin-top: 20px;
+        ul {
+          li {
+            margin: 15px 0;
+            img {
+              height: 20px;
+            }
+            font-size: 16px;
+            font-weight: 100;
+            color: #bcbcbc;
+            display: flex;
+            align-items: center;
+            strong {
+              color: #939393;
+              font-weight: 100;
+            }
+          }
+        }
+      }
+      .card-actions {
+        margin-top: 25px;
+        text-align: center;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        button {
+          all: unset;
+          cursor: pointer;
+          margin: 5px;
+          &:last-child {
+            background: #ffffff;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.17);
+            border-radius: 10px;
+            min-width: 185px;
+            height: 42px;
+            color: #0274b3;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

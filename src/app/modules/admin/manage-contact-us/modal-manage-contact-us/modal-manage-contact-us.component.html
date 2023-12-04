@@ -1,0 +1,74 @@
+<!-- <h1>hi</h1>
+(click)="sendForm()" -->
+<div class="modal-header">
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="title text-center">
+  <div class="text-center mb-5">
+    <img src="/assets/imgs/icons/amico.svg" alt="" srcset="">
+  </div>
+  <h2>
+    {{ "manageContactUs.reply" | translate }}
+  </h2>
+
+  <p>{{ "manageContactUs.PleaseWriteareply" | translate }}</p>
+</div>
+
+<div class="modal-body">
+  <p *ngIf="reply !== null">
+    {{ "manageContactUs.lastReply" | translate }} : {{ reply }}
+  </p>
+  <form [formGroup]="messageModalForm">
+    <div class="row">
+      <div class="col-lg-12 mb-5">
+        <textarea
+          formControlName="reply"
+          id="reply"
+          class="form-control"
+          rows="3"
+          [placeholder]="'manageContactUs.PleaseWriteareply' | translate"
+        ></textarea>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: messageModalForm.controls['reply']
+          }"
+        ></ng-container>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="page-action">
+  <button type="submit" class="" (click)="sendForm()">
+    {{ "manageContactUs.Send" | translate }}
+  </button>
+  <button type="button" class="" (click)="activeModal.close('Close click')">
+    {{ "manageContactUs.Cancel" | translate }}
+  </button>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

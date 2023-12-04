@@ -1,0 +1,350 @@
+// .form-gro {
+//   margin-bottom: 20px;
+//   position: relative;
+//   input {
+//     font-family: 'Regular';
+//     border-radius: 0;
+//     border: none;
+//     border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);;
+//   }
+//   .btn-info {
+//     position: absolute;
+//     right: 0;
+//     bottom: 10px;
+//     button {
+//       all: unset;
+//       cursor: pointer;
+//     }
+//   }
+// }
+.user-img {
+  text-align: center;
+
+  .view-img {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      right: 7px;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  .action {
+    margin-top: 10px;
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    span {
+      color: #292929;
+      opacity: 0.5;
+    }
+  }
+}
+
+.lbl-curser {
+
+  cursor: pointer;
+  width: 90%;
+}
+
+.drag-div {
+  text-align: center;
+}
+
+.trash {
+  border: 0px;
+  color: red;
+}
+
+.upload-file {
+  background: #fff !important;
+
+
+  font-family: 'Regular';
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  ;
+
+  text-align: center;
+  padding: 2rem 20px;
+
+  p {
+    color: #BBBBBB;
+  }
+
+  input {
+    border: none;
+    background: transparent;
+    display: none;
+
+    span {
+      position: relative;
+      top: 15px;
+    }
+  }
+}
+
+input {
+  display: none;
+}
+
+.drag-div {
+  position: relative;
+  background: #fff;
+  margin-bottom: 0px;
+  font-family: 'Regular';
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  ;
+
+  label {
+    color: #AFAFAF;
+    width: 100%;
+    text-align: start;
+    display: inline-block;
+    width: 130px;
+    text-align: center;
+  }
+
+  &.nn {
+    justify-content: center;
+    position: relative;
+
+    .del-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: end;
+      padding: 12px 14px;
+      right: 0;
+      bottom: 10px;
+
+      button {
+        border-radius: 4px;
+        background: #e1e1e19e;
+        outline: none;
+      }
+    }
+  }
+
+  // height: 38px;
+  display: flex;
+  align-items: center;
+  // padding: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  label {
+    width: 100%;
+    text-align: start;
+    display: block;
+    width: 132px;
+    text-align: center;
+
+    img {
+      display: none;
+    }
+  }
+}
+
+.file-name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.drag-div.sm {
+  label.main {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.file-details {
+  background: white;
+  margin: 10px 0;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+
+  img {
+    width: 30px;
+  }
+
+  span {
+    font-size: 13px;
+    color: #707070;
+  }
+
+  .file-actions {
+    button {
+      all: unset;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+  }
+}
+
+.update-img .img-fluid {
+  all: unset;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative !important;
+  top: -25px !important;
+}
+
+
+.folder {
+  border: 1px solid #D6D6D6;
+  border-radius: 10px;
+  width: 117px;
+  padding: 10px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  padding-top: 2px;
+  text-align: center;
+}
+
+.folder h5 {
+  color: #828282;
+  font-size: 14px;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folder .action {
+  text-align: end;
+}
+
+.folder button {
+  all: unset;
+  cursor: pointer;
+  color: #E84D5E;
+}
+
+.label-txt {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: inline-block;
+  font-family: 'Semibold';
+  white-space: nowrap;
+}
+
+
+.folder.ds {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  width: 122px;
+  z-index: 9;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #5e6278;
+  border: 1px solid var(--kt-input-border-color);
+  box-shadow: none !important;
+  background: #fff;
+  padding: 0.775rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  height: 43.56px;
+  border-radius: 0.475rem;
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+}
+.snap-img {
+
+  height: 20px !important;
+  margin-top: -6px;
+}
+
+
+.cameraSection {
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: -35px;
+  // position: relative;
+  // bottom: -42px;
+  // right: 45px;
+}
+
+
+
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+  .padding {
+    padding: 1.5rem
+  }
+}
+
+@media (max-width:767.98px) {
+  .padding {
+    padding: 1rem
+  }
+}
+
+.padding {
+  padding: 5rem
+}
+
+.container {
+  margin-top: 100px
+}
+
+.progress.progress-md {
+  height: 18px
+}
+
+.template-demo .progress {
+  margin-top: 1.5rem
+}
+
+.progress {
+  border-radius: 3px;
+  height: 18px
+}

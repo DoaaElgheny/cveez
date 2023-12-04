@@ -1,0 +1,339 @@
+<div class="page-content">
+  <div class="close">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.png" alt="" srcset="" />
+    </button>
+  </div>
+  <div class="form h-100">
+    <div class="form-container create-form">
+      <div class="form-container">
+        <div class="panel panel-primary">
+          <div class="form-content">
+            <div class="container">
+              <div class="form-content" *ngIf="successLoad">
+                <form
+                  role="form"
+                  #f="ngForm"
+                  [formGroup]="seekerForm"
+                  novalidate="novalidate"
+                >
+                  <div class="container">
+                    <div class="form-title">
+                      <h2>
+                        {{ "jobSeeker.PersonalInformation" | translate }}
+                      </h2>
+                      <p>
+                        {{ "jobSeeker.subTitleEditEgent" | translate }}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "SharedFields.FullName" | translate
+                          }}</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="'SharedFields.FullName' | translate"
+                            formControlName="fullName"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['fullName']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message: 'Validation.NameMinLength' | translate,
+                              control: seekerForm.controls['fullName']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message: 'Validation.NameMaxLength' | translate,
+                              control: seekerForm.controls['fullName']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "SharedFields.BirthDate" | translate
+                          }}</label>
+                          <input
+                            type="date"
+                            class="form-control date"
+                            ngbDatepicker
+                            #d="ngbDatepicker"
+                            [placeholder]="'SharedFields.BirthDate' | translate"
+                            formControlName="birthDate"
+                            aria-label=""
+                            (input)="checkDate($event)"
+                          />
+                        </div>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: seekerForm.controls['birthDate']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'inFuture',
+                            message:
+                              'jobSeeker.DateCannotBeInTheFuture' | translate,
+                            control: seekerForm.controls['birthDate']
+                          }"
+                        ></ng-container>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "SharedFields.Gender" | translate
+                          }}</label>
+                          <select
+                            id="inputState"
+                            class="form-select"
+                            formControlName="gender"
+                          >
+                            <option [value]="genderList.Male">
+                              {{
+                                "Shared.Gender." + genderList.Male | translate
+                              }}
+                            </option>
+                            <option [value]="genderList.Female">
+                              {{
+                                "Shared.Gender." + genderList.Female | translate
+                              }}
+                            </option>
+                          </select>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['gender']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                          <label for="">
+                            {{ "SharedFields.Nationality" | translate }}
+                          </label>
+                          <select
+                            id="inputState2"
+                            class="form-select"
+                            formControlName="nationalityId"
+                          >
+                            <option
+                              *ngFor="let nationality of nationalitiesList"
+                              [value]="nationality.id"
+                            >
+                              {{
+                                lang === "ar"
+                                  ? nationality.nameAr
+                                  : nationality.nameEn
+                              }}
+                            </option>
+                          </select>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['nationalityId']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">
+                            {{ "SharedFields.Country" | translate }}</label
+                          >
+                          <select
+                            id="inputState3"
+                            class="form-select"
+                            formControlName="countryId"
+                          >
+                            <option
+                              *ngFor="let country of countriesList"
+                              [value]="country.id"
+                              selected="seekerData?.country?.id === country.id? true : false"
+                            >
+                              {{
+                                lang === "ar" ? country.nameAr : country.nameEn
+                              }}
+                            </option>
+                          </select>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['countryId']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "SharedFields.Email" | translate
+                          }}</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'Validation.EmailPlaceholder' | translate
+                            "
+                            formControlName="email"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['email']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">
+                            {{ "SharedFields.MobileNumber" | translate }}
+                          </label>
+                          <intl-telephone-input
+                            #mobile
+                            [preferredCountries]="[
+                              CountryISO.Pakistan,
+                              CountryISO.India
+                            ]"
+                            [selectedCountryISO]="
+                              CountryISO[selectedCountryIso]
+                            "
+                            [enablePlaceholder]="true"
+                            [searchCountryFlag]="true"
+                            [separateDialCode]="false"
+                            [enableAutoCountrySelect]="true"
+                            [searchCountryField]="SearchCountryField.All"
+                            [phoneValidation]="true"
+                            [numberFormat]="PhoneNumberFormat.International"
+                            [inputId]="'mobileNumber'"
+                            [customPlaceholder]="mobileNumber"
+                            (onChange)="onInputChange($event)"
+                          >
+                          </intl-telephone-input>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message: 'Validation.MobileMaxLength' | translate,
+                              control: seekerForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message: 'Validation.MobileMinLength' | translate,
+                              control: seekerForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message: 'Validation.MobilePattern' | translate,
+                              control: seekerForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="form-action two" *ngIf="successLoad">
+            <div class="container">
+              <div
+                class="btn-group btn-group-lg m-0"
+                role="group"
+                aria-label="..."
+              >
+                <button class="continue my-2" (click)="submit()">
+                  <div class="btn btn-default btn-success btn-lg" role="button">
+                    {{ "Buttons.Save" | translate }}
+                  </div>
+                </button>
+
+                <label for="step2" id="back-step2" class="back my-2">
+                  <div
+                    (click)="closeFunction()"
+                    class="btn btn-default btn-primary btn-lg"
+                    role="button"
+                  >
+                    {{ "Buttons.Cancel" | translate }}
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

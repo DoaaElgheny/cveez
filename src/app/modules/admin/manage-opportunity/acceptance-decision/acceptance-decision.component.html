@@ -1,0 +1,252 @@
+<section class="acceptance-decission">
+  <div class="container">
+    <div class="model-header">
+      <button (click)="closeFunction()">
+        <img src="/assets/imgs/error.png" alt="error-img" srcset="" />
+      </button>
+    </div>
+    <div class="model-title">
+      <h3>{{ opportunityDetails?.jobTitle }}</h3>
+      <h5>{{ opportunityDetails?.agent }}</h5>
+    </div>
+    <div class="modal-body">
+      <ul class="row p-0 list-unstyled">
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.CareerLevel" | translate }}:
+            <strong class="mx-2">
+              <bdi>
+                {{ opportunityDetails?.jobLevel }}
+              </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/2.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.Age" | translate }}:
+            <strong class="mx-2">
+              <bdi>{{ opportunityDetails?.ageRange }}</bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.JobType" | translate }}:
+            <strong class="mx-2">
+              <bdi>{{ opportunityDetails?.jobType }}</bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/4.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.Gender" | translate }}:
+            <strong class="mx-2">
+              <bdi *ngIf="opportunityDetails?.gender === gender.Male">{{
+                "ManageOpportunity.GenderItems.Male" | translate
+              }}</bdi>
+              <bdi *ngIf="opportunityDetails?.gender === gender.Female">{{
+                "ManageOpportunity.GenderItems.Female" | translate
+              }}</bdi>
+              <bdi
+                *ngIf="opportunityDetails?.gender === gender.MaleAndFemale"
+                >{{
+                  "ManageOpportunity.GenderItems.MaleAndFemale" | translate
+                }}</bdi
+              >
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/5.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.Country" | translate }} :
+            <strong class="mx-2">
+              <bdi>{{ opportunityDetails?.country }}</bdi>
+            </strong>
+          </div>
+        </li>
+        <li
+          class="col-lg-6 my-4"
+          *ngIf="
+            opportunityDetails.announceDetailsAttachementFileStorageUrl !== null
+          "
+        >
+          <img src="/assets/imgs/icons/6.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.OpportunityDetailsFile" | translate }}:
+            <strong class="mx-2" (click)="downloadFile()">
+              <bdi> {{ "ManageOpportunity.Download" | translate }} </bdi>
+            </strong>
+            <button (click)="downloadFile()">
+              <img src="/assets/imgs/icons/download.svg" alt="" srcset="" />
+            </button>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/7.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.SalaryRange" | translate }}:
+            <strong class="mx-2">
+              <bdi> {{ opportunityDetails?.salaryRange }}</bdi>
+            </strong>
+            <strong class="mx-2" *ngIf="!opportunityDetails?.salaryRange">
+              <bdi>-</bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/8.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.OpportunityClassification" | translate }}:
+            <strong class="mx-2">
+              <bdi> {{ opportunityDetails?.classification }} </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/9.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.TheDurationOfTheTrialPeriod" | translate }}:
+            <strong class="mx-2">
+              <bdi> {{ opportunityDetails?.probationPeriod }} </bdi>
+            </strong>
+            <strong class="mx-2" *ngIf="!opportunityDetails?.probationPeriod">
+              <bdi>-</bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/11.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.WorkingHours" | translate }}:
+            <strong class="mx-2">
+              <bdi> {{ opportunityDetails?.jobHour }} </bdi>
+            </strong>
+            <strong class="mx-2" *ngIf="!opportunityDetails?.jobHour">
+              <bdi>-</bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/12.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.QualificationLevel" | translate }}:
+            <strong
+              class="mx-2"
+              *ngFor="let qualification of opportunityDetails?.qualifications"
+            >
+              <bdi>
+                {{
+                  lang === "ar" ? qualification?.nameAr : qualification?.nameEn
+                }}
+              </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-6 my-4">
+          <img src="/assets/imgs/icons/13.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.Specialization" | translate }}:
+            <strong
+              class="mx-2"
+              *ngFor="let specialization of opportunityDetails?.specializations"
+            >
+              <bdi>
+                {{
+                  lang === "ar"
+                    ? specialization?.nameAr
+                    : specialization?.nameEn
+                }}
+              </bdi>
+            </strong>
+            <strong
+              class="mx-2"
+              *ngIf="opportunityDetails?.specializations?.length === 0"
+            >
+              <bdi> - </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-12 my-4">
+          <img src="/assets/imgs/icons/10.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.Features" | translate }}:
+            <strong class="mx-2">
+              <bdi *ngIf="opportunityDetails?.isTransportationAllowance">
+                {{ "ManageOpportunity.TransportationAllowance" | translate }}
+              </bdi>
+              <bdi *ngIf="opportunityDetails?.isHealthInsurance">
+                - {{ "ManageOpportunity.HealthInsurances" | translate }}
+              </bdi>
+              <bdi *ngIf="opportunityDetails?.isTravelTicketAllowance">
+                - {{ "ManageOpportunity.AirTicketAllowance" | translate }}
+              </bdi>
+              <bdi *ngIf="opportunityDetails?.isHousingAllowance">
+                - {{ "ManageOpportunity.HousingAllowance" | translate }}
+              </bdi>
+              <bdi *ngIf="opportunityDetails?.isTravelPossibility">
+                - {{ "ManageOpportunity.PossibilityToTravel" | translate }}
+              </bdi>
+              <bdi *ngIf="opportunityDetails?.isPossibleWorkingRemotly">
+                -
+                {{
+                  "ManageOpportunity.PossibilityOfWorkingRemotely" | translate
+                }}
+              </bdi>
+              <bdi
+                *ngIf="
+                  !opportunityDetails?.isTransportationAllowance ||
+                  !opportunityDetails?.isPossibleWorkingRemotly ||
+                  !opportunityDetails?.isHousingAllowance ||
+                  !opportunityDetails?.isTravelTicketAllowance ||
+                  !opportunityDetails?.isTransportationAllowance ||
+                  !opportunityDetails?.isHealthInsurance
+                "
+              >
+                -
+              </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-12 my-4">
+          <img src="/assets/imgs/icons/10.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.JobDescription" | translate }}:
+            <strong class="mx-2">
+              <bdi *ngIf="opportunityDetails?.jobDescription">
+                {{ opportunityDetails?.jobDescription }}
+              </bdi>
+              <bdi *ngIf="!opportunityDetails?.jobDescription"> - </bdi>
+            </strong>
+          </div>
+        </li>
+        <li class="col-lg-12 my-4">
+          <img src="/assets/imgs/icons/10.svg" alt="" srcset="" />
+          <div>
+            {{ "ManageOpportunity.DetailsAboutFacility" | translate }}:
+            <strong class="mx-2">
+              <bdi *ngIf="opportunityDetails?.announceDetails">
+                {{ opportunityDetails?.announceDetails }}
+              </bdi>
+              <bdi *ngIf="!opportunityDetails?.announceDetails">
+                -
+              </bdi>
+            </strong>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="AcceptState()">
+      {{ "Buttons.Accept" | translate }}
+    </button>
+    <button (click)="openRejectModal()">
+      {{ "Buttons.Reject" | translate }}
+    </button>
+  </div>
+</section>

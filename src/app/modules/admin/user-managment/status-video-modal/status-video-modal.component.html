@@ -1,0 +1,28 @@
+<section class="modal-section">
+    <div class="modal-title">
+        <button (click)="closeFunction()">
+            <img src="/assets/imgs/error.svg" alt="" srcset="">
+        </button>
+    </div>
+    <div class="modal-body">
+        <img src="/assets/imgs/pana.svg" alt="" srcset="">
+        <h3>
+            {{'jobSeeker.please'| translate}}
+        </h3>
+        <p>
+            {{'jobSeeker.Enterthereason'| translate}}
+        </p>
+        <textarea (keyup)="valid()"  [(ngModel)]="reason" name="" id="" cols="30" rows="3"
+        [placeholder]="'jobSeeker.Enterthereason'| translate"></textarea>
+        <p style="color: red;" *ngIf="reasonEmpty">{{'jobSeeker.reasonRequired'| translate}}  </p>
+    </div>
+    <div class="modal-footer">
+        <button (click)="Reject()">
+            {{'jobSeeker.send'| translate}}
+        </button>
+        <button (click)="closeFunction()">
+            {{'Buttons.Cancel'| translate}}
+        </button>
+    </div>
+</section>
+

@@ -1,0 +1,99 @@
+.secttion-back {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    a {
+        color: #292929;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        @media(max-width: 785px) {
+            display: block;
+        }
+    }
+    h2 {
+        font-size: 30px;
+        width: 100%;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 3px;
+        // text-align: center;
+        @media(max-width: 750px) {
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+}
+
+.add-opportunities {
+    .page-content {
+        background: #FFFFFF;
+        border-radius: 35px;
+        padding: 25px;
+        margin: 20px 0;
+        .page-title {
+            h3 {
+                @media(max-width: 750px) {
+                    font-size: 17px;
+                }
+                background: linear-gradient(90deg, rgba(184, 193, 248, 0.46) 0%, rgba(199, 206, 251, 0) 100%);
+                display: inline-block;
+                padding: 9px;
+                margin: 0;
+                color: #292929;
+                font-weight: 700;
+                font-size: 26px;
+                transform: rotate(0.11deg);
+            }
+        }
+        .form-content {
+            margin-top: 30px;
+            label {
+                color: #353434;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .page-action {
+        margin-top: 3rem;
+        text-align: center;
+        button {
+            &:first-child {
+                margin: 5px;
+                cursor: pointer !important;
+                color: #fff;
+                background: var(--color);
+                border-radius: 5px;
+                font-size: 16px;
+                border: none;
+                min-width: 210px;
+                line-height: 0;
+                padding: 10px;
+                min-height: 43px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 120px;
+            }
+        }
+    }
+}
+
+option:disabled{
+    color: gray !important;
+}
+select{
+    color: gray !important;
+}
+::ng-deep .multiselect-dropdown .ng-star-inserted{
+    color: gray !important;
+}
+.job-download{
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #0274b3;
+    cursor: pointer;
+    font-size: larger;
+    text-decoration: underline;
+}

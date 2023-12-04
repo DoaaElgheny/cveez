@@ -1,0 +1,1091 @@
+<div class="page-content">
+  <div class="form h-100">
+    <div class="form-container create-form">
+      <div class="form-container">
+        <input id="step2" type="checkbox" />
+        <input id="step3" type="checkbox" />
+        <div id="part1" class="form-group">
+          <div class="panel panel-primary">
+            <div class="center-auth-content">
+              <div class="panel-heading">
+                <div class="panel-heading">
+                  <div class="container">
+                    <h4>{{ "Shared.Step1Of2" | translate }}</h4>
+                    <div class="steps-sec">
+                      <div class="active"></div>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-content">
+                <form
+                  role="form"
+                  #f="ngForm"
+                  [formGroup]="representativeForm"
+                  novalidate="novalidate"
+                >
+                  <div class="container">
+                    <div class="form-title">
+                      <h2>
+                        {{
+                          "AgentRegisteration.CompanyRepresentativeInformation"
+                            | translate
+                        }}
+                      </h2>
+                      <p>
+                        {{
+                          "AgentRegisteration.CompanyRepresentativeInformationTitle"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.TheNameFacilityRepresentative"
+                              | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'AgentRegisteration.TheNameFacilityRepresentative'
+                                | translate
+                            "
+                            formControlName="agentRepresentativeName"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeName'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeNameMinLength'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeName'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeNameMaxLength'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeName'
+                                ]
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.CompanyRepresentativePosition"
+                              | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'AgentRegisteration.CompanyRepresentativePosition'
+                                | translate
+                            "
+                            formControlName="agentRepresentativePosition"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativePosition'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativePositionMinLength'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativePosition'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativePositionMaxLength'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativePosition'
+                                ]
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.Email" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'Validation.EmailPlaceholder' | translate
+                            "
+                            formControlName="agentRepresentativeEmail"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeEmail'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            *ngIf="
+                              representativeForm.controls[
+                                'agentRepresentativeEmail'
+                              ].errors &&
+                              representativeForm.controls[
+                                'agentRepresentativeEmail'
+                              ].errors.ConfirmEmail
+                            "
+                          >
+                            <div class="fv-plugins-message-container">
+                              <div class="fv-help-block">
+                                {{
+                                  "AgentRegisteration.agentRepresentativeEmailPattern"
+                                    | translate
+                                }}
+                              </div>
+                            </div>
+                          </ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.agentRepresentativeEmailPattern'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeEmail'
+                                ]
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.ConfirmEmail" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            appBlockCopyPaste
+                            [placeholder]="
+                              'Validation.EmailPlaceholder' | translate
+                            "
+                            formControlName="agentRepresentativeConfirmEmail"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeConfirmEmail'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.agentRepresentativeEmailPattern'
+                                | translate,
+                              control:
+                                representativeForm.controls[
+                                  'agentRepresentativeConfirmEmail'
+                                ]
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            *ngIf="
+                              representativeForm.controls[
+                                'agentRepresentativeConfirmEmail'
+                              ].errors &&
+                              representativeForm.controls[
+                                'agentRepresentativeConfirmEmail'
+                              ].errors.ConfirmAgentEmail
+                            "
+                          >
+                            <div class="fv-plugins-message-container">
+                              <div class="fv-help-block">
+                                {{
+                                  "AgentRegisteration.agentEmailMatchConfirm"
+                                    | translate
+                                }}
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.MobileNumber" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <intl-telephone-input
+                            [preferredCountries]="[
+                              CountryISO.Pakistan,
+                              CountryISO.India
+                            ]"
+                            [enablePlaceholder]="true"
+                            [searchCountryFlag]="true"
+                            [separateDialCode]="false"
+                            [enableAutoCountrySelect]="true"
+                            [searchCountryField]="SearchCountryField.All"
+                            [phoneValidation]="true"
+                            [numberFormat]="PhoneNumberFormat.International"
+                            [inputId]="'agentMobileNumber'"
+                            (onChange)="
+                              onInputChange($event, 'agentMobileNumber')
+                            "
+                          >
+                          </intl-telephone-input>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls['agentMobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeMobileMaxLength'
+                                | translate,
+                              control:
+                                representativeForm.controls['agentMobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeMobileLength'
+                                | translate,
+                              control:
+                                representativeForm.controls['agentMobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.MobilePattern' | translate,
+                              control:
+                                representativeForm.controls['agentMobileNumber']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.Country" | translate
+                          }}</label>
+                          <span class="text-danger mx-2 fs-2">*</span>
+                          <select
+                            id="inputState"
+                            class="form-select"
+                            formControlName="countryId"
+                          >
+                            <option [value]="null" aria-selected="true">
+                              {{ "SharedFields.SelectOption" | translate }}
+                            </option>
+                            <option
+                              *ngFor="let country of countriesList"
+                              [value]="country.id"
+                            >
+                              {{
+                                lang === "ar" ? country.nameAr : country.nameEn
+                              }}
+                            </option>
+                          </select>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: representativeForm.controls['countryId']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.Password" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <div class="password-input">
+                            <input
+                              [type]="showPassword ? 'text' : 'password'"
+                              class="form-control"
+                              formControlName="password"
+                              [placeholder]="
+                                'AgentRegisteration.Password' | translate
+                              "
+                              aria-label=""
+                            />
+                            <button (click)="togglePasswordVisibilty()">
+                              <img
+                                *ngIf="showPassword"
+                                src="../assets/imgs/password.png"
+                                alt=""
+                                srcset=""
+                              />
+                              <img
+                                *ngIf="!showPassword"
+                                src="../assets/imgs/hide.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </button>
+                            <ng-container
+                              [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{
+                                validation: 'required',
+                                message:
+                                  'Validation.ThisFieldIsRequired' | translate,
+                                control: representativeForm.controls['password']
+                              }"
+                            ></ng-container>
+                            <ng-container
+                              [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{
+                                validation: 'pattern',
+                                message:
+                                  'Validation.PasswordPattern' | translate,
+                                control: representativeForm.controls['password']
+                              }"
+                            ></ng-container>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.ConfirmPassword" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <div class="password-input">
+                            <input
+                              [type]="showPasswordConfirm ? 'text' : 'password'"
+                              class="form-control"
+                              formControlName="passwordConfirm"
+                              [placeholder]="
+                                'AgentRegisteration.ConfirmPassword' | translate
+                              "
+                              aria-label=""
+                            />
+                            <button (click)="togglePasswordConfirmVisibilty()">
+                              <img
+                                *ngIf="showPasswordConfirm"
+                                src="../assets/imgs/password.png"
+                                alt=""
+                                srcset=""
+                              />
+                              <img
+                                *ngIf="!showPasswordConfirm"
+                                src="../assets/imgs/hide.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </button>
+                          </div>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                                representativeForm.controls['passwordConfirm']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message: 'Validation.PasswordPattern' | translate,
+                              control:
+                                representativeForm.controls['passwordConfirm']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            *ngIf="
+                              representativeForm.controls['passwordConfirm']
+                                .errors &&
+                              representativeForm.controls['passwordConfirm']
+                                .errors.ConfirmPassword
+                            "
+                          >
+                            <div class="fv-plugins-message-container">
+                              <div class="fv-help-block">
+                                {{
+                                  "AgentRegisteration.passwordMatch" | translate
+                                }}
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="form-action one">
+              <div class="container">
+                <div
+                  class="btn-group btn-group-lg m-0"
+                  role="group"
+                  aria-label="..."
+                >
+                  <label
+                    *ngIf="representativeForm.invalid"
+                    class="continue"
+                    (click)="valid()"
+                  >
+                    <div class="btn btn-default btn-success btn-lg">
+                      {{ "AgentRegisteration.Next" | translate }}
+                    </div>
+                  </label>
+                  <label
+                    *ngIf="representativeForm.valid"
+                    for="step2"
+                    id="continue-step2"
+                    class="continue"
+                    (click)="valid()"
+                  >
+                    <div class="btn btn-default btn-success btn-lg">
+                      {{ "AgentRegisteration.Next" | translate }}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="part2" class="form-group">
+          <div class="panel panel-primary">
+            <div class="center-auth-content">
+              <div class="panel-heading">
+                <div class="container">
+                  <h4>{{ "Shared.Step2Of2" | translate }}</h4>
+                  <div class="steps-sec">
+                    <div class="active"></div>
+                    <div class="active"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-content">
+                <div class="container">
+                  <div class="form-title">
+                    <h2>
+                      {{
+                        "AgentRegisteration.FacilityBasicInformation"
+                          | translate
+                      }}
+                    </h2>
+                  </div>
+                  <form
+                    [formGroup]="agentForm"
+                    novalidate="novalidate"
+                    id="kt_login_signin_form"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.AgentName" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'AgentRegisteration.AgentName' | translate
+                            "
+                            formControlName="name"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: agentForm.controls['name']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message:
+                                'AgentRegisteration.NameMinLength' | translate,
+                              control: agentForm.controls['name']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message:
+                                'AgentRegisteration.NameMaxLength' | translate,
+                              control: agentForm.controls['name']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.AgentMobileNumber" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <intl-telephone-input
+                            [preferredCountries]="[
+                              CountryISO.Pakistan,
+                              CountryISO.India
+                            ]"
+                            [enablePlaceholder]="true"
+                            [searchCountryFlag]="true"
+                            [separateDialCode]="false"
+                            [enableAutoCountrySelect]="true"
+                            [searchCountryField]="SearchCountryField.All"
+                            [phoneValidation]="true"
+                            [numberFormat]="PhoneNumberFormat.International"
+                            [inputId]="'mobileNumber'"
+                            (onChange)="onInputChange($event, 'mobileNumber')"
+                          >
+                          </intl-telephone-input>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: agentForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'maxlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeMobileMaxLength'
+                                | translate,
+                              control: agentForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'minlength',
+                              message:
+                                'AgentRegisteration.agentRepresentativeMobileLength'
+                                | translate,
+                              control: agentForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.MobilePattern' | translate,
+                              control: agentForm.controls['mobileNumber']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.AgentEmail" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="email"
+                            class="form-control"
+                            [placeholder]="
+                              'Validation.EmailPlaceholder' | translate
+                            "
+                            formControlName="email"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: agentForm.controls['email']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.EmailPattern' | translate,
+                              control: agentForm.controls['email']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.AgentConfirmEmail" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            appBlockCopyPaste
+                            [placeholder]="
+                              'Validation.EmailPlaceholder' | translate
+                            "
+                            formControlName="emailConfirm"
+                            aria-label=""
+                          />
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: agentForm.controls['emailConfirm']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'pattern',
+                              message:
+                                'AgentRegisteration.emailPattern' | translate,
+                              control: agentForm.controls['emailConfirm']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            *ngIf="
+                              agentForm.controls['emailConfirm'].errors &&
+                              agentForm.controls['emailConfirm'].errors
+                                .emailConfirm
+                            "
+                          >
+                            <div class="fv-plugins-message-container">
+                              <div class="fv-help-block">
+                                {{
+                                  "AgentRegisteration.agentEmailMatchConfirm"
+                                    | translate
+                                }}
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.CommercialRegistrationNo"
+                              | translate
+                          }}</label>
+                          <span class="text-danger mx-2 fs-2">*</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [placeholder]="
+                              'AgentRegisteration.CommercialRegistrationNo'
+                                | translate
+                            "
+                            formControlName="commercialRegistrationNo"
+                            aria-label=""
+                          />
+                        </div>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              agentForm.controls['commercialRegistrationNo']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'minlength',
+                            message:
+                              'AgentRegisteration.CommirecalNoMaxLength'
+                              | translate,
+                            control:
+                              agentForm.controls['commercialRegistrationNo']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'maxlength',
+                            message:
+                              'AgentRegisteration.CommirecalNoMaxLength'
+                              | translate,
+                            control:
+                              agentForm.controls['commercialRegistrationNo']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'pattern',
+                            message:
+                              'Validation.ShouldAcceptOnlyNumbers' | translate,
+                            control:
+                              agentForm.controls['commercialRegistrationNo']
+                          }"
+                        ></ng-container>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.Expirydate" | translate
+                          }}</label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <div class="input-sec">
+                          
+                            <input
+                          
+                            type="date"
+                              class="form-control date"
+                              ngbDatepicker
+                              #d="ngbDatepicker"
+                              aria-label=""
+                              [(ngModel)]="expireDate" [ngModelOptions]="{standalone: true}"
+                              data-toggle="tooltip"
+                              data-placement="bottom"
+                              title=" enter the start date"
+                              [placeholder]="
+                                'AgentRegisteration.Expirydate' | translate
+                              "
+                            />
+                         
+                          </div>
+                        </div>
+                        <!-- <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: agentForm.controls['expirationDateTest']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'pattern',
+                            message:
+                              'Validation.ShouldAcceptOnlyNumbers' | translate,
+                            control: agentForm.controls['expirationDate']
+                          }"
+                        ></ng-container> -->
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.CommercialRegister" | translate
+                          }}</label>
+                          <app-upload-file
+                            [acceptedExtensions]="[
+                              'png',
+                              'gif',
+                              'jpg',
+                              'jpeg',
+                              'pdf'
+                            ]"
+                            [id]="
+                              'commercialRegistertionNoImageStorageFileName'
+                            "
+                            [label]="'AgentRegisteration.commercialImage'"
+                            (bindValue)="uploadcommericalImg($event)"
+                          >
+                          </app-upload-file>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.Companylogo" | translate
+                          }}</label>
+
+                          <app-upload-file
+                            [acceptedExtensions]="['png', 'gif', 'jpg', 'jpeg']"
+                            [id]="'logoImageStorageFileName'"
+                            [label]="
+                              'AgentRegisteration.Companylogo' | translate
+                            "
+                            (bindValue)="uploadlogoImg($event)"
+                          >
+                          </app-upload-file>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <label for="">{{
+                            "AgentRegisteration.LinkedInAccountLink" | translate
+                          }}</label>
+                          <input
+                            type="url"
+                            class="form-control"
+                            [placeholder]="
+                              'AgentRegisteration.LinkedInAccountLink'
+                                | translate
+                            "
+                            formControlName="linkedInAccountLink"
+                            aria-label=""
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                          <label for="">
+                            {{
+                              "AgentRegisteration.DescriptionAboutAgent"
+                                | translate
+                            }} </label
+                          ><span class="text-danger mx-2 fs-2">*</span>
+                          <textarea
+                            class="form-control"
+                            id=""
+                            rows="3"
+                            formControlName="description"
+                            [placeholder]="
+                              'AgentRegisteration.DescriptionAboutAgent'
+                                | translate
+                            "
+                          ></textarea>
+                        </div>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: agentForm.controls['description']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'minlength',
+                            message:
+                              'AgentRegisteration.descriptionMinLength'
+                              | translate,
+                            control: agentForm.controls['description']
+                          }"
+                        ></ng-container>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'maxlength',
+                            message:
+                              'AgentRegisteration.descriptionMaxLength'
+                              | translate,
+                            control: agentForm.controls['description']
+                          }"
+                        ></ng-container>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input
+                              style="cursor: pointer"
+                              class="form-check-input"
+                              type="checkbox"
+                              formControlName="isAllowNotification"
+                              value=""
+                              id="flexCheckChecked"
+                            />
+                            <label
+                              class="form-check-label sd"
+                              for="flexCheckChecked"
+                            >
+                              {{
+                                "AgentRegisteration.DoYouNeedToNotifyYouAboutNewEmploymentRequest"
+                                  | translate
+                              }}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input
+                              style="cursor: pointer"
+                              class="form-check-input"
+                              type="checkbox"
+                              formControlName="termsAndConditions"
+                              value=""
+                              id="flexCheckDefault2"
+                            />
+                            <label
+                              class="form-check-label sd"
+                              for="flexCheckDefault2"
+                            >
+                              {{ "SharedFields.IAgree" | translate }}
+                              <a
+                                href="/privacy-policy"
+                                [ngStyle]="{ cursor: 'pointer' }"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >{{
+                                  "SharedFields.TermsAndPrivacyPolicy"
+                                    | translate
+                                }}</a
+                              ></label
+                            ><span class="text-danger mx-2 fs-2">*</span>
+                          </div>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: agentForm.controls['termsAndConditions']
+                            }"
+                          ></ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="form-action two">
+              <div class="container">
+                <div
+                  class="btn-group btn-group-lg m-0"
+                  role="group"
+                  aria-label="..."
+                >
+                  <button class="continue my-2" (click)="submit()">
+                    <div
+                      class="btn btn-default btn-success btn-lg"
+                      role="button"
+                    >
+                      {{ "Buttons.Save" | translate }}
+                    </div>
+                  </button>
+
+                  <label for="step2" id="back-step2" class="back my-2">
+                    <div
+                      class="btn btn-default btn-primary btn-lg"
+                      role="button"
+                    >
+                      {{ "Buttons.Back" | translate }}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

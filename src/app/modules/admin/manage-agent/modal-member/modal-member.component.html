@@ -1,0 +1,24 @@
+<section class="modal-section">
+  <div class="modal-title">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.svg" alt="" srcset="" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="/assets/imgs/img.svg" alt="" srcset="" />
+    <h3>
+      {{ "jobSeeker.please" | translate }}
+    </h3>
+    <p>
+      {{ "jobSeeker.confirmationMessage" | translate }}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button (click)="AcceptState()">
+      {{ "jobSeeker.Accept" | translate }}
+    </button>
+    <button (click)="RejectState()">
+      {{ "jobSeeker.Reject" | translate }}
+    </button>
+  </div>
+</section>

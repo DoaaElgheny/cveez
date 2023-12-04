@@ -1,0 +1,188 @@
+<section class="favourite-search">
+  <div class="contaiiner">
+    <div class="page-header">
+      <h1>
+        {{ "Search.FindTheRightOpportunity" | translate }}
+      </h1>
+      <p>
+        {{ "Search.Welcome" | translate }}
+        <strong>{{
+          currentUserName !== null || currentUserName !== "null"
+          ? currentUserName
+          : ""
+          }}</strong>!!
+        {{
+        currentUser
+        ? ("Search.SearchTitle" | translate)
+        : ("Search.SearchTitleAuth" | translate)
+        }}
+        <a class="link" *ngIf="!currentUser" (click)="checkButtonAction()">{{
+          "Search.SignIn" | translate
+          }}</a>
+      </p>
+      <div class="serach-sec" #target>
+        <input type="text" [(ngModel)]="seachKey" class="form-group"
+          [placeholder]="'Search.SearchPlaceholder' | translate" (input)="fromSearchInput = true; loadData()" />
+        <button (click)="loadData()">
+          {{ "FavouriteSearch.FindJobs" | translate }}
+          <img src="/assets/imgs/search-icon.svg" alt="search-icon" srcset="" />
+        </button>
+      </div>
+      <p>
+        {{ "FavouriteSearch.SearchResult" | translate }} ({{ collectionSize }})
+      </p>
+    </div>
+    <div class="page-content mb-10">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="filter-parent-sect">
+            <app-filter [isJobSearch]="true" [isShowAgents]="currentUser ? true : false" [isShowClassifications]="true"
+            [isShowJobTypes]="true" [isShowJobHours]="true" [isShowYearsExperience]="true" [isShowSkills]="false"
+            [countryId]="countryId" [classificationId]="classificationId"
+            (searchChanged)="handleSearch($event)"></app-filter>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="row">
+            <div *ngIf="data?.length === 0">
+              <img style="
+                  text-align: center;
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;
+                  max-width: 250px;
+                " src="assets/imgs/icons/no-results.png" />
+
+              <h1 style="text-align: center; padding-top: 15px">
+                {{ "jobSeeker.ResultNotFound" | translate }}
+              </h1>
+            </div>
+            <div class="col-lg-4 col-md-6 my-10" style="margin-bottom: 5.5rem !important" *ngFor="let item of data">
+              <div class="user-profile h-100">
+                <div>
+                  <div class="user-img" (click)="
+                      !item.isHideCompanyName ? viewAgent(item.agentId) : null
+                    ">
+
+                    <img [src]="
+                        item.agentAttachementFileStorageURL &&
+                        !item.isHideCompanyName &&
+                        logoConditions
+                          ? item.agentAttachementFileStorageURL
+                          : '/assets/imgs/company-default-logo.jpeg'
+                      " alt="" srcset="" />
+                  </div>
+                  <div class="header">
+                    <div class="date">
+                      <p>
+                        <img src="/assets/imgs/date-icon.svg" alt="" srcset="" />
+                        <span *ngIf="item.publishDayNumber > 0" class="mx-2">{{ item.publishDayNumber }}
+                          {{ "Search.Days" | translate }}</span>
+                        <span *ngIf="item.publishDayNumber === 0" class="mx-2">
+                          {{ "Search.Today" | translate }}</span>
+                      </p>
+                    </div>
+                    <div>
+
+                      <span *ngIf="
+                          item.acceptanceState ===
+                            opportunityAcceptanceState.Accepted &&
+                          item.state === opportunityState.Available
+                        " class="badge badge-light-success fs-7 fw-bold">
+                        {{ "ManageOpportunity.Open" | translate }}
+                      </span>
+
+                      <span *ngIf="
+                          item.acceptanceState ===
+                            opportunityAcceptanceState.Accepted &&
+                          item.state === opportunityState.NotAvailable
+                        " class="badge badge-light-danger fs-7 fw-bold">
+                        {{ "ManageOpportunity.ClosedState" | translate }}
+                      </span>
+
+                      <span *ngIf="
+                          item.acceptanceState ===
+                          opportunityAcceptanceState.UnderStudying
+                        " class="badge badge-light-primary fs-7 fw-bold">
+                        {{ "ManageOpportunity.UnderStudying" | translate }}
+                      </span>
+
+                      <span *ngIf="
+                          item.acceptanceState ===
+                          opportunityAcceptanceState.Rejected
+                        " class="badge badge-light-danger fs-7 fw-bold">
+                        {{ "ManageOpportunity.Rejected" | translate }}
+                      </span>
+
+                      <span *ngIf="
+                          item.acceptanceState ===
+                          opportunityAcceptanceState.Closed
+                        " class="badge badge-light fs-7 fw-bold">
+                        {{ "ManageOpportunity.Expired" | translate }}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-center mt-4 mb-5">{{ item.jobTitle }}</h3>
+                    <h5 class="link" *ngIf="!item.isHideCompanyName && logoConditions"
+                      (click)="viewAgent(item.agentId)">
+                      {{ item.agentName }}
+                    </h5>
+                  </div>
+                  <div class="card-details">
+                    <ul class="list-unstyled p-0 m-0">
+                      <li>
+                        <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+                        <strong class="mx-1">
+                          {{ "viewProfileuser.CareerLevel" | translate }}:
+                        </strong>
+                        <bdi>{{ item.jobLevel ? item.jobLevel : "-" }}</bdi>
+                      </li>
+                      <li>
+                        <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+                        <strong class="mx-1">
+                          {{ "Search.Filter.JobTypes" | translate }}:
+                        </strong>
+                        <bdi>{{ item.jobType ? item.jobType : "-" }}</bdi>
+                      </li>
+                      <li>
+                        <img src="/assets/imgs/icons/7.svg" alt="" srcset="" />
+                        <strong class="mx-1">
+                          {{ "AddOpportunities.salaryRange" | translate }}:
+                        </strong>
+                        <bdi>{{
+                          item.salaryRange ? item.salaryRange : "-"
+                          }}</bdi>
+                      </li>
+                      <li>
+                        <img src="/assets/imgs/icons/11.svg" alt="" srcset="" />
+                        <strong class="mx-1">
+                          {{ "Search.Filter.JobHours" | translate }}:
+                        </strong>
+                        <bdi>{{ item.jobHours ? item.jobHours : "-" }}</bdi>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <app-saved-job [isSaved]="item.isSave" (bindValue)="reload($event)" [Id]="item.id"></app-saved-job>
+                  <button  *ngIf="
+                      currentUser
+                    " (click)="checkButtonAction(item.id)">
+                    {{ "Search.ViewDetails" | translate }}
+                  </button>
+                  <button *ngIf="!currentUser" (click)="checkButtonAction()">
+                    {{ "Search.ViewDetailsAuth" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="10" [pageSize]="pageSize"
+          [boundaryLinks]="true" (pageChange)="loadData(target)">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>

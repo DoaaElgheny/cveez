@@ -1,0 +1,370 @@
+<div>
+  <div class="main-sec">
+    <section class="home">
+      <div class="nav-sec">
+        <app-header></app-header>
+      </div>
+      <ngb-carousel #carousel [showNavigationArrows]="false" [showNavigationIndicators]="false">
+        <ng-template ngbSlide *ngFor="let item of images">
+          <div class="picsum-img-wrapper home" [ngStyle]="{ 'background-image': 'url(' + item + ')' }">
+            <div class="overlay"></div>
+          </div>
+          <!-- <div class="carousel-caption">
+            <div class="content">
+              <h1>
+                {{ "Home.TheEasiestWayToGet" | translate }}
+                <span>{{ "Home.YourNewJob" | translate }}</span>
+              </h1>
+            </div>
+          </div> -->
+        </ng-template>
+      </ngb-carousel>
+      <div class="owel-buttons">
+        <button (click)="prevFun()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+          </svg>
+        </button>
+        <button (click)="nextFun()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <section class="find-job" id="find-job">
+    <div class="container">
+      <div class="title">
+        <h2>
+          {{ "Home.StartFindingTheRightJob" | translate }}
+        </h2>
+        <!-- <p>
+          {{ "Home.FindYourCareerOpportunityThrough" | translate }}
+        </p> -->
+      </div>
+      <div class="contents">
+        <div class="search-section">
+          <div class="pare">
+            <img src="/assets/imgs/search-ico.svg" alt="" srcset="" />
+            <input type="text" (change)="searchChange($event)" class="form-control" id="formGroupExampleInput"
+              [placeholder]="'Search.SearchPlaceholder' | translate" />
+          </div>
+          <div class="sep"></div>
+          <div class="pare" style="position: relative">
+            <img src="/assets/imgs/location-ico.svg" alt="" srcset="" />
+            <input type="text" [taListItemField]="[lang === 'ar' ? 'countryAr' : 'countryEn']"
+              [taListItemLabel]="[lang === 'ar' ? 'countryAr' : 'countryEn']"
+              [placeholder]="'Search.EnterLocation' | translate" ngxTypeahead class="form-control" [taUrl]="url"
+              [taApi]="apiMode" [value]="countryName" [taQueryParam]="apiParam"
+              (taSelected)="handleResultSelected($event)" class="form-control" id="formGroupExampleInput" />
+          </div>
+          <div class="action">
+            <button (click)="submitSearch()">
+              {{ "FavouriteSearch.FindJobs" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="choose-type">
+    <div class="container">
+      <div class="title">
+        <h2>{{ "manageClassification.chooseCategory" | translate }}</h2>
+      </div>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6 mb-10" *ngFor="let oneClassification of allClassification">
+            <div class="card-type h-100" (click)="redirectToSearch(oneClassification?.id)">
+              <div class="icon">
+                <!-- <img src="/assets/imgs/icons/01.svg" alt="" /> -->
+                <img class="img" [src]="
+                    oneClassification?.attachementFileStorageURL !== null
+                      ? oneClassification?.attachementFileStorageURL
+                      : 'https://img.freepik.com/free-photo/group-business-people-having-meeting_53876-14814.jpg'
+                  " alt="" />
+              </div>
+              <div class="txt">
+                <h4>{{ oneClassification?.name }}</h4>
+                <p>
+                  {{ "manageClassification.availableJobs" | translate }}
+                  {{ oneClassification?.opportunityNo }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--
+<section class="our-partners" id="our-partners">
+  <div class="container">
+    <div class="title">
+      <h3>
+        {{ "Home.TrustedByOver" | translate }}
+        <br />
+        {{ "Home.BrandsAndOrganizations" | translate }}
+      </h3>
+    </div>
+    <div class="logos-section">
+      <img src="/assets/imgs/icons/logo1.svg" alt="" srcset="" />
+      <img src="/assets/imgs/icons/logo2.svg" alt="" srcset="" />
+      <img src="/assets/imgs/icons/logo3.svg" alt="" srcset="" />
+      <img src="/assets/imgs/icons/logo4.svg" alt="" srcset="" />
+      <img src="/assets/imgs/icons/logo5.svg" alt="" srcset="" />
+      <img src="/assets/imgs/icons/logo6.svg" alt="" srcset="" />
+    </div>
+  </div>
+</section> -->
+
+  <section class="about-us" id="about-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="about-info">
+            <h1>
+              {{ "Home.AboutUs" | translate }}
+            </h1>
+            <p>
+              {{ "Home.aboutUsText" | translate }}
+              <span class="d-block">
+                {{ "Home.aboutUsTextLine2" | translate }}</span>
+            </p>
+            <div class="action">
+              <button routerLinkActive="active" routerLink="/about-us">
+                {{ "Home.MoreAboutCVEEEZ" | translate }}
+              </button>
+            </div>
+            <div class="plus">
+              <img class="" src="/assets/imgs/plus.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Why Cveez -->
+  <section class="why-cveez">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 my-4">
+          <div class="img-view">
+            <img src="/assets/imgs/imgs/img1.png" alt="" srcset="">
+            <div class="video-play">
+              <button>
+                <div class="btn-content">
+                  <img src="/assets/imgs/imgs/img2.svg" alt="" srcset="">
+                
+                    <div class="icon" (click)="openViewVideoModal()">
+                      <img src="/assets/imgs/icon-video.svg" alt="" srcset="">
+                    </div>
+                  
+
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 my-4">
+          <div class="cvz-info">
+            <div class="title mb-10">
+              <h3>
+                {{ "whyCeevez.whyCeevez" | translate }}
+                
+              </h3>
+              <p>
+                {{ "whyCeevez.applicationProcces" | translate }}
+
+              </p>
+            </div>
+            <div class="actions">
+              <button (click)="router.navigateByUrl('/auth/agent-registration')">
+                <img src="/assets/imgs/icons/white-arrow.svg" alt="" srcset="" />
+                {{ "whyCeevez.Employer" | translate }}
+              </button>
+              <button (click)="router.navigateByUrl('auth/job-seeker-registration')">
+                <img src="/assets/imgs/icons/blue-arrow.svg" alt="" srcset="" />
+                {{ "whyCeevez.jobSeeker" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Why Cveez -->
+
+  <!-- Partners Section -->
+  <section class="partners-section-logos">
+    <div class="container">
+      <div class="content-sec">
+        <header>
+          <h3>
+            {{ "whyCeevez.Trusted" | translate }}
+
+            <br>
+            {{ "whyCeevez.trustedMore" | translate }}
+
+          </h3>
+        </header>
+        <article>
+          <div class="logos-imgs">
+            <img src="/assets/imgs/logo1.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo3.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo20.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo2.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo4.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo5.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo6.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo7.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo8.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo9.svg" width="130" height="30" alt="" srcset="">
+            <img src="/assets/imgs/logo10.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo11.svg" alt="" srcset="">
+            <img src="/assets/imgs/logo13.svg" alt="" srcset="">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- Partners Section -->
+
+  <div class="logos">
+    <!-- <div class="container">
+    <div class="title">
+      <h2>
+        {{ "Home.TrustedByOver" | translate }}
+      </h2>
+      <p>
+        {{ "Home.BrandsAndOrganizations" | translate }}
+      </p>
+    </div>
+    <div class="row justify-content-center mt-10">
+      <ngb-carousel
+        [showNavigationArrows]="true"
+        [showNavigationIndicators]="true"
+      >
+        <ng-template ngbSlide *ngFor="let agent of allAgent">
+          <div class="col-lg-3 my-4" (click)="viewAgent(agent.id)">
+            <div class="logos-card h-100">
+              <img
+                class="img"
+                [src]="
+                  agent?.logoImageStorageFileUrl !== null
+                    ? agent?.logoImageStorageFileUrl
+                    : '/assets/imgs/card.jpg'
+                "
+                alt=""
+              />
+              <h3>{{ agent.name }}</h3>
+              <h4>{{ agent.agentRepresentativeEmail }}</h4>
+              <p>
+                {{ agent.description }}
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div> -->
+    <!-- <section class="subscripe mt-10">
+      <div class="">
+        <div class="title mb-10">
+          <h3>
+            {{ "Home.JoinCVEEEZNow" | translate }}
+          </h3>
+          <h5>
+            {{ "Home.JoinNowAndEnjoyOurServices" | translate }}
+          </h5>
+        </div>
+        <div class="actions">
+          <button (click)="router.navigateByUrl('/auth/agent-registration')">
+            <img src="/assets/imgs/icons/white-arrow.svg" alt="" srcset="" />
+            {{ "Home.AgentOwner" | translate }}
+          </button>
+          <button
+            (click)="router.navigateByUrl('auth/job-seeker-registration')"
+          >
+            <img src="/assets/imgs/icons/blue-arrow.svg" alt="" srcset="" />
+            {{ "Home.JobSeeker" | translate }}
+          </button>
+        </div>
+      </div>
+    </section> -->
+
+    <div class="services" id="services">
+      <div class="container">
+        <div class="title">
+          <h2>
+            {{ "Home.ExploreCVEEEZServices" | translate }}
+          </h2>
+          <p>
+            {{ "Home.WeHelpCompaniesAndJobSeekersFindTheRightFit" | translate }}
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 my-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ "Home.headhuntingServices" | translate }}
+                </h5>
+                <img src="assets/imgs/home/HR 1.svg" class="card-img-top" alt="..." />
+                <p class="card-text">
+                  {{ "Home.cardOneContent" | translate
+                  }}<span class="d-block">Info@cveeez.com</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 my-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ "Home.professionalTrainingCourses" | translate }}
+                </h5>
+                <img src="assets/imgs/home/TRANING 1.svg" class="card-img-top" alt="..." />
+                <p class="card-text">
+                  {{ "Home.cardTwoContent" | translate }}
+                  <span class="d-block">Info@cveeez.com</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 my-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ "Home.buildAprofessionalCV" | translate }}
+                </h5>
+                <img src="assets/imgs/home/CV 1.svg" class="card-img-top" alt="..." />
+                <p class="card-text">
+                  {{ "Home.cardThreeContent" | translate }}
+                  <span class="d-block">Info@cveeez.com</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="footer" id="contact-us">
+    <app-footer></app-footer>
+  </section>
+</div>
+
+<div class="whatsapp">
+  <a (click)="wattsApp()">
+    <img height="50px" width="50px" src="/assets/imgs/whatsap.svg" />
+  </a>
+</div>

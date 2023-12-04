@@ -1,0 +1,579 @@
+<div class="page-title secttion-back">
+  <a *ngIf="id === 0">
+    <a class="mt-2" (click)="backClicked()" style="cursor: pointer">
+      <img src="/assets/imgs/arrow.png" alt="" srcset=""/>
+      <!-- <span class="mx-2">{{ "SharedFields.Back" | translate }}</span> -->
+      </a
+    >
+    <h2>
+      <span>{{
+        "ManageOpportunityAgent.addOpportunity" | translate
+      }}</span>
+    </h2>
+  </a>
+  <a *ngIf="id !== 0">
+    <a class="mt-2" (click)="backClicked()" style="cursor: pointer">
+      <img src="/assets/imgs/arrow.png" alt="" srcset="" />
+        <!-- <span class="mx-2">{{ "SharedFields.Back" | translate }}</span> -->
+    </a>
+    <h2>
+      <span class="mx-4">{{
+        "ManageOpportunityAgent.editOpportunity" | translate
+      }}</span>
+    </h2>
+  </a>
+</div>
+<section class="add-opportunities">
+  <div class="container">
+    <div class="page-content">
+      <div class="page-title">
+        <h3>{{ "AddOpportunities.title" | translate }}</h3>
+      </div>
+      <form
+        [formGroup]="opportunitiesForm"
+        role="form"
+        #f="ngForm"
+        novalidate="novalidate"
+      >
+        <div class="form-content">
+          <div class="row">
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.jobTitle" | translate }}</label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <ng-multiselect-dropdown
+                formControlName="titlesDataView"
+                [placeholder]="'SharedFields.SelectOption' | translate"
+                [settings]="dropdownSettingsSingle"
+                [data]="jobTitlesList"
+                #job
+                (onSelect)="onItemSelectSingle($event, 'jobTitleId',job)"
+                (onDeSelect)="onItemDeSelectSingle('jobTitleId',job)"
+                (input)="onSearchResultt(job)"
+              >
+              </ng-multiselect-dropdown>
+              <ng-container  *ngIf="jobTitleRequired">
+              <span class="text-danger"> {{'AddOpportunities.fieldRequired' | translate}}</span> 
+              </ng-container>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['jobTitleId']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.jobLevel" | translate }}</label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <ng-multiselect-dropdown
+                formControlName="jobLevelsDataView"
+                [placeholder]="'SharedFields.SelectOption' | translate"
+                [settings]="dropdownSettingsSingle"
+                [data]="jobLevels"
+                (onSelect)="onItemSelectSingle($event, 'jobLevelId')"
+                (onDeSelect)="onItemDeSelectSingle('jobLevelId')"
+              >
+              </ng-multiselect-dropdown>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['jobLevelId']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">{{ "AddOpportunities.jobType" | translate }} </label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <select
+                formControlName="jobTypeId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.jobType" | translate }}
+                </option>
+                <option *ngFor="let item of jobTypes" [value]="item.id">
+                  {{ lang === "ar" ? item.nameAr : item.nameEn }}
+                </option>
+              </select>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['jobTypeId']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.country" | translate }} </label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <select
+                formControlName="countryId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.country" | translate }}
+                </option>
+                <option *ngFor="let item of country" [value]="item.id">
+                  {{ lang === "ar" ? item.nameAr : item.nameEn }}
+                </option>
+              </select>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['countryId']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.salaryRange" | translate }}</label
+              >
+              <select
+                formControlName="salaryRangeId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.salaryRange" | translate }}
+                </option>
+                <option *ngFor="let item of salaryRanges" [value]="item.id">
+                  {{ item.salary }}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-3 mb-4">
+              <label for="">{{ "AddOpportunities.period" | translate }} </label>
+              <select
+                formControlName="probationPeriodId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.period" | translate }}
+                </option>
+                <option *ngFor="let item of probationPeriods" [value]="item.id">
+                  {{ lang === "ar" ? item.nameAr : item.nameEn }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.jobHours" | translate }}
+              </label>
+              <select
+                formControlName="jobHourId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.jobHours" | translate }}
+                </option>
+                <option *ngFor="let item of jobHours" [value]="item.id">
+                  {{ item.hours }}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.attachment" | translate }}
+              </label>
+              <app-upload-file
+                [acceptedExtensions]="['png', 'gif', 'jpg', 'jpeg', 'pdf']"
+                [id]="'commercialRegistertionNoImageStorageFileName'"
+                [fileName]="attachment"
+                [label]="'AddOpportunities.attachment' | translate"
+                (bindValue)="uploadfiles($event)"
+              >
+              </app-upload-file>
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="">
+                {{ "AddOpportunities.desc" | translate }}
+                <a class="job-download" (click)="jobDescriptionDownload()">( {{'AddOpportunities.jobDescriptionDownload'|translate}} )</a>
+              </label>
+              <textarea
+                formControlName="jobDescription"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                [placeholder]="'AddOpportunities.desc' | translate"
+              ></textarea>
+            </div>
+            <div class="col-lg-6 mb-4">
+              <!-- <div class="form-check"> -->
+                <label class="form-check-label" for="gridCheck">
+                  {{ "AddOpportunities.offer" | translate }}
+                </label>
+              <!-- </div> -->
+              <textarea
+                formControlName="announceDetails"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                [placeholder]="'AddOpportunities.offer' | translate"
+              ></textarea>
+            </div>
+            <div class="col-lg-6 mb-4">
+              <div class="row">
+                <div class="col-lg-6 mb-4">
+                  <label for="">
+                    {{ "AddOpportunities.timeOfOffer" | translate }}</label
+                  ><span class="text-danger mx-2 fs-2">*</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'AddOpportunities.timeOfOffer' | translate"
+                    formControlName="periodExpiration"
+                    aria-label=""
+                  />
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'AddOpportunities.fieldRequired' | translate,
+                      control: opportunitiesForm.controls['periodExpiration']
+                    }"
+                  ></ng-container>
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                      validation: 'max',
+                      message:
+                        'AddOpportunities.periodExpirationMaxLength'
+                        | translate,
+                      control: opportunitiesForm.controls['periodExpiration']
+                    }"
+                  ></ng-container>
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                      validation: 'min',
+                      message:
+                        'AddOpportunities.periodExpirationMaxLength'
+                        | translate,
+                      control: opportunitiesForm.controls['periodExpiration']
+                    }"
+                  ></ng-container>
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                      validation: 'pattern',
+                      message:
+                        'AddOpportunities.periodExpirationPattern' | translate,
+                      control: opportunitiesForm.controls['periodExpiration']
+                    }"
+                  ></ng-container>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                  <label for="">
+                    {{
+                      "AddOpportunities.classificationJob" | translate
+                    }} </label
+                  ><span class="text-danger mx-2 fs-2">*</span>
+                  <select
+                    class="form-select"
+                    formControlName="classificationId"
+                    aria-label="Default select example"
+                  >
+                    <option value="null" disabled selected>
+                      {{ "AddOpportunities.classificationJob" | translate }}
+                    </option>
+                    <option
+                      *ngFor="let item of classificationList"
+                      [value]="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
+                  <ng-container
+                    [ngTemplateOutlet]="formError"
+                    [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'AddOpportunities.fieldRequired' | translate,
+                      control: opportunitiesForm.controls['classificationId']
+                    }"
+                  ></ng-container>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-check">
+                    <input
+                      formControlName="isHideCompanyName"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="gridCheck10"
+                    />
+                    <label class="form-check-label" for="gridCheck10">
+                      {{ "AddOpportunities.hideCommany" | translate }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-title">
+          <h3>{{ "AddOpportunities.identicaly" | translate }}</h3>
+        </div>
+        <div class="form-content">
+          <div class="row">
+            <div class="col-md mb-4">
+              <div class="form-check">
+                <input
+                  formControlName="isHealthInsurance"
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isHealthInsurance"
+                />
+                <label class="form-check-label" for="isHealthInsurance">
+                  {{ "AddOpportunities.healthy" | translate }}
+                </label>
+              </div>
+            </div>
+            <div class="col-md mb-4">
+              <div class="form-check">
+                <input
+                  formControlName="isHousingAllowance"
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isHousingAllowance"
+                />
+                <label class="form-check-label" for="isHousingAllowance">
+                  {{ "AddOpportunities.house" | translate }}
+                </label>
+              </div>
+            </div>
+            <div class="col-md mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  formControlName="isTravelTicketAllowance"
+                  type="checkbox"
+                  id="isTravelTicketAllowance"
+                />
+                <label class="form-check-label" for="isTravelTicketAllowance">
+                  {{ "AddOpportunities.ticket" | translate }}
+                </label>
+              </div>
+            </div>
+            <div class="col-md mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  formControlName="isTransportationAllowance"
+                  type="checkbox"
+                  id="isTransportationAllowance"
+                />
+                <label class="form-check-label" for="isTransportationAllowance">
+                  {{ "AddOpportunities.transport" | translate }}
+                </label>
+              </div>
+            </div>
+            <div class="col-md mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  formControlName="isPossibleWorkingRemotly"
+                  type="checkbox"
+                  id="isPossibleWorkingRemotly"
+                />
+                <label class="form-check-label" for="isPossibleWorkingRemotly">
+                  {{ "AddOpportunities.remotely" | translate }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-title">
+          <h3>{{ "AddOpportunities.personJob" | translate }}</h3>
+        </div>
+        <div class="form-content">
+          <div class="row">
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.specification" | translate }} </label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <ng-multiselect-dropdown
+                [placeholder]="'SharedFields.SelectOption' | translate"
+                formControlName="specializations"
+                [settings]="dropdownSettings"
+                [data]="specializationsList"
+                #specializations
+                (onSelect)="
+                  onItemSelect($event, 'specializations', specializations)
+                "
+                (onSelectAll)="
+                  onSelectAll($event, 'specializations', specializations)
+                "
+              >
+              </ng-multiselect-dropdown>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['specializations']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.qualificaion" | translate }} </label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <ng-multiselect-dropdown
+                [placeholder]="'SharedFields.SelectOption' | translate"
+                formControlName="qualifications"
+                [settings]="dropdownSettings"
+                [data]="qualificationsList"
+                #qualifications
+                (onSelect)="
+                  onItemSelect($event, 'qualifications', qualifications)
+                "
+                (onSelectAll)="
+                  onSelectAll($event, 'qualifications', qualifications)
+                "
+              >
+              </ng-multiselect-dropdown>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['qualifications']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.ageRange" | translate }}</label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <select
+                formControlName="ageRangeId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.ageRange" | translate }}
+                </option>
+                <option *ngFor="let item of ageRanges" [value]="item.id">
+                  {{ item.age }}
+                </option>
+              </select>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['ageRangeId']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for=""> {{ "AddOpportunities.gender" | translate }}</label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <select
+                formControlName="gender"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.gender" | translate }}
+                </option>
+                <option [value]="genderList.Male">
+                  {{ "Shared.Gender." + genderList.Male | translate }}
+                </option>
+                <option [value]="genderList.Female">
+                  {{ "Shared.Gender." + genderList.Female | translate }}
+                </option>
+                <option [value]="genderList.MaleAndFemale">
+                  {{ "Shared.Gender." + genderList.MaleAndFemale | translate }}
+                </option>
+              </select>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['gender']
+                }"
+              ></ng-container>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+              <label for="">
+                {{ "AddOpportunities.experience" | translate }}</label
+              ><span class="text-danger mx-2 fs-2">*</span>
+              <select
+                formControlName="yearsExperienceId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option value="null" disabled selected>
+                  {{ "AddOpportunities.experience" | translate }}
+                </option>
+                <option
+                  *ngFor="let item of yearsExperiencesList"
+                  [value]="item.id"
+                >
+                  {{ lang === "ar" ? item.nameAr : item.nameEn }}
+                </option>
+              </select>
+              <ng-container
+                [ngTemplateOutlet]="formError"
+                [ngTemplateOutletContext]="{
+                  validation: 'required',
+                  message: 'AddOpportunities.fieldRequired' | translate,
+                  control: opportunitiesForm.controls['yearsExperienceId']
+                }"
+              ></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="page-action">
+          <button (click)="submit()">
+            {{ "AddOpportunities.send" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

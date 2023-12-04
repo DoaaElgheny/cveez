@@ -1,0 +1,282 @@
+<aside class="filter-section">
+  <div class="title">
+    <h3>{{ "FavouriteSearch.Filter" | translate }}</h3>
+    <div class="reset-btn">
+      <button (click)="resetForm()" class="">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-counterclockwise"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+          />
+          <path
+            d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+          />
+        </svg>
+        {{ "Buttons.Reset" | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="content" [formGroup]="searchForm">
+    <!-- agents -->
+    <div class="form-group" *ngIf="isShowAgents">
+      <label for="">
+        {{ "Search.Filter.Facility" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        formControlName="agentsDataView"
+        [settings]="dropdownSettingsSearch"
+        [data]="agentsList"
+        #agents
+        (onSelect)="onItemSelect('agents', agents)"
+        (onDeSelect)="onItemSelect('agents', agents)"
+        (onDeSelectAll)="onItemSelect('agents', agents)"
+        (onSelectAll)="onItemSelect('agents', agents)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- classifications -->
+    <div class="form-group" *ngIf="isShowClassifications">
+      <label for="">
+        {{ "Search.Filter.Category" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        formControlName="classificationsDataView"
+        [settings]="dropdownSettingsSearch"
+        [data]="classificationsList"
+        #classifications
+        (onSelect)="onItemSelect('classifications', classifications)"
+        (onDeSelect)="onItemSelect('classifications', classifications)"
+        (onDeSelectAll)="onItemSelect('classifications', classifications)"
+        (onSelectAll)="onItemSelect('classifications', classifications)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- opportunities -->
+    <div class="form-group" *ngIf="isShowOpportunities">
+      <label for="">
+        {{ "Search.Filter.Opportunity" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        formControlName="opportunitiesDataView"
+        [settings]="dropdownOpportunitiesSettings"
+        [data]="OpportunitiesList"
+        #opportunities
+        (onSelect)="onItemSelectSingle($event, 'opportunityId')"
+        (onDeSelect)="onItemDeSelectSingle('opportunityId')"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- titles -->
+    <div class="form-group">
+      <label for="">
+        {{ "viewProfileuser.Jobtitle" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        formControlName="titlesDataView"
+        [settings]="dropdownSettings"
+        [data]="jobTitlesList"
+        #titles
+        (onSelect)="onItemSelect('titles', titles)"
+        (onDeSelect)="onItemSelect('titles', titles)"
+        (onDeSelectAll)="onItemSelect('titles', titles)"
+        (onSelectAll)="onItemSelect('titles', titles)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- specializations -->
+    <div class="form-group">
+      <label for="">
+        {{ "viewProfileuser.Specialization" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettings"
+        [data]="specializationsList"
+        formControlName="specializationsDataView"
+        #specializations
+        (onSelect)="onItemSelect('specializations', specializations)"
+        (onDeSelect)="onItemSelect('specializations', specializations)"
+        (onDeSelectAll)="onItemSelect('specializations', specializations)"
+        (onSelectAll)="onItemSelect('specializations', specializations)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- levels -->
+    <div class="form-group">
+      <label for="">
+        {{ "viewProfileuser.CareerLevel" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettings"
+        formControlName="levelsDataView"
+        [data]="jobLevels"
+        #levels
+        (onSelect)="onItemSelect('levels', levels)"
+        (onSelect)="onItemSelect('levels', levels)"
+        (onDeSelect)="onItemSelect('levels', levels)"
+        (onDeSelectAll)="onItemSelect('levels', levels)"
+        (onSelectAll)="onItemSelect('levels', levels)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- qualifications -->
+    <div class="form-group">
+      <label for="">
+        {{ "viewProfileuser.qualification" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettings"
+        [data]="qualificationsList"
+        formControlName="qualificationsDataView"
+        #qualifications
+        (onSelect)="onItemSelect('qualifications', qualifications)"
+        (onDeSelect)="onItemSelect('qualifications', qualifications)"
+        (onDeSelectAll)="onItemSelect('qualifications', qualifications)"
+        (onSelectAll)="onItemSelect('qualifications', qualifications)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- Years of experience -->
+    <div class="form-group" *ngIf="isShowYearsExperience">
+      <label for="">
+        {{ "viewProfileuser.YearsOfExperience" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettings"
+        [data]="yearsExperiencesList"
+        formControlName="yearsExperienceDataView"
+        #yearsExperience
+        (onSelect)="onItemSelect('yearsExperience', yearsExperience)"
+        (onDeSelect)="onItemSelect('yearsExperience', yearsExperience)"
+        (onDeSelectAll)="onItemSelect('yearsExperience', yearsExperience)"
+        (onSelectAll)="onItemSelect('yearsExperience', yearsExperience)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- Job Types -->
+    <div class="form-group" *ngIf="isShowJobTypes">
+      <label for="">
+        {{ "Search.Filter.JobTypes" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettings"
+        [data]="jobTypesList"
+        formControlName="jobTypesDataView"
+        #jobTypes
+        (onSelect)="onItemSelect('jobTypes', jobTypes)"
+        (onDeSelect)="onItemSelect('jobTypes', jobTypes)"
+        (onDeSelectAll)="onItemSelect('jobTypes', jobTypes)"
+        (onSelectAll)="onItemSelect('jobTypes', jobTypes)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- job Hours -->
+    <div class="form-group" *ngIf="isShowJobHours">
+      <label for="">
+        {{ "Search.Filter.JobHours" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownHoursSettings"
+        [data]="jobHoursList"
+        formControlName="jobHoursDataView"
+        #jobHours
+        (onSelect)="onItemSelect('jobHours', jobHours)"
+        (onDeSelect)="onItemSelect('jobHours', jobHours)"
+        (onDeSelectAll)="onItemSelect('jobHours', jobHours)"
+        (onSelectAll)="onItemSelect('jobHours', jobHours)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- gender List -->
+    <div class="form-group">
+      <label for="">{{ "SharedFields.Gender" | translate }}</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettingsSingle"
+        [data]="genders"
+        #gender
+        formControlName="genderDataView"
+        (onSelect)="onItemSelectSingle($event, 'gender')"
+        (onDeSelect)="onItemDeSelectSingle('gender')"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <div class="form-group">
+      <label for="">
+        {{ "viewProfileuser.Country" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettingsSingle"
+        [data]="countriesList"
+        formControlName="countryIdDataView"
+        (onSelect)="onItemSelectSingle($event, 'countryId')"
+        (onDeSelect)="onItemDeSelectSingle('countryId')"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- nationalityId -->
+    <div class="form-group" *ngIf="isJobSearch===false">
+      <label for="">
+        {{ "viewProfileuser.Nationality" | translate }}
+      </label>
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSettingsSingle"
+        [data]="nationalitiesList"
+        formControlName="nationalityIdDataView"
+        (onDeSelect)="onItemDeSelectSingle('nationalityId')"
+        (onSelect)="onItemSelectSingle($event, 'nationalityId')"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <!-- skills -->
+    <div class="form-group" *ngIf="isShowSkills">
+      <label for="">
+        {{ "viewProfileuser.skills" | translate }}
+      </label>
+
+      <ng-multiselect-dropdown
+        [placeholder]="'SharedFields.SelectOption' | translate"
+        [settings]="dropdownSkillsSettings"
+        [data]="skillsList"
+        formControlName="skillsDataView"
+        #skills
+        (onSelect)="onItemSelect('skills', skills)"
+        (onDeSelect)="onItemSelect('skills', skills)"
+        (onDeSelectAll)="onItemSelect('skills', skills)"
+        (onSelectAll)="onItemSelect('skills', skills)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+  </div>
+</aside>

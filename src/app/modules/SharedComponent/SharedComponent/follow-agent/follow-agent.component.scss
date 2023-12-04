@@ -1,0 +1,11 @@
+.follow-agent-btn{
+    all: unset;
+    cursor: pointer;
+    margin: 5px;
+    &:last-child {
+        border-top: 1px solid #eee;
+        border-radius: 10px;
+        height: 42px;
+        text-align: center;
+    }
+}

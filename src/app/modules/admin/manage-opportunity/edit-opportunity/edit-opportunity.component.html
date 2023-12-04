@@ -1,0 +1,42 @@
+<section class="modal-section">
+  <div class="modal-title">
+    
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.svg" alt="" srcset="" />
+    </button>
+    <h3>
+      {{ "ManageOpportunity.EditOpportunity" | translate }}
+    </h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      {{ "ManageOpportunity.OpportunityClassification" | translate }}
+    </p>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      [(ngModel)]="ClassificationId"
+    >
+      <option selected disabled value="">
+        {{ "ManageOpportunity.OpportunityClassification" | translate }}
+      </option>
+      <option
+        *ngFor="let classification of allClassifications"
+        [value]="classification.id"
+      >
+        {{ classification.name }}
+      </option>
+    </select>
+    <p style="color: red" *ngIf="emptyInput">
+      {{ "jobSeeker.reasonRequired" | translate }}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button (click)="editOpportunity()">
+      {{ "Buttons.Save" | translate }}
+    </button>
+    <button (click)="closeFunction()">
+      {{ "Buttons.Cancel" | translate }}
+    </button>
+  </div>
+</section>

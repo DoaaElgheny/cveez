@@ -1,0 +1,288 @@
+<div class="modal-header">
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="title text-center">
+  <h2 *ngIf="id === undefined">{{ "managePackage.addPackage" | translate }}</h2>
+  <h2 *ngIf="id !== undefined">
+    {{ "managePackage.editPackageTitle" | translate }}
+  </h2>
+</div>
+<div class="modal-body">
+  <form [formGroup]="packagenModalForm">
+    <div class="row">
+      <!--package name  -->
+      <div class="col-lg-6 mb-5">
+        <label for="nameAr" class="form-label">{{ "managePackage.nameAr" | translate }} </label><span
+          class="text-danger mx-2 fs-2">*</span>
+        <input formControlName="nameAr" id="nameAr" type="email" class="form-control"
+          [placeholder]="'managePackage.name' | translate" />
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['nameAr']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inArabic' | translate,
+            control: packagenModalForm.controls['nameAr']
+          }"></ng-container>
+      </div>
+      <div class="col-lg-6 mb-5">
+        <label for="nameEn" class="form-label">
+          {{ "managePackage.nameEn" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <input formControlName="nameEn" id="nameEn" type="email" class="form-control"
+          [placeholder]="'managePackage.name' | translate" />
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['nameEn']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inEnglish' | translate,
+            control: packagenModalForm.controls['nameEn']
+          }"></ng-container>
+      </div>
+      <!-- drop downs -->
+      <div class="col-lg-6 mb-5">
+        <label for="subscribersType" class="form-label">
+          {{ "managePackage.subscribers" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <!-- (change)="page = 1; getAllAgentData()" -->
+        <!-- [(ngModel)]="AccreditationDecision" -->
+        <select formControlName="subscribersType" id="subscribersType" class="form-select"
+          aria-label="Default select example">
+          <!-- <option selected disabled value="">جميع</option> -->
+          <option [value]="null" disabled Select>
+            {{ "managePackage.subscribers" | translate }}
+          </option>
+          <!-- <option [value]="theSubscribersType.All">
+            {{ "managePackage.allSubscribers" | translate }}
+          </option> -->
+          <option [value]="theSubscribersType.JobSeeker">
+            {{ "managePackage.jobSeeker" | translate }}
+          </option>
+          <option [value]="theSubscribersType.Agent">
+            {{ "managePackage.facility" | translate }}
+          </option>
+        </select>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['subscribersType']
+          }"></ng-container>
+      </div>
+      <!--  -->
+      <div class="col-lg-6 mb-5">
+        <label for="price" class="form-label">{{ "managePackage.subscriptionCost" | translate }} </label><span
+          class="text-danger mx-2 fs-2">*</span>
+        <input formControlName="price" id="price" type="number" class="form-control" />
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['price']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'managePackage.countFiled' | translate,
+            control: packagenModalForm.controls['price']
+          }"></ng-container>
+      </div>
+      <!--  -->
+      <div class="col-lg-12 mb-5">
+        <label class="form-label">
+          {{ "managePackage.ChooseThePeriodOfPackage" | translate }}
+        </label>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-check w-100">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" formControlName="durationPackage"
+            [value]="theDurationPackage.Day" (change)="changeDuration()" />
+          <label class="form-check-label" for="flexRadioDefault1">
+            {{ "managePackage.Day" | translate }}
+          </label>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-check w-100">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" formControlName="durationPackage"
+            [value]="theDurationPackage.Week" (change)="changeDuration()" />
+          <label class="form-check-label" for="flexRadioDefault1">
+            {{ "managePackage.Week" | translate }}
+          </label>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-check w-100">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" formControlName="durationPackage"
+            [value]="theDurationPackage.Month" (change)="changeDuration()" />
+          <label class="form-check-label" for="flexRadioDefault1">
+            {{ "managePackage.Month" | translate }}
+          </label>
+        </div>
+      </div>
+      <div class="col-lg-12 mb-5" *ngIf="isMonth">
+        <label for="subscriptionPeriod" class="form-label">
+          {{ "managePackage.ChooseTheNumberOfMonths" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <select class="form-select" formControlName="subscriptionPeriod" id="subscriptionPeriod">
+          <option [value]="null" disabled Select>
+            {{ "managePackage.ChooseTheNumberOfMonths" | translate }}
+          </option>
+          <option *ngFor="let month of listOfMonths; let i = index" [value]="month.num">
+            {{ month.num }} {{ "managePackage.Month" | translate }}
+          </option>
+        </select>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['subscriptionPeriod']
+          }"></ng-container>
+      </div>
+      <div class="col-lg-12 mb-5" *ngIf="isWeek">
+        <label for="subscriptionPeriod" class="form-label">
+          {{ "managePackage.ChooseTheNumberOfWeeks" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <select class="form-select" formControlName="subscriptionPeriod" id="subscriptionPeriod">
+          <option [value]="null" disabled Select>
+            {{ "managePackage.ChooseTheNumberOfWeeks" | translate }}
+          </option>
+          <option *ngFor="let month of listOfWeeks; let i = index" [value]="month.num">
+            {{ month.num }} {{ "managePackage.Week" | translate }}
+          </option>
+        </select>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['subscriptionPeriod']
+          }"></ng-container>
+      </div>
+      <div class="col-lg-12 mb-5" *ngIf="isDay">
+        <label for="subscriptionPeriod" class="form-label">
+          {{ "managePackage.ChooseTheNumberOfDays" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <select class="form-select" formControlName="subscriptionPeriod" id="subscriptionPeriod">
+          <option [value]="null" disabled Select>
+            {{ "managePackage.ChooseTheNumberOfDays" | translate }}
+          </option>
+          <option *ngFor="let month of listOfDays; let i = index" [value]="month.num">
+            {{ month.num }} {{ "managePackage.Day" | translate }}
+          </option>
+        </select>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['subscriptionPeriod']
+          }"></ng-container>
+      </div>
+      <!--package descriptions  -->
+      <div class="col-lg-12 mb-5">
+        <label for="descriptionAr" class="form-label">
+          {{ "managePackage.detailsAr" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+
+        <textarea formControlName="descriptionAr" id="descriptionAr" class="form-control" rows="3"
+          [placeholder]="'managePackage.details' | translate"></textarea>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['descriptionAr']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'maxlength',
+            message: 'Validation.DescriptionMaxLength' | translate,
+            control: packagenModalForm.controls['descriptionAr']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inArabic' | translate,
+            control: packagenModalForm.controls['descriptionAr']
+          }"></ng-container>
+      </div>
+
+      <div class="col-lg-12 mb-5">
+        <label for="descriptionEn" class="form-label">
+          {{ "managePackage.detailsEn" | translate }} </label><span class="text-danger mx-2 fs-2">*</span>
+        <textarea formControlName="descriptionEn" id="descriptionEn" class="form-control" rows="3"
+          [placeholder]="'managePackage.details' | translate"></textarea>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: packagenModalForm.controls['descriptionEn']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'maxlength',
+            message: 'Validation.DescriptionMaxLength' | translate,
+            control: packagenModalForm.controls['descriptionEn']
+          }"></ng-container>
+        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inEnglish' | translate,
+            control: packagenModalForm.controls['descriptionEn']
+          }"></ng-container>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- <div class="table-responsive pre-scrollable"> -->
+        <h1 *ngIf="packagenModalForm.get('packageCondations')?.value.length">
+          {{ "managePackage.Packageconditions" | translate }}
+        </h1>
+        <table class="table table-bordered table-framed">
+          <tbody>
+            <tr *ngFor="
+                let costCenterForm of convertToFormArray(
+                  packagenModalForm.get('packageCondations')
+                ).controls;
+                let i = index
+              ">
+              <ng-container [formGroup]="costCenterForm">
+                <td>
+                  {{ costCenterForm.value.name }}
+                </td>
+
+                <td *ngIf="
+                    costCenterForm.value.conditionValue ===
+                    conditionValue.Integer 
+                  ">
+
+                  <div class="col-lg-6 mb-5">
+                    <input formControlName="value" id="value" type="number" min="0" pattern="^[0-9]+([.][0-9]+)?$"
+                      class="form-control" />
+                    <div class="text-danger" *ngIf="
+                        costCenterForm.get('value').dirty &&
+                        costCenterForm.get('value').invalid
+                      ">
+                      يجب ادخال رقم وعلي الاقل يكون 1
+                    </div>
+                  </div>
+                </td>
+
+                <td *ngIf="
+                    costCenterForm.value.conditionValue === conditionValue.None
+                  ">
+                  <input type="checkbox" formControlName="value" />
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="page-action">
+  <button type="submit" class="" (click)="savePackageForm()">
+    {{ "managePackage.Save" | translate }}
+  </button>
+  <button type="button" class="" (click)="activeModal.close('Close click')">
+    {{ "managePackage.Cancel" | translate }}
+  </button>
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

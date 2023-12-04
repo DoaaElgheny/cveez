@@ -1,0 +1,288 @@
+<section class="view-job">
+  <div class="logo-img">
+    <div>
+      <img [src]="
+        orderDetails?.isHideCompanyName === false &&
+        logoConditions &&
+        orderDetails.logoURL
+          ? orderDetails.logoURL
+          : '/assets/imgs/company-default-logo.jpeg'
+      " alt="" srcset="" />
+       <h6 *ngIf="orderDetails?.isApplied && isApplyShow">
+        <strong class="mx-2" >
+          {{ "myOrderJobSeeker.isApply" | translate }}</strong>
+      </h6> 
+    </div>
+    <div class="mt-7">  
+  
+    <circle-progress *ngIf="isJobSeeker"
+  [percent]="orderDetails?.compatibilityRatio"
+  [radius]="40"
+  [subtitle]="'ManageOpportunityAgent.CompatibilityRate' | translate"
+
+  [showSubtitle]="true"
+  [outerStrokeWidth]="5"
+  [innerStrokeWidth]="3"
+  [space]="'4'"
+  [outerStrokeColor]="'#4882c2'"
+  [outerStrokeGradientStopColor] = "'#53a9ff'"
+  [innerStrokeColor]="'#a9cee5'"
+  [titleColor] = "'#444444'"
+  [animation]="false"
+  [animationDuration]="300"
+></circle-progress>
+  </div>
+    <!-- <div class="cardss" *ngIf="isJobSeeker">
+      <div class="percent">
+        <svg>
+          <circle cx="30" cy="30" r="30"></circle>
+          <circle cx="30" cy="30" r="30" style="--percent: 30"></circle>
+        </svg>
+        <div class="number">
+          <h3>{{orderDetails?.compatibilityRatio}}<span>%</span></h3>
+          
+        </div>
+      </div>
+      <span class="mt-1">
+        {{ "ManageOpportunityAgent.CompatibilityRate" | translate }}
+      </span>
+    </div> -->
+  </div>
+  <div class="job-title">
+    <h3>
+      {{ orderDetails.jobTitle }}
+    </h3>
+    <div class="actions d-flex">
+    
+      <div *ngIf="currentUser.roles[0] !== roles.cveezAgent">
+        <app-saved-job [isSaved]="orderDetails.isSave" (bindValue)="reload($event)"
+          [Id]="orderDetails.id"></app-saved-job>
+      </div>
+
+      <!-- <button>
+          <img src="/assets/imgs/save-btn.svg" alt="" srcset="" />
+        </button> -->
+      <button *ngIf="orderDetails?.isHideCompanyName === false && logoConditions" class="mx-2">
+        <a [href]="orderDetails.linkedIn" target="_blank"  *ngIf="orderDetails.linkedIn !== null && orderDetails.linkedIn !== ''">
+          <img src="/assets/imgs/linked-btn.svg" alt="" srcset="" /></a>
+      </button>
+      <button *ngIf="orderDetails?.isHideCompanyName === false && logoConditions"
+        (click)="viewAgent(orderDetails.agentId)">
+        {{ "myOrderJobSeeker.agentFile" | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="job-info">
+    <div class="details">
+      <h6>
+        <strong class="mx-2" *ngIf="orderDetails?.isHideCompanyName === false && logoConditions">
+          {{ orderDetails?.agent ? orderDetails?.agent : "-" }}</strong>
+        {{ orderDetails?.country ? orderDetails?.country : "-" }}
+      </h6>
+      <h6 *ngIf="orderDetails?.publishedDays > 0">
+        <strong class="mx-2">{{ orderDetails?.numberOfApplicants }}
+          {{ "myOrderJobSeeker.JobApplicant" | translate }}</strong>
+        {{ "myOrderJobSeeker.PostedSince" | translate }}
+        {{ orderDetails?.publishedDays }}
+        {{ "myOrderJobSeeker.day" | translate }}
+      </h6>
+      <h6 *ngIf="orderDetails?.publishedDays === 0">
+        <strong class="mx-2">{{ orderDetails?.numberOfApplicants }}
+          {{ "myOrderJobSeeker.JobApplicant" | translate }}</strong>
+        {{ "myOrderJobSeeker.Posted" | translate }}
+        {{ "Search.Today" | translate }}
+      </h6>
+    </div>
+    <div class="row my-9">
+      <div class="col-lg-4 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "ManageOpportunityAgent.jobLevel" | translate }}:</strong>
+          <bdi>{{ orderDetails.jobLevel }}</bdi>
+        </h6>
+      </div>
+
+      <div class="col-lg-4 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "ManageOpportunityAgent.jobType" | translate }} :
+          </strong>
+          <bdi>{{ orderDetails.jobType }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-4 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/7.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "ManageOpportunityAgent.salaryType" | translate }} :</strong>
+          <bdi>{{ orderDetails.salaryRange }} </bdi>
+        </h6>
+      </div>
+    </div>
+  </div>
+  <div class="job-description" *ngIf="orderDetails.jobDescription !== null">
+    <h3 class="title">{{ "AddOpportunities.desc" | translate }}</h3>
+    <p class="parag">
+      {{ orderDetails.jobDescription }}
+    </p>
+  </div>
+  <div class="job-details">
+    <h3 class="title">{{ "myOrderJobSeeker.details" | translate }}</h3>
+    <div class="row my-9">
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "AddOpportunities.jobLevel" | translate }} :</strong>
+          <bdi> {{ orderDetails.jobLevel }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/2.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "AddOpportunities.ageRange" | translate }}:
+          </strong>
+          <bdi>{{ orderDetails.ageRange }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.jobType" | translate }}:</strong>
+          <bdi>{{ orderDetails.jobType }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/4.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.gender" | translate }}:
+          </strong>
+          <bdi>{{ "Shared.Gender." + orderDetails.gender | translate }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/5.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "AddOpportunities.country" | translate }} :
+          </strong>
+          <bdi>{{ orderDetails.country }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3" *ngIf="orderDetails.announceDetailsAttachementFileStorageUrl !== null">
+        <h6>
+          <img src="/assets/imgs/icons/6.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "AddOpportunities.attachment" | translate }} :
+          </strong>
+          <bdi>{{ "ManageOpportunity.Download" | translate }}</bdi>
+          <button class="mx-4" (click)="
+              downloadFile(
+                orderDetails.announceDetailsAttachementFileStorageUrl
+              )
+            ">
+            <img src="/assets/imgs/uploading.svg" alt="" srcset="" />
+          </button>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/7.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.salaryRange" | translate }} :</strong>
+          <bdi>{{ orderDetails.salaryRange }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/8.svg" alt="" srcset="" />
+          <strong class="mx-1"> {{ "viewJob.Category" | translate }} : </strong>
+          <bdi>{{ orderDetails.classification }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/12.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.period" | translate }} :
+          </strong>
+          <bdi>{{ orderDetails.probationPeriod }}</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/1.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.qualificaion" | translate }} :
+          </strong>
+          <bdi *ngFor="let item of orderDetails.qualifications">
+            {{ item }}
+          </bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/12.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.jobHours" | translate }} :
+          </strong>
+          <bdi>{{ orderDetails.jobHour }} hrs</bdi>
+        </h6>
+      </div>
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.experience" | translate }} :
+          </strong>
+          <bdi>
+            {{ orderDetails?.yearsExperience ? orderDetails?.yearsExperience : '-' }}
+          </bdi>
+        </h6>
+      </div>
+
+      <div class="col-lg-6 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/3.svg" alt="" srcset="" />
+          <strong class="mx-1">
+            {{ "AddOpportunities.specification" | translate }} :
+          </strong>
+          <bdi *ngFor="let item of orderDetails.specializations">
+            {{ item }}
+          </bdi>
+        </h6>
+      </div>
+
+      <div class="col-lg-12 my-3">
+        <h6>
+          <img src="/assets/imgs/icons/10.svg" alt="" srcset="" />
+          <strong class="mx-1">{{ "AddOpportunities.identicaly" | translate }}:</strong>
+
+          <bdi *ngIf="orderDetails.isHealthInsurance">{{ "AddOpportunities.healthy" | translate }} --</bdi>
+          <bdi *ngIf="orderDetails.isHousingAllowance">{{ "AddOpportunities.house" | translate }} --</bdi>
+          <bdi *ngIf="orderDetails.isTravelPossibility">{{ "AddOpportunities.travel" | translate }} --</bdi>
+          <bdi *ngIf="orderDetails.isTravelTicketAllowance">{{ "AddOpportunities.ticket" | translate }} --</bdi>
+          <bdi *ngIf="orderDetails.isTransportationAllowance">{{ "AddOpportunities.transport" | translate }} --</bdi>
+          <bdi *ngIf="orderDetails.isPossibleWorkingRemotly">{{ "AddOpportunities.remotely" | translate }} --</bdi>
+        </h6>
+      </div>
+    </div>
+  </div>
+  <div class="job-description" *ngIf="orderDetails.summary !== null">
+    <h3 class="title">{{ "myOrderJobSeeker.summary" | translate }}</h3>
+    <p class="parag">
+      {{ orderDetails.summary }}
+    </p>
+  </div>
+
+  <ng-container>
+    <div class="job-action">
+      <h6 *ngIf="isJobSeeker">{{ "viewJob.jobValue" | translate }}
+        ({{orderDetails?.updateValue}}/{{orderDetails?.originalValue}})</h6>
+      <h5 *ngIf="forApply&& !orderDetails?.isApply">{{ "viewJob.interested" | translate }}</h5>
+
+      <button *ngIf="forApply &&!orderDetails?.isApply" (click)="applyToTheOpportunity(orderDetails.id)">
+        {{ "viewJob.ApplyNow" | translate }}
+      </button>
+    </div>
+  </ng-container>
+</section>

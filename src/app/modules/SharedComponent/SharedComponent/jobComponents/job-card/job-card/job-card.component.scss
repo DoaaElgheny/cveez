@@ -1,0 +1,183 @@
+.job-card {
+    margin-bottom: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    z-index: 99;
+    &.active {
+        border: 1px solid rgb(38, 123, 255);
+        &::before {
+            content: "";
+            top: 40px;
+            border-radius: 2px;
+            position: absolute;
+            border: 1px solid rgb(38, 123, 255);
+            background-color: rgb(255, 255, 255);
+            right: -9px;
+            width: 16px;
+            height: 16px;
+            transform: rotateZ(45deg);
+            z-index: 9;
+            border-left: 0;
+            border-bottom: 0;
+        }
+    }
+    .job-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        img {
+            width: 60px;
+            height: 60px;
+            background: #ededed;
+            border-radius: 50%;
+            padding: 5px;
+            object-fit: cover;
+            box-shadow: 0 0 5px #d7d7d7;
+        }
+        div {
+            margin: 0 8px;
+            h4 {
+                color: #0274B3;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 3px;
+            }
+            p {
+                color: #939393;
+                font-weight: 500;
+                font-size: 15px;
+                margin-top: 4px;
+            }
+        }
+        .type {
+            color: #D42E56;
+            display: inline-block;
+            background: #FEE2E2;
+            border-radius: 10px;
+            min-width: 60px;
+            text-align: center;
+            padding: 5px;
+        }
+        .un {
+            color: #4CAF50;
+            display: inline-block;
+            background: #4caf5014;
+            border-radius: 10px;
+            min-width: 60px;
+            text-align: center;
+            padding: 5px;
+        }
+        .finished {
+            color: #000000;
+            display: inline-block;
+            background: #dfdfdf;
+            border-radius: 10px;
+            min-width: 60px;
+            text-align: center;
+            padding: 5px;
+        }
+    }
+    .job-body {
+        margin: 25px 0;
+        display: flex;
+        justify-content: space-between;
+        .headers {
+            margin-inline-end: 10px;
+        }
+        h6 {
+            margin: 15px 0;
+            img {
+                height: 12px;
+            }
+            font-size: 14px;
+            font-weight: 100;
+            color: #BCBCBC;
+            display: flex;
+            align-items: center;
+            strong{
+                color: #939393;
+                font-weight: 100;
+            }
+        }
+    }
+    .job-footer {
+        border-top: 1px solid rgba(188, 188, 188, 0.3);
+        margin-top: 20px;
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-top: 20px;
+        .foot-action {
+            p {
+                font-size: 16px;
+                &:first-child {
+                    color: #006FB0;
+                }
+                &:last-child {
+                    color: #B5B5B5;
+                }
+            }
+        }
+        .actions {
+            button {
+                all: unset;
+                cursor: pointer;
+                &:last-child {
+                    background: #FFFFFF;
+                    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.17);
+                    border-radius: 10px;
+                    min-width: 115px;
+                    height: 42px;
+                    color: #0274B3;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+
+.cardss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.cardss .percent {
+    position: relative;
+}
+.cardss svg {
+    overflow: visible;
+    width: 80px;
+    height: 80px;
+}
+.cardss svg circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #f0f0f0;
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+.cardss svg circle:last-of-type {
+    stroke-dasharray: 625px;
+    stroke-dashoffset: calc(625px - (625px * var(--percent)) / 100);
+    stroke: #3498db;
+}
+.cardss svg circle:last-of-type {
+    stroke: #006FB0;
+}
+
+.number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

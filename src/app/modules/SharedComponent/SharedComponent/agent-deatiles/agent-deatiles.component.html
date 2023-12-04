@@ -1,0 +1,301 @@
+<section class="profile-view">
+  <div class="page-content">
+    <div class="card-body py-3">
+      <div class="user-info">
+        <div class="row align-items-center">
+          <div class="col-lg-6 my-3">
+            <div class="main-info">
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6 my-2">
+                  <div class="user-img">
+                    <div class="view-img">
+                      <img
+                        *ngIf="agentData?.logoImageStorageFileUrl === null"
+                        src="/assets/imgs/user.svg"
+                        alt=""
+                        srcset=""
+                      />
+                      <img
+                        *ngIf="agentData?.logoImageStorageFileUrl !== null"
+                        [src]="agentData?.logoImageStorageFileUrl"
+                        alt=""
+                        srcset=""
+                        class="img-user"
+                      />
+                      <!-- <button>
+                          <img src="/assets/imgs/camera.svg" alt="" srcset="" />
+                        </button> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-6 my-2">
+                  <div class="user-details">
+                    <div
+                      *ngIf="currentUser.roles[0] !== roles.cveezAgent"
+                      style="text-align: end; margin: 0 10px"
+                    >
+                      <app-follow-agent
+                        [agentId]="agentID"
+                        [isFollow]="agentData?.isFollow"
+                      ></app-follow-agent>
+                    </div>
+                    <h3 *ngIf="agentData?.agentRepresentativeName !== null">
+                      {{ agentData?.agentRepresentativeName }}
+                    </h3>
+                    <h3 *ngIf="agentData?.agentRepresentativeName === null">
+                      -
+                    </h3>
+                    <h5 *ngIf="agentData?.agentRepresentativePosition !== null">
+                      {{ agentData?.agentRepresentativePosition }}
+                    </h5>
+                    <h5 *ngIf="agentData?.agentRepresentativePosition === null">
+                      -
+                    </h5>
+
+                    <ul
+                      class="list-unstyled"
+                      *ngIf="!router.url.includes('show-agent')"
+                    >
+                      <li *ngIf="agentData?.isAllowNotification">
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfile.notificaionOn" | translate }}
+                        </span>
+                      </li>
+                      <li *ngIf="!agentData?.isAllowNotification">
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfile.notificaionOff" | translate }}
+                        </span>
+                      </li>
+                      <li>
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfile.terms" | translate }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-1"></div>
+          <div class="col-lg-5 my-3">
+            <div class="row">
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/location.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfile.Country" | translate }}
+                    </h4>
+                    <p *ngIf="agentData?.countryName !== null">
+                      {{ agentData?.countryName }}
+                    </p>
+                    <p *ngIf="agentData?.countryName === null">-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/mobile.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfile.phoneNumber" | translate }}
+                    </h4>
+                    <p
+                      *ngIf="agentData?.agentMobileNumber !== null"
+                      style="direction: ltr"
+                      (click)="
+                        callWattsApp(
+                          agentData?.agentCountryCode +
+                            agentData?.agentMobileNumber
+                        )
+                      "
+                      [ngStyle]="{ cursor: 'pointer' }"
+                    >
+                      +{{ agentData?.agentCountryCode
+                      }}{{ agentData?.agentMobileNumber }}
+                    </p>
+                    <p *ngIf="agentData?.agentMobileNumber === null">-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/mail.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfile.Email" | translate }}
+                    </h4>
+                    <p *ngIf="agentData?.agentRepresentativeEmail !== null">
+                      {{ agentData?.agentRepresentativeEmail }}
+                    </p>
+                    <p *ngIf="agentData?.agentRepresentativeEmail === null">
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="main-content-info">
+      <div class="sec-title main-title">
+        <h3>
+          {{ "viewProfile.InformationAboutTheFacility" | translate }}
+        </h3>
+      </div>
+      <div class="card-body py-3">
+        <div class="row justify-content-between">
+          <div class="col-lg-6 my-4">
+            <div class="facility-info border-sec">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.TradeName" | translate }}
+              </span>
+              <strong *ngIf="agentData?.name !== null">
+                {{ agentData?.name }}</strong
+              >
+              <strong *ngIf="agentData?.name === null"> -</strong>
+            </div>
+          </div>
+          <div class="col-lg-6 my-4">
+            <div class="facility-info">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.CommercialRegistrationNo" | translate }}
+              </span>
+              <strong *ngIf="agentData?.commercialRegistrationNo !== null">{{
+                agentData?.commercialRegistrationNo
+              }}</strong>
+              <strong *ngIf="agentData?.commercialRegistrationNo === null"
+                >-</strong
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col-lg-6 my-4">
+            <div class="facility-info border-sec">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.ExpiryDate" | translate }}
+              </span>
+              <strong *ngIf="agentData?.expirationDate !== null"
+                >{{ agentData?.expirationDate | date : "dd/MM/yyyy" }}
+              </strong>
+              <strong *ngIf="agentData?.expirationDate === null">- </strong>
+            </div>
+          </div>
+          <div class="col-lg-6 my-4">
+            <div class="facility-info">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.companyLogo" | translate }}
+              </span>
+              <strong
+                *ngIf="agentData?.commercialRegistertionNoImageName !== null"
+              >
+                <a
+                  target="_blank"
+                  [href]="
+                    agentData?.commercialRegistertionNoImageStorageFileUrl
+                  "
+                  download
+                  >{{ "viewProfile.ClickHereToView" | translate }}
+                </a>
+              </strong>
+              <strong
+                *ngIf="agentData?.commercialRegistertionNoImageName === null"
+              >
+                -
+              </strong>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col-lg-6 my-4">
+            <div class="facility-info border-sec">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.agentMobileNumber" | translate }}
+              </span>
+              <strong
+                *ngIf="agentData?.mobileNumber !== null"
+                style="direction: ltr"
+                >+{{ agentData?.countryCode }}{{ agentData?.mobileNumber }}
+              </strong>
+              <strong *ngIf="agentData?.mobileNumber === null">- </strong>
+            </div>
+          </div>
+          <div class="col-lg-6 my-4">
+            <div class="facility-info">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.email" | translate }}
+              </span>
+              <strong *ngIf="agentData?.email !== null">
+                {{ agentData?.email }}
+              </strong>
+              <strong *ngIf="agentData?.email === null"> - </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-title">
+        <h3>
+          {{ "viewProfile.CompanyAccountLink" | translate }}
+        </h3>
+      </div>
+      <div class="card-body py-3">
+        <div class="row justify-content-between">
+          <div class="col-lg-12 my-4">
+            <div class="facility-info">
+              <span>
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                {{ "viewProfile.LinkedinLink" | translate }}
+              </span>
+              <strong *ngIf="agentData?.linkedInAccountLink !== null">
+                <a target="_blank" [href]="agentData?.linkedInAccountLink">
+                  {{ "viewProfile.ClickHereToView" | translate }}
+                </a>
+              </strong>
+              <strong *ngIf="agentData?.linkedInAccountLink === null">
+                -
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-title">
+        <h3>{{ "viewProfile.ads" | translate }}</h3>
+      </div>
+      <div class="card-body py-3">
+        <div class="row justify-content-between">
+          <div class="col-lg-12 my-4">
+            <div class="facility-info">
+              <span class="d-flex">
+                <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+                <span class="mx-4">
+                  <strong>
+                    {{ agentData?.description }}
+                  </strong>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

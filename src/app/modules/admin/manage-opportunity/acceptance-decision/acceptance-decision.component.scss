@@ -1,0 +1,66 @@
+.acceptance-decission {
+  padding: 25px 0;
+  .model-header {
+    text-align: end;
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+  }
+  .model-title {
+    text-align: center;
+    h3 {
+      color: #000000;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 11px;
+    }
+    h5 {
+      color: #5a5a5a;
+      font-size: 20px;
+      font-weight: 100;
+    }
+  }
+  .modal-body {
+    ul {
+      li {
+        display: flex;
+        align-items: flex-start;
+        font-size: 14px;
+        div {
+          color: #5a5a5a;
+          margin: 0 10px;
+          strong {
+            color: #3a3939;
+            font-weight: 100;
+          }
+          button {
+            all: unset;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border: none;
+    justify-content: center;
+    padding: 0;
+    button {
+      background: var(--color);
+      border-radius: 5px;
+      min-width: 140px;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+      &:last-child {
+        background: #ffffff;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        color: var(--color);
+      }
+    }
+  }
+}

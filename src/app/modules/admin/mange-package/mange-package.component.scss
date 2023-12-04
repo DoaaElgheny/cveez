@@ -1,0 +1,141 @@
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #5e6278;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border: 1px solid #e4e6ef;
+  appearance: none;
+  border-radius: 0.475rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.page-title {
+  h3 {
+    color: #333232;
+    font-weight: 400;
+    font-size: 28px;
+    span {
+      color: #6a6a6a;
+      font-size: 18px;
+    }
+  }
+}
+.search-top {
+  padding-bottom: 0 !important;
+  .input-img {
+    position: relative;
+    input {
+      min-height: 43.56px;
+      padding-right: 38px;
+    }
+    img {
+      position: absolute;
+      top: 9px;
+      right: 12px;
+    }
+    button {
+      position: absolute;
+      top: 9px;
+      right: 35px;
+      outline: none;
+      border: 0;
+      background-color: transparent;
+      border: none;
+    }
+  }
+  .action {
+    button {
+      color: #042f86;
+      font-weight: 600;
+      width: 100%;
+      border: 1px solid #ebebeb;
+      border-radius: 8px;
+      height: 43.55px;
+      background-color: #ffffff;
+      padding: 10px;
+    }
+  }
+}
+.package-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    h4 {
+      font-size: 18px;
+    }
+    h6 {
+      color: #c0c0c0;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .action {
+      display: flex;
+      align-items: center;
+      button {
+        all: unset;
+        cursor: pointer;
+      }
+    }
+  }
+  .body {
+    p {
+      color: #a1a1aa;
+    }
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    H6 {
+      color: #9d9da6;
+    }
+    p {
+      text-align: end;
+      // margin-top: 20px;
+      margin-bottom: 0;
+      color: #9d9da6;
+    }
+  }
+}
+
+.option {
+  li {
+    text-align: start;
+    padding: 5px;
+    a {
+      background-color: #fff;
+      color: #4a4a4a;
+      &:hover {
+        color: #4a4a4a;
+      }
+    }
+    button {
+      color: #4a4a4a;
+      &:hover {
+        color: #4a4a4a;
+      }
+    }
+  }
+}
+
+.dropdown-toggle::after {
+  all: unset;
+}

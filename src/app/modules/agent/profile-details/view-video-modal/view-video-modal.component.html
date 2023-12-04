@@ -1,0 +1,15 @@
+<section class="modal-section">
+  <div class="modal-title">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.svg" alt="" srcset="" />
+    </button>
+  </div>
+  <div class="user-img">
+    <ng-container *ngIf="vedioStatus === thevideoStatus.Accepted">
+      <video width="100%" height="350px" controls>
+        <source [src]="videoLink" type="video/mp4" />
+        <source [src]="videoLink" type="video/ogg" />
+      </video>
+    </ng-container>
+  </div>
+</section>

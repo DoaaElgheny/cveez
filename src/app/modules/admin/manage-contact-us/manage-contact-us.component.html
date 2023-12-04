@@ -1,0 +1,250 @@
+<section class="top-search">
+  <div class="d-flex  gap-5">
+
+    <div class="title">
+      <h2>
+        {{ "manageContactUs.ComplaintsAndMessagesManagement" | translate }}
+      </h2>
+    </div>
+    <div class="col-lg-1">
+      <div class="reset-btn">
+        <button (click)="fromSearchInput = false; rest()" class="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-counterclockwise"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+            />
+            <path
+              d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+            />
+          </svg>
+          {{ "Buttons.Reset" | translate }}
+        </button>
+      </div>
+    </div>
+     </div>
+
+  <div class="content">
+    <div class="row justify-content-between">
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-6 my-3">
+            <div class="iput-sec">
+              <!-- <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" /> -->
+              <input
+                onfocus="(this.type='date')"
+                class="form-control date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                aria-label=""
+                [(ngModel)]="dateText1"
+                (change)="page = 1; getAllMessages()"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title=" enter the start date "
+                [placeholder]="'manageContactUs.fromDate' | translate"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 my-3">
+            <div class="iput-sec">
+              <!-- <img class="mx-2" src="/assets/imgs/dat.svg" alt="" srcset="" /> -->
+              <input
+                onfocus="(this.type='date')"
+                class="form-control date"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                aria-label=""
+                [(ngModel)]="dateText2"
+                (change)="page = 1; getAllMessages()"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title=" enter the end date "
+                [placeholder]="'manageContactUs.toDate' | translate"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-6 my-3">
+            <select
+              class="form-select"
+              [(ngModel)]="MessageTypeStatus"
+              aria-label="Default select example"
+              (change)="page = 1; getAllMessages()"
+            >
+              <option selected disabled value="">
+                {{ "manageContactUs.type" | translate }}
+              </option>
+              <option [value]="theMessageType.All">
+                {{ "manageContactUs.All" | translate }}
+              </option>
+
+              <option [value]="theMessageType.Message">
+                {{ "manageContactUs.message" | translate }}
+              </option>
+              <option [value]="theMessageType.Complaint">
+                {{ "manageContactUs.complaint" | translate }}
+              </option>
+            </select>
+          </div>
+          <!-- user type -->
+          <div class="col-lg-6 my-3">
+            <select
+              class="form-select"
+              [(ngModel)]="userTypeStatus"
+              aria-label="Default select example"
+              (change)="page = 1; getAllMessages()"
+            >
+              <option selected disabled value="">
+                {{ "manageContactUs.userType" | translate }}
+              </option>
+              <option [value]="theuserType.All">
+                {{ "manageContactUs.All" | translate }}
+              </option>
+              <option [value]="theuserType.Agent">
+                {{ "manageContactUs.facility" | translate }}
+              </option>
+
+              <option [value]="theuserType.JobSeeker">
+                {{ "manageContactUs.jobSeeker" | translate }}
+              </option>
+              <option [value]="theuserType.Visitor">
+                {{ "manageContactUs.visitor" | translate }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="message-cards">
+      <div class="row">
+        <div *ngIf="allMessages.length === 0">
+          <img
+            style="
+              text-align: center;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 250px;
+            "
+            src="assets/imgs/icons/no-results.png"
+          />
+
+          <h1 style="text-align: center; padding-top: 15px">
+            {{ "jobSeeker.ResultNotFound" | translate }}
+          </h1>
+        </div>
+        <div class="col-lg-4 col-sm-6 my-4" *ngFor="let message of allMessages">
+          <div class="message-card h-100">
+            <div class="title pb-4">
+              <div>
+                <h3>{{ message.name }}</h3>
+                <b>{{ message.email }}</b>
+              </div>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                (change)="selectMessageType(message, $event)"
+              >
+                <option selected disabled value="">
+                  {{ "manageContactUs.status" | translate }}
+                </option>
+                <option
+                  [selected]="message.complaintType === complain.New"
+                  [value]="complain.New"
+                >
+                  {{ "manageContactUs.New" | translate }}
+                </option>
+                <option
+                  [selected]="message.complaintType === complain.Solved"
+                  [value]="complain.Solved"
+                >
+                  {{ "manageContactUs.Solved" | translate }}
+                </option>
+              </select>
+            </div>
+            <div class="content-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <time>{{ message.date | date }} </time>
+              <!-- user type span -->
+              <div class="type d-inline m-0">
+                <span
+                  class="badge badge-light-success fs-7 fw-bold"
+                  *ngIf="message.messageType === theMessageType.Message"
+                >
+                  {{ "manageContactUs.message" | translate }}
+                </span>
+                <span
+                  class="badge badge-light-danger fs-7 fw-bold"
+                  *ngIf="message.messageType === theMessageType.Complaint"
+                >
+                  {{ "manageContactUs.complaint" | translate }}
+                </span>
+              </div>
+              </div>
+              <p>
+                <app-read-more
+                  [text]="message.message"
+                  [maxHeight]="39"
+                ></app-read-more>
+                <!-- {{ message.message }} -->
+              </p>
+              <div class="action">
+                <!-- *********** -->
+                <div class="type">
+                  <img src="/assets/imgs/icons/type.svg" alt="" />
+                  <span
+                    class="message"
+                    *ngIf="message.userType === theuserType.Agent"
+                  >
+                    {{ "manageContactUs.facility" | translate }}
+                  </span>
+                  <span
+                    class="complain"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="message.userType === theuserType.JobSeeker"
+                  >
+                    {{ "manageContactUs.jobSeeker" | translate }}
+                  </span>
+                  <span
+                    class="other"
+                    style="--bs-bg-opacity: 0.5"
+                    *ngIf="message.userType === theuserType.Visitor"
+                  >
+                    {{ "manageContactUs.visitor" | translate }}
+                  </span>
+                </div>
+                <button
+                  class="btn btn-lg btn-outline-primary"
+                  (click)="open(message.id, message.reply)"
+                >
+                  {{ "manageContactUs.reply" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="pagi-sec">
+  <ngb-pagination
+    [collectionSize]="totalCount"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="getAllMessages()"
+    class="pagination p-0 my-4 d-flex justify-content-center"
+  >
+  </ngb-pagination>
+</div>

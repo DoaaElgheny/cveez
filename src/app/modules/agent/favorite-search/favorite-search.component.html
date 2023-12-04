@@ -1,0 +1,86 @@
+<section class="favourite-search">
+  <div class="contaiiner">
+    <div class="page-header">
+      <h1>
+        {{ "FavouriteSearch.FindTheRightEmployee" | translate }}
+      </h1>
+      <p>
+        {{ "FavouriteSearch.Welcome" | translate }}
+        <strong>{{ currentUserName }}</strong>!!
+        {{ "FavouriteSearch.SearchTitle" | translate }}
+      </p>
+      <div class="serach-sec" #target  id="serach-sec">
+        <input type="text" [(ngModel)]="seachKey" class="form-group"
+          [placeholder]="'FavouriteSearch.SearchPlaceholder' | translate"
+          (input)="fromSearchInput = true; loadData()" />
+        <button (click)="loadData()">
+          {{ "FavouriteSearch.FindJobs" | translate }}
+          <img src="/assets/imgs/search-icon.svg" alt="search-icon" srcset="" />
+        </button>
+      </div>
+      <p>
+        {{ "FavouriteSearch.SearchResult" | translate }} ({{ collectionSize }})
+      </p>
+    </div>
+    <div class="page-content">
+      <div class="row">
+        <div class="col-lg-3">
+          <app-filter [isShowSkills]="true" (searchChanged)="handleSearch($event)"></app-filter>
+        </div>
+        <div class="col-lg-9">
+          <div class="row">
+            <div *ngIf="data?.length === 0">
+              <img style="
+                  text-align: center;
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;
+                  max-width: 250px;
+                " src="assets/imgs/icons/no-results.png" />
+
+              <h1 style="text-align: center; padding-top: 15px">
+                {{ "jobSeeker.ResultNotFound" | translate }}
+              </h1>
+            </div>
+            <div class="col-lg-4 col-md-6 my-3" *ngFor="let item of data">
+              <div class="user-profile h-100">
+                <div>
+                  <div class="user-img">
+                    <!-- <img src="assets/imgs/home/favorite.jpeg" alt="" /> -->
+                    <img [src]="
+                        item.attachementFileStorageURL
+                          ? item.attachementFileStorageURL
+                          : 'assets/imgs/home/favorite.jpeg'
+                      " alt="" srcset="" />
+                  </div>
+                  <div class="user-country">
+                    <span class="fi fi-{{ item.countryCodeIso | lowercase }}"></span>
+                  </div>
+
+                  <div class="info">
+                    <h3>{{ item.fullName }}</h3>
+                    <h5>{{ item.title }}</h5>
+                    <p>{{ item.yearsExperience }}</p>
+                  </div>
+                  <div class="skills" *ngIf="item.skills">
+                    <span *ngFor="let skill of item.skills.slice(0, 4)">{{
+                      skill.number
+                      }}</span>
+                  </div>
+                </div>
+                <div class="action">
+                  <button (click)="profileDetails(item.id)">
+                    {{ "FavouriteSearch.ShowProfile" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="currentPage" [maxSize]="5" [pageSize]="pageSize"
+          [boundaryLinks]="true" (pageChange)="loadData(target)">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,558 @@
+<section class="profile-view">
+  <div class="page-title">
+    <h3  >
+      <a  (click)="goBack()" role="button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-chevron-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+          />
+        </svg>
+      </a>
+      <span class="mx-2">
+        {{ "viewProfileuser.accountDetails" | translate }}
+      </span>
+    </h3>
+  </div>
+  <div class="page-content">
+    <div class="card-body py-3">
+      <div class="user-info">
+        <div class="row align-items-center">
+          <div class="col-lg-6 my-3">
+            <div class="main-info">
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6 my-2">
+                  <div class="user-img">
+                    <img
+                      *ngIf="userData?.attachementFileStorageURL === null"
+                      src="/assets/imgs/user.svg"
+                      alt=""
+                      srcset=""
+                    />
+                    <img
+                      *ngIf="userData?.attachementFileStorageURL !== null"
+                      [src]="userData?.attachementFileStorageURL"
+                      alt=""
+                      srcset=""
+                      class="img-user"
+                    />
+
+                    <div
+                      class="action"
+                      *ngIf="userData?.referenceNumber !== null"
+                    >
+                      <button (click)="copy(userData?.referenceNumber)">
+                        <img src="/assets/imgs/copy.svg" alt="" srcset="" />
+                      </button>
+                      <span> ID : {{ userData?.referenceNumber }} </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-6 my-2">
+                  <div class="user-details">
+                    <h3 *ngIf="userData?.fullName !== null">
+                      {{ userData?.fullName }}
+                    </h3>
+                    <h3 *ngIf="userData?.fullName === null">-</h3>
+                    
+                    <section class="work-type">
+                      <div class="work-item" *ngFor="let Title of userTitles">
+                        <div *ngIf="theLanguage === 'ar'">
+                          <h5 *ngIf="Title?.nameAr !== null">
+                            {{ Title?.nameAr }}
+                          </h5>
+                          <h5 *ngIf="Title?.nameAr === null">-</h5>
+                        </div>
+  
+                        <div *ngIf="theLanguage === 'en'">
+                          <h5 *ngIf="Title?.nameEn !== null">
+                            {{ Title?.nameEn }}
+                          </h5>
+                          <h5 *ngIf="Title?.nameEn === null">-</h5>
+                        </div>
+                      </div>
+                    </section>
+
+                    <h5 *ngIf="userJobLevel?.name === null">-</h5>
+                    <button *ngIf="!isAdmin">
+                      {{ "viewProfileuser.accountPromotion" | translate }}
+                      <img src="/assets/imgs/tarkya.svg" alt="" srcset="" />
+                    </button>
+                    <ul class="list-unstyled">
+                      <li *ngIf="userData?.isWantFeelChances">
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfileuser.notificaionOn" | translate }}
+                        </span>
+                      </li>
+
+                      <li *ngIf="!userData?.isWantFeelChances">
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfileuser.notificaionOff" | translate }}
+                        </span>
+                      </li>
+                      <li>
+                        <img src="/assets/imgs/check.svg" alt="" srcset="" />
+                        <span class="mx-2">
+                          {{ "viewProfileuser.terms" | translate }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-1"></div>
+          <div class="col-lg-5 my-3">
+            <div class="row">
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/location.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfileuser.Country" | translate }}
+                    </h4>
+                    <div *ngIf="theLanguage === 'ar'">
+                      <p *ngIf="userData?.countryName !== null">
+                        {{ userCountry?.nameAr }}
+                      </p>
+                      <p *ngIf="userData?.countryName === null">-</p>
+                    </div>
+                    <div *ngIf="theLanguage === 'en'">
+                      <p *ngIf="userData?.countryName !== null">
+                        {{ userCountry?.nameEn }}
+                      </p>
+                      <p *ngIf="userData?.countryName === null">-</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/mobile.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfileuser.phoneNumber" | translate }}
+                    </h4>
+                    <p
+                      *ngIf="userData?.mobileNumber !== null"
+                      style="direction: ltr"
+                    >
+                      +{{ userData?.countryCode }}{{ userData?.mobileNumber }}
+                    </p>
+                    <p *ngIf="userData?.mobileNumber === null">-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 my-3">
+                <div class="info-card">
+                  <div class="icon">
+                    <img src="/assets/imgs/mail.svg" alt="" srcset="" />
+                  </div>
+                  <div class="mx-3">
+                    <h4>
+                      {{ "viewProfileuser.Email" | translate }}
+                    </h4>
+                    <p *ngIf="userData?.email !== null">
+                      {{ userData?.email }}
+                    </p>
+                    <p *ngIf="userData?.email === null">-</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.personalInformation" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.dateOfBirth" | translate }}
+            </span>
+            <strong *ngIf="userData?.birthDate !== null">
+              {{ userData?.birthDate | date : "dd/MM/yyyy" }}</strong
+            >
+            <strong *ngIf="userData?.birthDate === null"> -</strong>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.gender" | translate }}
+            </span>
+            <strong *ngIf="userData?.gender !== null">
+              <span *ngIf="userData?.gender === 2">
+                {{ "viewProfileuser.male" | translate }}
+              </span>
+              <span *ngIf="userData?.gender === 3">
+                {{ "viewProfileuser.female" | translate }}
+              </span>
+            </strong>
+            <strong *ngIf="userData?.gender === null">-</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Nationality" | translate }}
+            </span>
+            <div *ngIf="theLanguage === 'ar'">
+              <strong *ngIf="userNationality?.nameAr !== null">
+                {{ userNationality.nameAr }}
+              </strong>
+              <strong *ngIf="userNationality?.nameAr === null">- </strong>
+            </div>
+            <div *ngIf="theLanguage === 'en'">
+              <strong *ngIf="userNationality?.nameEn !== null">
+                {{ userNationality.nameEn }}
+              </strong>
+              <strong *ngIf="userNationality?.nameEn === null">- </strong>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-6 my-4">
+                    <div class="facility-info">
+                        <span>
+                            <img src="/assets/imgs/poilts.svg" alt="" srcset="">
+                            {{ "viewProfileuser.companyLogo" | translate }}
+                        </span>
+                        <strong *ngIf="userData?.logoImageStorageFileName!== null"> <a target="_blank"
+                                [href]="userData?.logoImageStorageFileUrl"
+                                download>{{userData?.logoImageStorageFileName}} </a> </strong>
+                        <strong *ngIf="userData?.logoImageStorageFileName=== null"> - </strong>
+                    </div>
+                </div> -->
+      </div>
+    </div>
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.BackgroundInformation" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Jobtitle" | translate }}
+            </span>
+
+            <div *ngFor="let Title of userTitles">
+              <div *ngIf="theLanguage === 'ar'">
+                <strong *ngIf="Title?.nameAr !== null">
+                  {{ Title?.nameAr }}
+                </strong>
+                <strong *ngIf="Title?.nameAr === null"> - </strong>
+              </div>
+
+              <div *ngIf="theLanguage === 'en'">
+                <strong *ngIf="Title?.nameEn !== null">
+                  {{ Title?.nameEn }}
+                </strong>
+                <strong *ngIf="Title?.nameEn === null"> - </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.Specialization" | translate }}
+            </span>
+            <div *ngIf="theLanguage === 'en'">
+              <div *ngFor="let specialization of userspecializations">
+                <strong *ngIf="specialization?.nameEn !== null">
+                  {{ specialization?.nameEn }}
+                </strong>
+                <strong *ngIf="specialization?.nameEn === null"> - </strong>
+              </div>
+            </div>
+            <div *ngIf="theLanguage === 'ar'">
+              <div *ngFor="let specialization of userspecializations">
+                <strong *ngIf="specialization?.nameAr !== null">
+                  {{ specialization?.nameAr }}
+                </strong>
+                <strong *ngIf="specialization?.nameAr === null"> - </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div *ngIf="theLanguage === 'ar'" class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.CareerLevel" | translate }}
+            </span>
+            <strong *ngIf="userJobLevel?.nameAr !== null">
+              {{ userJobLevel?.nameAr }}
+            </strong>
+            <strong *ngIf="userJobLevel?.nameAr === null"> - </strong>
+          </div>
+
+          <div *ngIf="theLanguage === 'en'" class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.CareerLevel" | translate }}
+            </span>
+            <strong *ngIf="userJobLevel?.nameEn !== null">
+              {{ userJobLevel?.nameEn }}
+            </strong>
+            <strong *ngIf="userJobLevel?.nameEn === null"> - </strong>
+          </div>
+        </div>
+        <div class="col-lg-6 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.YearsOfExperience" | translate }}
+            </span>
+            <div *ngIf="theLanguage === 'en'">
+              <strong *ngIf="userYearsExperience?.nameEn !== null">
+                {{ userYearsExperience?.nameEn }}
+              </strong>
+              <strong *ngIf="userYearsExperience?.nameEn === null"> - </strong>
+            </div>
+
+            <div *ngIf="theLanguage === 'ar'">
+              <strong *ngIf="userYearsExperience?.nameAr !== null">
+                {{ userYearsExperience?.nameAr }}
+              </strong>
+              <strong *ngIf="userYearsExperience?.nameAr === null"> - </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div class="facility-info border-sec">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.qualification" | translate }}
+            </span>
+            <div *ngFor="let qualification of userQualifications">
+              <div *ngIf="theLanguage === 'en'">
+                <strong *ngIf="qualification?.nameEn !== null">
+                  {{ qualification?.nameEn }}
+                </strong>
+                <strong *ngIf="qualification?.nameEn === null"> - </strong>
+              </div>
+
+              <div *ngIf="theLanguage === 'ar'">
+                <strong *ngIf="qualification?.nameAr !== null">
+                  {{ qualification?.nameAr }}
+                </strong>
+                <strong *ngIf="qualification?.nameAr === null"> - </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-6 my-4">
+                    <div class="facility-info">
+                        <span>
+                            <img src="/assets/imgs/poilts.svg" alt="" srcset="">
+                            {{ "viewProfileuser.ProfessionalCertificate" | translate }}
+                        </span>
+
+                        <div *ngFor="let professionalCertificates of userProfessionalCertificates">
+                            <strong *ngIf="professionalCertificates?.certificate!== null">
+
+                                {{professionalCertificates?.certificate}}
+                            </strong>
+                            <strong *ngIf="professionalCertificates?.certificate=== null">
+                                -
+                            </strong>
+                        </div>
+                    </div>
+
+                </div> -->
+      </div>
+    </div>
+
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.UserAccountLink" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div
+        class="row justify-content-between"
+
+      >
+        <div class="col-lg-12 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.UserLinkedInLink" | translate }}
+            </span>
+            <strong *ngIf="userData?.linkedIn !== null && userData?.linkedIn !== ''">
+              <a target="_blank" [href]="userData?.linkedIn">
+                {{ "viewProfileuser.Clickheretoview" | translate }}
+              </a>
+            </strong>
+            <!-- <strong *ngIf="userData?.linkedIn === null"> - </strong> -->
+          </div>
+        </div>
+      </div>
+      <div
+        class="row justify-content-between"
+        *ngIf="userData?.linkVedio !== null && userData?.linkVedio !== ''"
+      >
+        <div class="col-lg-12 my-4">
+          <div class="facility-info">
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              {{ "viewProfileuser.VideoLink" | translate }}
+            </span>
+            <strong>
+              <a target="_blank" [href]="userData?.linkVedio" download
+                >{{ "viewProfile.ClickHereToView" | translate }}
+              </a>
+              <!-- <a target="_blank" [href]="userData?.linkVedio">
+                                {{userData?.linkVedio}} </a> -->
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.skills" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <div
+            *ngFor="let Skill of userSkills; index as i"
+            class="facility-info"
+          >
+            <span>
+              <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+              <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+              <strong *ngIf="Skill?.number !== null">
+                {{ Skill?.number }}
+              </strong>
+              <strong *ngIf="Skill?.number === null"> - </strong>
+            </span>
+
+            <strong *ngIf="i === userSkills.length"> - </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.Summary" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-12 my-4">
+          <span>
+            <img src="/assets/imgs/poilts.svg" alt="" srcset="" />
+            <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+            <strong *ngIf="userData?.summary !== null">
+              {{ userData?.summary }}
+            </strong>
+            <strong *ngIf="userData?.summary === null"> - </strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.IntroductoryVideo" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <span>
+            <img
+              class="img-video"
+              src="/assets/imgs/user.svg"
+              alt=""
+              srcset=""
+            />
+            <strong *ngIf="userData?.vedioAttachementFileStorageURL !== null">
+              <a
+                target="_blank"
+                [href]="userData?.vedioAttachementFileStorageURL"
+                download
+                >{{ "viewProfileuser.theVideoLink" | translate }}
+              </a>
+            </strong>
+            <strong *ngIf="userData?.vedioAttachementFileStorageURL === null">
+              -
+            </strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">
+      <h3>
+        {{ "viewProfileuser.CV" | translate }}
+      </h3>
+    </div>
+    <div class="card-body py-3">
+      <div class="row justify-content-between">
+        <div class="col-lg-6 my-4">
+          <span>
+            <img
+              class="img-video"
+              src="/assets/imgs/user.svg"
+              alt=""
+              srcset=""
+            />
+            <!-- {{ "viewProfileuser.LinkedinLink" | translate }} -->
+            <strong *ngIf="userData?.cvAttachementFileStorageURL !== null">
+              <a
+                target="_blank"
+                [href]="userData?.cvAttachementFileStorageURL"
+                download
+                >{{ "viewProfileuser.AccessTheCVHere" | translate }}
+              </a>
+            </strong>
+            <strong *ngIf="userData?.cvAttachementFileStorageURL === null">
+              -
+            </strong>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

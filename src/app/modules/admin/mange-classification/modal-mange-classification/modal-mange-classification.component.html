@@ -1,0 +1,206 @@
+<div class="modal-header">
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="title text-center">
+  <h2 *ngIf="id === undefined">
+    {{ "manageClassification.addCategory" | translate }}
+  </h2>
+  <h2 *ngIf="id !== undefined">
+    {{ "manageClassification.editCategory" | translate }}
+  </h2>
+</div>
+<div class="modal-body">
+  <form
+    (ngSubmit)="handelForm(classificationModalForm)"
+    [formGroup]="classificationModalForm"
+  >
+    <div class="row">
+      <div class="col-lg-6 mb-5">
+        <label for="nameAr" class="form-label">
+          {{ "manageClassification.nameAr" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <input
+          formControlName="nameAr"
+          id="nameAr"
+          type="email"
+          class="form-control"
+          [placeholder]="'manageClassification.name' | translate"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: classificationModalForm.controls['nameAr']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inArabic' | translate,
+            control: classificationModalForm.controls['nameAr']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-lg-6 mb-5">
+        <label for="nameEn" class="form-label"
+          >{{ "manageClassification.nameEn" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <input
+          formControlName="nameEn"
+          id="nameEn"
+          type="email"
+          class="form-control"
+          [placeholder]="'manageClassification.name' | translate"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: classificationModalForm.controls['nameEn']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inEnglish' | translate,
+            control: classificationModalForm.controls['nameEn']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-lg-12 mb-5 new-uoload">
+        <app-upload-file
+          [acceptedExtensions]="['png', 'gif', 'jpg', 'jpeg']"
+          [id]="'img'"
+          [fileName]="commercialStorageFileName"
+          [label]="'manageClassification.fileImge' | translate"
+          (bindValue)="uploadImg($event)"
+        >
+        </app-upload-file
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control:
+              classificationModalForm.controls['attachementFileStorageName']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-lg-12 mb-5">
+        <label for="descriptionAr" class="form-label"
+          >{{ "manageClassification.detailsAr" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <textarea
+          formControlName="descriptionAr"
+          id="descriptionAr"
+          class="form-control"
+          rows="3"
+          [placeholder]="'manageClassification.details' | translate"
+        ></textarea>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: classificationModalForm.controls['descriptionAr']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inArabic' | translate,
+            control: classificationModalForm.controls['descriptionAr']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-lg-12 mb-5">
+        <label for="descriptionEn" class="form-label">
+          {{ "manageClassification.detailsEn" | translate }} </label
+        ><span class="text-danger mx-2 fs-2">*</span>
+        <textarea
+          formControlName="descriptionEn"
+          id="descriptionEn"
+          class="form-control"
+          rows="3"
+          [placeholder]="'manageClassification.details' | translate"
+        ></textarea>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Validation.ThisFieldIsRequired' | translate,
+            control: classificationModalForm.controls['descriptionEn']
+          }"
+        ></ng-container>
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'pattern',
+            message: 'manageClassification.inEnglish' | translate,
+            control: classificationModalForm.controls['descriptionEn']
+          }"
+        ></ng-container>
+      </div>
+
+      <!-- <div class="col-lg-6">
+        <label for="attachementName" class="form-label">صورة الملف</label>
+        <input
+          FormControlName="attachementName"
+          id="attachementName"
+          type="email"
+          class="form-control"
+          placeholder="صيغة الملف المسموح بها"
+        />
+      </div>  -->
+
+      <!-- <div class="col-lg-6">
+        <label for="attachementFileStorageName" class="form-label">صورة الملف</label>
+        <input
+          FormControlName="attachementFileStorageName"
+          id="attachementFileStorageName"
+          type="email"
+          class="form-control"
+          placeholder="صيغة الملف المسموح بها"
+        />
+      </div>  -->
+    </div>
+  </form>
+</div>
+
+<div class="page-action">
+  <button type="submit" class="" (click)="saveClassificationForm()">
+    {{ "manageClassification.Save" | translate }}
+  </button>
+  <button type="button" class="" (click)="activeModal.close('Close click')">
+    {{ "manageClassification.Cancel" | translate }}
+  </button>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          <span role="alert">
+            {{ message }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

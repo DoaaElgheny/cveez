@@ -1,0 +1,666 @@
+<div class="page-content">
+  <div class="form h-100">
+    <div class="form-container create-form">
+      <div class="form-container">
+        <input id="step2" type="checkbox" />
+        <input id="step3" type="checkbox" />
+        <div id="part1" class="form-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="panel-heading">
+                <div class="container">
+                  <h4>{{ "Shared.Step1Of2" | translate }}</h4>
+                  <div class="steps-sec">
+                    <div class="active"></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form
+              [formGroup]="completeStep1Form"
+              role="form"
+              #f="ngForm"
+              novalidate="novalidate"
+            >
+              <div class="form-content">
+                <div class="container">
+                  <div class="form-title">
+                    <h2>
+                      {{ "jobSeeker.PersonalInformation" | translate }}
+                    </h2>
+                    <p>
+                      {{ "jobSeeker.SubTitle" | translate }}
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">{{
+                          "SharedFields.FullName" | translate
+                        }}</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          [placeholder]="'SharedFields.FullName' | translate"
+                          formControlName="fullName"
+                          aria-label=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="form-group">
+                        <label for="">{{
+                          "SharedFields.Gender" | translate
+                        }}</label>
+                        <select
+                          id="inputState"
+                          class="form-select"
+                          formControlName="gender"
+                        >
+                          <option [value]="genderList.Male">
+                            {{ "Shared.Gender." + genderList.Male | translate }}
+                          </option>
+                          <option [value]="genderList.Female">
+                            {{
+                              "Shared.Gender." + genderList.Female | translate
+                            }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "SharedFields.Nationality" | translate }}
+                        </label>
+                        <select
+                          id="inputState2"
+                          class="form-select"
+                          formControlName="nationalityId"
+                        >
+                          <option
+                            *ngFor="let nationality of nationalitiesList"
+                            [value]="nationality.id"
+                          >
+                            {{
+                              lang === "ar"
+                                ? nationality.nameAr
+                                : nationality.nameEn
+                            }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "SharedFields.Country" | translate }}</label
+                        >
+                        <select
+                          id="inputState3"
+                          class="form-select"
+                          formControlName="countryId"
+                        >
+                          <option
+                            *ngFor="let country of countriesList"
+                            [value]="country.id"
+                          >
+                            {{
+                              lang === "ar" ? country.nameAr : country.nameEn
+                            }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">{{
+                          "SharedFields.Email" | translate
+                        }}</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          [placeholder]="
+                            'Validation.EmailPlaceholder' | translate
+                          "
+                          formControlName="email"
+                          aria-label=""
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "SharedFields.MobileNumber" | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          [placeholder]="
+                            'SharedFields.MobileNumber' | translate
+                          "
+                          formControlName="mobileNumber"
+                          readonly
+                          aria-label=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-action one">
+                <div class="container">
+                  <div
+                    class="btn-group btn-group-lg m-0"
+                    role="group"
+                    aria-label="..."
+                  >
+                    <label
+                      *ngIf="completeStep1Form.invalid"
+                      class="continue"
+                      (click)="valid()"
+                    >
+                      <div class="btn btn-default btn-success btn-lg">
+                        {{ "Buttons.Next" | translate }}
+                      </div>
+                    </label>
+                    <label
+                      *ngIf="completeStep1Form.valid"
+                      for="step2"
+                      id="continue-step2"
+                      class="continue"
+                      (click)="valid()"
+                    >
+                      <div class="btn btn-default btn-success btn-lg">
+                        {{ "Buttons.Next" | translate }}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="part2" class="form-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="container">
+                <h4>{{ "Shared.Step2Of2" | translate }}</h4>
+                <div class="steps-sec">
+                  <div class="active"></div>
+                  <div class="active"></div>
+                </div>
+              </div>
+            </div>
+            <form
+              [formGroup]="completeStep2Form"
+              role="form"
+              #f="ngForm"
+              novalidate="novalidate"
+            >
+              <div class="form-content">
+                <div class="container">
+                  <div class="form-title">
+                    <h2>
+                      {{ "jobSeeker.BackgroundInformation" | translate }}
+                    </h2>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">{{
+                          "SharedFields.BirthDate" | translate
+                        }}</label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <input
+                          type="date"
+                          class="form-control date"
+                          ngbDatepicker
+                          #d="ngbDatepicker"
+                          [placeholder]="'SharedFields.BirthDate' | translate"
+                          formControlName="birthDate"
+                          aria-label=""
+                          (input)="checkDate($event)"
+                        />
+                      </div>
+                      <ng-container
+                        [ngTemplateOutlet]="formError"
+                        [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Validation.ThisFieldIsRequired' | translate,
+                          control: completeStep2Form.controls['birthDate']
+                        }"
+                      ></ng-container>
+                      <ng-container
+                        [ngTemplateOutlet]="formError"
+                        [ngTemplateOutletContext]="{
+                          validation: 'inFuture',
+                          message:
+                            'jobSeeker.DateCannotBeInTheFuture' | translate,
+                          control: completeStep2Form.controls['birthDate']
+                        }"
+                      ></ng-container>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">{{
+                          "SharedFields.PersonalImage" | translate
+                        }}</label>
+                        <app-upload-file
+                          [acceptedExtensions]="['png', 'jpg', 'jpeg']"
+                          [id]="'attachementFileStorageName'"
+                          [label]="'SharedFields.PersonalImage'"
+                          (bindValue)="uploadPersonalImg($event)"
+                        >
+                        </app-upload-file>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              completeStep2Form.controls[
+                                'attachementFileStorageName'
+                              ]
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.UserLinkedInLink" | translate }}
+                        </label>
+                        <input
+                          type="url"
+                          class="form-control"
+                          [placeholder]="
+                            'viewProfileuser.UserLinkedInLink' | translate
+                          "
+                          formControlName="linkedIn"
+                          aria-label=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.CV" | translate }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <app-upload-file
+                          [acceptedExtensions]="[
+                            'doc',
+                            'docx',
+                            'vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/msword',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'msword',
+                            'png',
+                            'jpg',
+                            'jpeg',
+                            'pdf'
+                          ]"
+                          [id]="'cvAttachementFileStorageName'"
+                          [label]="'viewProfileuser.CV'"
+                          (bindValue)="uploadCVAttachement($event)"
+                          (click)="checkValue($event)"
+                        >
+                        </app-upload-file>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              completeStep2Form.controls[
+                                'cvAttachementFileStorageName'
+                              ]
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.IntroductoryVideo" | translate }}
+                        </label>
+                        <app-upload-file
+                          [acceptedExtensions]="['mp4']"
+                          [id]="'vedioAttachementFileStorageName'"
+                          [label]="'viewProfileuser.IntroductoryVideo'"
+                          (bindValue)="uploadVedioAttachement($event)"
+                        >
+                        </app-upload-file>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.VideoLink" | translate }}
+                        </label>
+                        <input
+                          type="url"
+                          class="form-control"
+                          [placeholder]="
+                            'viewProfileuser.VideoLink' | translate
+                          "
+                          formControlName="linkVedio"
+                          aria-label=""
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.Jobtitle" | translate }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <ng-multiselect-dropdown
+                          [placeholder]="
+                            'SharedFields.SelectOption' | translate
+                          "
+                          [settings]="dropdownSettings"
+                          [data]="jobTitlesList"
+                          formControlName="titlesView"
+                          #titles
+                          (onSelect)="onItemSelect($event, 'titles', titles)"
+                          (onSelectAll)="onSelectAll($event, 'titles', titles)"
+                        >
+                        </ng-multiselect-dropdown>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: completeStep2Form.controls['titles']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{
+                            "viewProfileuser.Specialization" | translate
+                          }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <ng-multiselect-dropdown
+                          [placeholder]="
+                            'SharedFields.SelectOption' | translate
+                          "
+                          [settings]="dropdownSettings"
+                          formControlName="specializationsView"
+                          [data]="specializationsList"
+                          #specializations
+                          (onSelect)="
+                            onItemSelect(
+                              $event,
+                              'specializations',
+                              specializations
+                            )
+                          "
+                          (onSelectAll)="
+                            onSelectAll(
+                              $event,
+                              'specializations',
+                              specializations
+                            )
+                          "
+                        >
+                        </ng-multiselect-dropdown>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              completeStep2Form.controls['specializations']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{
+                            "viewProfileuser.CareerLevel" | translate
+                          }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <select
+                          id="inputState6"
+                          class="form-select"
+                          formControlName="jobLevelId"
+                        >
+                          <option disabled [value]="null">
+                            {{ "SharedFields.SelectOption" | translate }}
+                          </option>
+                          <option
+                            *ngFor="let jobLevel of jobLevels"
+                            [value]="jobLevel.id"
+                          >
+                            {{
+                              lang === "ar" ? jobLevel.nameAr : jobLevel.nameEn
+                            }}
+                          </option>
+                        </select>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: completeStep2Form.controls['jobLevelId']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{
+                            "viewProfileuser.YearsOfExperience" | translate
+                          }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <select
+                          id="inputState7"
+                          class="form-select"
+                          formControlName="yearsExperienceId"
+                        >
+                          <option disabled [value]="null">
+                            {{ "SharedFields.SelectOption" | translate }}
+                          </option>
+                          <option
+                            *ngFor="let year of yearsExperiencesList"
+                            [value]="year.id"
+                          >
+                            {{ lang === "ar" ? year.nameAr : year.nameEn }}
+                          </option>
+                        </select>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              completeStep2Form.controls['yearsExperienceId']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{
+                            "viewProfileuser.qualification" | translate
+                          }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <ng-multiselect-dropdown
+                          [placeholder]="
+                            'SharedFields.SelectOption' | translate
+                          "
+                          [settings]="dropdownSettings"
+                          formControlName="qualificationsView"
+                          [data]="qualificationsList"
+                          #qualifications
+                          (onSelect)="
+                            onItemSelect(
+                              $event,
+                              'qualifications',
+                              qualifications
+                            )
+                          "
+                          (onSelectAll)="
+                            onSelectAll(
+                              $event,
+                              'qualifications',
+                              qualifications
+                            )
+                          "
+                        >
+                        </ng-multiselect-dropdown>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                              completeStep2Form.controls['qualifications']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{ "viewProfileuser.skills" | translate }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <ng-multiselect-dropdown
+                          [placeholder]="
+                            'SharedFields.SelectOption' | translate
+                          "
+                          [settings]="dropdownSkillsSettings"
+                          [data]="skillsList"
+                          formControlName="skillsView"
+                          #skills
+                          (onSelect)="onItemSelect($event, 'skills', skills)"
+                          (onSelectAll)="onSelectAll($event, 'skills', skills)"
+                        >
+                        </ng-multiselect-dropdown>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: completeStep2Form.controls['skills']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                      <div class="form-group">
+                        <label for="">
+                          {{
+                            "viewProfileuser.SeekerSummary" | translate
+                          }} </label
+                        ><span class="text-danger mx-2 fs-2">*</span>
+                        <textarea
+                          class="form-control"
+                          id=""
+                          rows="3"
+                          [placeholder]="'viewProfileuser.Summary' | translate"
+                          formControlName="summary"
+                        ></textarea>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: completeStep2Form.controls['summary']
+                          }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            formControlName="isWantFeelChances"
+                            value=""
+                            id="flexCheckChecked"
+                          />
+                          <label
+                            class="form-check-label sd ff"
+                            for="flexCheckChecked"
+                          >
+                            {{
+                              "jobSeeker.DoYouWantToBeNotifiedWithEveryNewSuitableOpportunity"
+                                | translate
+                            }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="form-action two">
+              <div class="container">
+                <div
+                  class="btn-group btn-group-lg m-0"
+                  role="group"
+                  aria-label="..."
+                >
+                  <label class="continue my-2" (click)="submit()">
+                    <div class="" role="button">
+                      {{ "Buttons.Save" | translate }}
+                    </div>
+                  </label>
+                  <label for="step2" id="back-step2" class="back my-2">
+                    <div
+                      class="btn btn-default btn-primary btn-lg"
+                      role="button"
+                    >
+                      {{ "Buttons.Back" | translate }}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

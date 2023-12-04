@@ -1,0 +1,323 @@
+<div class="page-title">
+  <div class="">
+    <h3>
+      {{ "ManageOpportunityAgent.searchOpportunity" | translate }}
+    </h3>
+  </div>
+</div>
+<div class="card-header search-top border-0 py-10">
+  <div class="row justify-content-between">
+    <div class="col-lg-4 mb-3">
+      <div class="input-img">
+        <img src="/assets/imgs/search.svg" alt="" srcset="" />
+        <button
+          *ngIf="searchText !== ''"
+          (click)="searchText = ''; getAllOpportunityData()"
+        >
+          x
+        </button>
+        <input
+          style="width: 100%"
+          class="form-control"
+          type="text"
+          (keyup)="page = 1; fromSearchInput = true; getAllOpportunityData()"
+          [placeholder]="'ManageOpportunityAgent.startSearch' | translate"
+          [(ngModel)]="searchText"
+        />
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="acceptanceState"
+        (change)="
+          page = 1; fromSearchInput = false; state = ''; getAllOpportunityData()
+        "
+      >
+        <option selected disabled value="">
+          {{ "ManageOpportunityAgent.OpportunityAcceptanceState" | translate }}
+        </option>
+        <option [value]="opportunityAcceptanceState.All">
+          {{ "ManageOpportunityAgent.All" | translate }}
+        </option>
+        <option [value]="opportunityAcceptanceState.UnderStudying">
+          {{ "ManageOpportunityAgent.UnderStudying" | translate }}
+        </option>
+        <option [value]="opportunityAcceptanceState.Accepted">
+          {{ "ManageOpportunityAgent.Accepted" | translate }}
+        </option>
+        <option [value]="opportunityAcceptanceState.Rejected">
+          {{ "ManageOpportunityAgent.Rejected" | translate }}
+        </option>
+        <option [value]="opportunityAcceptanceState.Closed">
+          {{ "ManageOpportunity.Expired" | translate }}
+        </option>
+      </select>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <select
+        *ngIf="
+          acceptanceState === opportunityAcceptanceState.Accepted.toString()
+        "
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="state"
+        (change)="page = 1; getAllOpportunityData()"
+      >
+        <option selected disabled value="">
+          {{ "ManageOpportunityAgent.OpportunityState" | translate }}
+        </option>
+        <option [value]="opportunityState.All">
+          {{ "ManageOpportunityAgent.All" | translate }}
+        </option>
+        <option [value]="opportunityState.Available">
+          {{ "ManageOpportunityAgent.Available" | translate }}
+        </option>
+        <option [value]="opportunityState.NotAvailable">
+          {{ "ManageOpportunityAgent.NotAvailable" | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 col-md-2 mb-3">
+      <div class="action">
+        <button (click)="addRoute()">
+          {{ "ManageOpportunityAgent.addOpportunity" | translate }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-plus-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <p
+    class="mt-3"
+    class="showNumberOfjobRemaining"
+    [ngStyle]="{ color: 'green' }"
+  >
+    <!-- {{ "myOrderJobSeeker.TheNumberOfjobRemaining" | translate }}
+    ({{ numberofUpdatedValue
+    }}<span> <span>/</span> {{ numberOfOriginalValue }}</span>
+    ) -->
+  </p>
+  <!-- <p
+    class="mt-3"
+    [ngStyle]="{ color: 'green' }"
+    *ngIf="condtionsToCurrentUser?.paymentType === payment.Paied"
+  >
+    {{ "myOrderJobSeeker.TheNumberOfjobRemaining" | translate }}
+    ({{ numberofUpdatedValue
+    }}<span> <span>/</span> {{ numberOfOriginalValue }}</span>
+    )
+  </p> -->
+
+  <p *ngIf="condtionsToCurrentUser?.paymentType === payment.Expired">
+    <span class="expired" (click)="openRenewalPackage()"
+      >{{ "myOrderJobSeeker.timeOut" | translate }}
+    </span>
+  </p>
+</div>
+<div class="page-content">
+  <div class="row">
+    <div *ngIf="allOpportunity.length === 0">
+      <img
+        style="
+          text-align: center;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 250px;
+        "
+        src="assets/imgs/icons/no-results.png"
+      />
+
+      <h1 style="text-align: center; padding-top: 15px">
+        {{ "jobSeeker.ResultNotFound" | translate }}
+      </h1>
+    </div>
+    <div class="col-lg-4 col-md-4 my-3" *ngFor="let item of allOpportunity">
+      <div class="package-card">
+        <div class="title">
+          <div class="d-flex align-items-center">
+            <h6>
+              <span
+                *ngIf="item.acceptanceState === 3"
+                class="badge badge-light-success fs-7 fw-bold"
+              >
+                {{ "ManageOpportunityAgent.Accepted" | translate }}
+              </span>
+              <span
+                *ngIf="item.acceptanceState === 2"
+                class="badge badge-light-primary fs-7 fw-bold"
+              >
+                {{ "ManageOpportunityAgent.UnderStudying" | translate }}
+              </span>
+              <span
+                *ngIf="item.acceptanceState === 4"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "ManageOpportunityAgent.Rejected" | translate }}
+              </span>
+              <span
+                *ngIf="item.acceptanceState === 5"
+                class="badge badge-light-danger fs-7 fw-bold"
+              >
+                {{ "ManageOpportunity.Expired" | translate }}
+              </span>
+            </h6>
+            <h4 class="w-100">{{ item.jobTitle }}</h4>
+          </div>
+          <div class="action">
+            <div ngbDropdown class="btn-group">
+              <div class="action-btn" id="dropdownBasic1" ngbDropdownToggle>
+                <button>
+                  <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+                </button>
+              </div>
+
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <ul class="option p-0 list-unstyled m-0 px-2">
+                  <li role="menuitem">
+                    <button class="dropdown-item" (click)="editPage(item)">
+                      <img src="/assets/imgs/is2.png" alt="" srcset="" />
+                      <span class="mx-2">{{
+                        "managePackage.edit" | translate
+                      }}</span>
+                    </button>
+                  </li>
+                  <li
+                    role="menuitem"
+                    *ngIf="
+                      item.acceptanceState !== 2 && item.acceptanceState !== 4
+                    "
+                  >
+                    <button class="dropdown-item" (click)="showOrder(item)">
+                      <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                      <span class="mx-2"
+                        >{{ "ManageOpportunityAgent.viewOrder" | translate }}
+                      </span>
+                    </button>
+                  </li>
+                  <li role="menuitem">
+                    <button class="dropdown-item" (click)="openViewModal(item)">
+                      <img src="/assets/imgs/is1.png" alt="" srcset="" />
+                      <span class="mx-2"
+                        >{{ "ManageOpportunityAgent.view" | translate }}
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <p>
+            <img src="/assets/imgs/icons/icons1.svg" alt="" srcset="" />
+            <span class="mx-2">
+              {{ "ManageOpportunityAgent.jobTitle" | translate }} :
+              {{ item.jobTitle }}
+            </span>
+          </p>
+          <p>
+            <img src="/assets/imgs/icons/icons2.svg" alt="" srcset="" />
+            <span class="mx-2">
+              {{ "ManageOpportunityAgent.jobType" | translate }} :
+              {{ item.jobType }}
+            </span>
+          </p>
+          <p>
+            <img src="/assets/imgs/icons/icons2.svg" alt="" srcset="" />
+            <span class="mx-2">
+              {{ "ManageOpportunityAgent.jobLevel" | translate }} :
+              {{ item.jobLevel }}
+            </span>
+          </p>
+          <p>
+            <img src="/assets/imgs/icons/icons3.svg" alt="" srcset="" />
+            <span class="mx-2">
+              {{ "ManageOpportunityAgent.salaryType" | translate }} :
+              {{ item.salaryRange !== null ? item.salaryRange : "---" }} $
+            </span>
+          </p>
+          <p>
+            <img src="/assets/imgs/icons/icons4.svg" alt="" srcset="" />
+            <span class="mx-2">
+              {{ "ManageOpportunityAgent.time" | translate }} :
+              {{ item.jobHour !== null ? item.jobHour : "---" }} h
+            </span>
+          </p>
+        </div>
+        <div class="footer">
+          <div class="action">
+            <div
+              class="form-check form-switch d-flex mx-2"
+              *ngIf="
+                item.acceptanceState !== 2 &&
+                item.acceptanceState !== 4 &&
+                item.acceptanceState !== opportunityAcceptanceState.Closed
+              "
+            >
+              <input
+                (change)="changeStateToggle(item)"
+                class="form-check-input"
+                type="checkbox"
+                [id]="item.id"
+                [checked]="item.state === opportunityState.Available"
+              />
+              <label
+                class="switch form-check-label"
+                [for]="item.id"
+                style="margin-left: 3px"
+              >
+                {{ "ManageOpportunityAgent.Availabletoapply" | translate }}
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <!--
+            <div class="form-check form-switch d-flex mx-2">
+
+              <input
+                (change)="changeHideToggle(item)"
+                class="form-check-input"
+                type="checkbox"
+                [id]="item.id"
+                [checked]="item.isHide"
+              />
+              <label class="switch form-check-label" [for]="item.id">
+                {{ "ManageOpportunityAgent.hideState" | translate }}
+                <span class="slider round"></span>
+              </label>
+            </div> -->
+            <!-- <button>
+                <img src="/assets/imgs/Button.svg" alt="" srcset="" />
+              </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <ngb-pagination
+    [collectionSize]="totalCount"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="getAllOpportunityData()"
+    class="pagination p-0 my-4 d-flex justify-content-center"
+  >
+  </ngb-pagination>
+</div>
+
+<!--
+  <div class="table-responsive" *ngIf="allMembers.length !== 0"> -->

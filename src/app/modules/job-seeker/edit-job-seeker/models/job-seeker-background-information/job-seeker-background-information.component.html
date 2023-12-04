@@ -1,0 +1,467 @@
+<div class="page-content">
+  <div class="close">
+    <button (click)="closeFunction()">
+      <img src="/assets/imgs/error.png" alt="" srcset="" />
+    </button>
+  </div>
+  <div class="form h-100">
+    <div class="form-container create-form">
+      <div class="form-container">
+        <div class="panel panel-primary">
+          <div class="form-content">
+            <div class="container">
+              <div class="form-content" *ngIf="successLoad">
+                <form [formGroup]="seekerForm" role="form" #f="ngForm" novalidate="novalidate">
+                  <div class="form-content">
+                    <div class="container">
+                      <div class="form-title">
+                        <h2>
+                          {{ "jobSeeker.BackgroundInformation" | translate }}
+                        </h2>
+                      </div>
+                      <div class="row">
+                        <!-- <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">{{
+                              "SharedFields.FullName" | translate
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              [placeholder]="
+                                'SharedFields.FullName' | translate
+                              "
+                              formControlName="fullName"
+                              aria-label=""
+                            />
+                            <ng-container
+                              [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{
+                                validation: 'required',
+                                message:
+                                  'Validation.ThisFieldIsRequired' | translate,
+                                control: seekerForm.controls['fullName']
+                              }"
+                            ></ng-container>
+                            <ng-container
+                              [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{
+                                validation: 'minlength',
+                                message: 'Validation.NameMinLength' | translate,
+                                control: seekerForm.controls['fullName']
+                              }"
+                            ></ng-container>
+                            <ng-container
+                              [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{
+                                validation: 'maxlength',
+                                message: 'Validation.NameMaxLength' | translate,
+                                control: seekerForm.controls['fullName']
+                              }"
+                            ></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">{{
+                              "SharedFields.BirthDate" | translate
+                            }}</label>
+                            <input
+                              type="date"
+                              class="form-control date"
+                              ngbDatepicker
+                              #d="ngbDatepicker"
+                              [placeholder]="
+                                'SharedFields.BirthDate' | translate
+                              "
+                              formControlName="birthDate"
+                              aria-label=""
+                              (input)="checkDate($event)"
+                            />
+                          </div>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control: seekerForm.controls['birthDate']
+                            }"
+                          ></ng-container>
+                          <ng-container
+                            [ngTemplateOutlet]="formError"
+                            [ngTemplateOutletContext]="{
+                              validation: 'inFuture',
+                              message:
+                                'jobSeeker.DateCannotBeInTheFuture' | translate,
+                              control: seekerForm.controls['birthDate']
+                            }"
+                          ></ng-container>
+                        </div> -->
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.Jobtitle" | translate }}
+                            </label>
+                            <ng-multiselect-dropdown [placeholder]="
+                                'SharedFields.SelectOption' | translate
+                              " [settings]="dropdownSettings" [data]="jobTitlesList" formControlName="titles" #titles
+                              (onSelect)="
+                                onItemSelect($event, 'titles', titles)
+                              " (onSelectAll)="
+                                onSelectAll($event, 'titles', titles)
+                              ">
+                            </ng-multiselect-dropdown>
+                                <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: seekerForm.controls['titles']
+                          }"
+                        ></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.Specialization" | translate }}
+                            </label>
+                            <ng-multiselect-dropdown [placeholder]="
+                                'SharedFields.SelectOption' | translate
+                              " [settings]="dropdownSettings" [data]="specializationsList"
+                              formControlName="specializations" #specializations (onSelect)="
+                                onItemSelect(
+                                  $event,
+                                  'specializations',
+                                  specializations
+                                )
+                              " (onSelectAll)="
+                                onSelectAll(
+                                  $event,
+                                  'specializations',
+                                  specializations
+                                )
+                              ">
+                            </ng-multiselect-dropdown>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control:
+                            seekerForm.controls['specializations']
+                          }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.CareerLevel" | translate }}
+                            </label>
+                            <select id="inputState6" class="form-select" formControlName="jobLevelId">
+                              <option *ngFor="let jobLevel of jobLevels" [value]="jobLevel.id">
+                                {{
+                                lang === "ar"
+                                ? jobLevel.nameAr
+                                : jobLevel.nameEn
+                                }}
+                              </option>
+                            </select>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                validation: 'required',
+                                message:
+                                  'Validation.ThisFieldIsRequired' | translate,
+                                control: seekerForm.controls['jobLevelId']
+                              }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{
+                              "viewProfileuser.YearsOfExperience" | translate
+                              }}
+                            </label>
+                            <select id="inputState7" class="form-select" formControlName="yearsExperienceId">
+                              <option *ngFor="let year of yearsExperiencesList" [value]="year.id">
+                                {{ lang === "ar" ? year.nameAr : year.nameEn }}
+                              </option>
+                            </select>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                validation: 'required',
+                                message:
+                                  'Validation.ThisFieldIsRequired' | translate,
+                                control:
+                                  seekerForm.controls['yearsExperienceId']
+                              }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.qualification" | translate }}
+                            </label>
+                            <ng-multiselect-dropdown [placeholder]="
+                                'SharedFields.SelectOption' | translate
+                              " [settings]="dropdownSettings" [data]="qualificationsList" #qualifications
+                              formControlName="qualifications" (onSelect)="
+                                onItemSelect(
+                                  $event,
+                                  'qualifications',
+                                  qualifications
+                                )
+                              " (onSelectAll)="
+                                onSelectAll(
+                                  $event,
+                                  'qualifications',
+                                  qualifications
+                                )
+                              ">
+                            </ng-multiselect-dropdown>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                              validation: 'required',
+                              message:
+                                'Validation.ThisFieldIsRequired' | translate,
+                              control:
+                              seekerForm.controls['qualifications']
+                            }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{
+                              "viewProfileuser.UserLinkedInLink" | translate
+                              }}
+                            </label>
+                            <input type="url" class="form-control" [placeholder]="
+                                'viewProfileuser.UserLinkedInLink' | translate
+                              " formControlName="linkedIn" aria-label="" />
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{
+                              "viewProfileuser.IntroductoryVideo" | translate
+                              }}
+                            </label>
+
+
+                            <app-upload-file [acceptedExtensions]="['mp4']" [id]="'vedioAttachementFileStorageName'"
+                              [label]="'viewProfileuser.IntroductoryVideo'" [fileName]="vedioAttachementName"
+                              (bindValue)="uploadVedioAttachement($event)">
+                            </app-upload-file>
+
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                  validation: 'required',
+                                  message:
+                                    'Validation.ThisFieldIsRequired'
+                                    | translate,
+                                  control:
+                                    seekerForm.controls[
+                                      'vedioAttachementFileStorageName'
+                                    ]
+                                }"></ng-container>
+
+                            <!-- <div class="folder" *ngIf="vedioAttachementName">
+                              <div class="action">
+                                <button (click)="deleteVedio()">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-trash3"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                              <h5>
+                                <a
+                                  [href]="vedioAttachementFileStorageName"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {{ vedioAttachementName }}
+                                </a>
+                              </h5>
+                            </div> -->
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.CV" | translate }}
+                            </label>
+
+                            <app-upload-file [acceptedExtensions]="[
+                                'doc',
+                                'docx',
+                                'vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                'application/msword',
+                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                'msword',
+                                'png',
+                                'jpg',
+                                'jpeg',
+                                'pdf'
+                              ]" [id]="'cvAttachemen'" [label]="'viewProfileuser.CV'" [fileName]="cvAttachementName"
+                              (bindValue)="uploadCVAttachement($event)">
+                            </app-upload-file>
+
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                  validation: 'required',
+                                  message:
+                                    'Validation.ThisFieldIsRequired'
+                                    | translate,
+                                  control:
+                                    seekerForm.controls[
+                                      'cvAttachementFileStorageName'
+                                    ]
+                                }"></ng-container>
+
+                            <!-- <div class="folder" *ngIf="cvAttachementName">
+                              <div class="action">
+                                <button (click)="deleteCV()">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-trash3"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+
+                              <h5>
+                                <a
+                                  [href]="cvAttachementFileStorageName"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {{ cvAttachementName }}
+                                </a>
+                              </h5>
+                            </div> -->
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.VideoLink" | translate }}
+                            </label>
+                            <input type="url" class="form-control" [placeholder]="
+                                'viewProfileuser.VideoLink' | translate
+                              " formControlName="linkVedio" aria-label="" />
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.skills" | translate }}
+                            </label>
+                            <ng-multiselect-dropdown [placeholder]="
+                                'SharedFields.SelectOption' | translate
+                              " [settings]="dropdownSkillsSettings" [data]="skillsList" formControlName="skills"
+                              #skills (onSelect)="
+                                onItemSelect($event, 'skills', skills)
+                              " (onSelectAll)="
+                                onSelectAll($event, 'skills', skills)
+                              ">
+                            </ng-multiselect-dropdown>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message:
+                              'Validation.ThisFieldIsRequired' | translate,
+                            control: seekerForm.controls['skills']
+                          }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <div class="form-group">
+                            <label for="">
+                              {{ "viewProfileuser.SeekerSummary" | translate }}
+                            </label>
+                            <textarea class="form-control" id="" rows="3" [placeholder]="
+                                'viewProfileuser.Summary' | translate
+                              " formControlName="summary"></textarea>
+                            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                  validation: 'required',
+                                  message:
+                                    'Validation.ThisFieldIsRequired'
+                                    | translate,
+                                  control:
+                                    seekerForm.controls[
+                                      'summary'
+                                    ]
+                                }"></ng-container>
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <div class="form-group">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" formControlName="isWantFeelChances"
+                                value="" id="flexCheckChecked" />
+                              <label class="form-check-label ng" for="flexCheckChecked">
+                                {{
+                                "jobSeeker.DoYouWantToBeNotifiedWithEveryNewSuitableOpportunity"
+                                | translate
+                                }}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="form-action two" *ngIf="successLoad">
+            <div class="container">
+              <div class="btn-group btn-group-lg m-0" role="group" aria-label="...">
+                <button class="continue my-2" (click)="submit()">
+                  <div class="btn btn-default btn-success btn-lg" role="button">
+                    {{ "Buttons.Save" | translate }}
+                  </div>
+                </button>
+
+                <label for="step2" id="back-step2" class="back my-2">
+                  <div (click)="closeFunction()" class="btn btn-default btn-primary btn-lg" role="button">
+                    {{ "Buttons.Cancel" | translate }}
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

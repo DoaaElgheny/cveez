@@ -1,0 +1,224 @@
+.view-job {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 6rem 0;
+  margin-top: 4rem;
+  .title {
+    color: #292929;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
+  .parag {
+    color: #bcbcbc;
+    font-size: 16px;
+    max-width: 900px;
+  }
+  .logo-img {
+    margin-top: -70px;
+    background: #d9d9d9;
+    padding: 5px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #baa8a8;
+    img {
+      width: 75%;
+      object-fit: cover;
+    }
+  }
+  .job-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    h3 {
+      color: #292929;
+      font-size: 25px;
+    }
+    .actions {
+      button {
+        all: unset;
+        cursor: pointer;
+        &:last-child {
+          background: #ffffff;
+          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.17);
+          border-radius: 10px;
+          min-width: 135px;
+          height: 42px;
+          color: #0274b3;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .job-info {
+    margin: 15px 0;
+    .details {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    h6 {
+      img {
+        height: 20px;
+      }
+      font-size: 16px;
+      font-weight: 100;
+      color: #bcbcbc;
+      display: flex;
+      align-items: center;
+      strong {
+        color: #939393;
+        font-weight: 100;
+      }
+    }
+  }
+  .job-details {
+    h6 {
+      font-size: 16px;
+      font-weight: 100;
+      color: #bcbcbc;
+      display: flex;
+      align-items: center;
+      img {
+        height: 20px;
+        width: 20px;
+      }
+      strong {
+        color: #939393;
+        font-weight: 100;
+      }
+      button {
+        all: unset;
+        cursor: pointer;
+      }
+    }
+  }
+  .job-action {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid rgba(188, 188, 188, 0.46);
+    margin-top: 60px;
+    padding-top: 25px;
+    button {
+      all: unset;
+      cursor: pointer;
+      background: #0274b3;
+      border-radius: 10px;
+      min-width: 135px;
+      height: 42px;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+  .links {
+    ul {
+      li {
+        line-height: 30px;
+        a {
+          color: #0274b3;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+.job-list {
+  margin-top: 30px;
+  .job-card {
+    margin-bottom: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    .job-header {
+      display: flex;
+      align-items: center;
+      img {
+        width: 60px;
+        height: 60px;
+        background: #ededed;
+        border-radius: 50%;
+        padding: 5px;
+        object-fit: cover;
+        box-shadow: 0 0 5px #d7d7d7;
+      }
+      div {
+        margin: 0 8px;
+        h4 {
+          color: #0274b3;
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 3px;
+        }
+        p {
+          color: #292929;
+          font-weight: 600;
+          font-size: 15px;
+        }
+      }
+    }
+    .job-footer {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      time {
+        color: #bcbcbc;
+      }
+      .actions {
+        button {
+          all: unset;
+          cursor: pointer;
+          &:last-child {
+            background: #ffffff;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.17);
+            border-radius: 10px;
+            min-width: 115px;
+            height: 42px;
+            color: #0274b3;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+.link {
+  cursor: pointer;
+}
+.expired-mode {
+  top: 40px;
+  border-radius: 2px;
+  .expired-mode-content {
+    background-color: rgb(255, 255, 255);
+    h1 {
+      color: #292929;
+      margin: 20px 0;
+      margin-bottom: 10px;
+    }
+    h5 {
+      color: #494949;
+      font-weight: 100;
+      margin-bottom: 25px;
+    }
+    button {
+      background: #0274b3;
+      border-radius: 5px;
+      color: #fff;
+      border: none;
+      min-width: 200px;
+      height: 45px;
+      margin-bottom: 15px;
+    }
+  }
+}

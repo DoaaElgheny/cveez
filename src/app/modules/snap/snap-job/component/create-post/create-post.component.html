@@ -1,0 +1,60 @@
+<!--  -->
+<div class="modal-header">
+	<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="title">
+	<div class="post-topbar">
+		<div class="user-picy">
+			<img [src]="currentUser?.imageUrl?currentUser.imageUrl:'https://media.licdn.com/dms/image/D4D03AQFh04MZVayabg/profile-displayphoto-shrink_100_100/0/1699107838969?e=1706140800&v=beta&t=i-h1Q_AFx6unHK3FyXnsAC7xvsqjBdt12kicr1Nfdds'"
+				alt="">
+			<h3 class="mt-5">{{currentUser?.name}} <br><span>Post to Anyone</span></h3>
+
+		</div>
+
+		<div placeholder="What do you want to tvalk bout ?" class="content" contenteditable="true"
+			(blur)="onFocusOut($event)">
+
+			<ng-content></ng-content>
+		</div>
+		<!--post-st end-->
+	</div><!--post-topbar end-->
+
+</div>
+<div class="uploaded-images">
+	<div class="img-item" *ngFor="
+		let item of convertToFormArray(form.get('postAttachements'))
+		  .controls;
+		let i = index
+	  ">
+		<img class="uplado-img" [src]="item.value.attachementFileStorageURL" alt="" srcset="" />
+		<div class="action">
+			<button (click)="
+			convertToFormArray(form.get('postAttachements')).removeAt(
+			  i
+			)
+		  ">
+				<img src="assets/imgs/delete.svg" alt="" srcset="" />
+			</button>
+		</div>
+	</div>
+</div>
+<div class="modal-action mt-20">
+	<div class="post-topbar">
+
+		<button>
+
+			<app-upload-file [isSnapJob]="true" [acceptedExtensions]="['png', 'gif', 'jpg', 'jpeg']" [flag]="3"
+				[isMultiple]="true" (bindValue)="uploadImage($event)">
+			</app-upload-file>
+
+		</button>
+		<button><img src="assets/imgs/snapjob/video.svg">Video</button>
+
+
+
+		<!--post-st end-->
+	</div><!--post-topbar end-->
+
+	<button [disabled]="!content" (click)="submit()" class="btn btn-primary post-btn">Post</button>
+
+</div>
