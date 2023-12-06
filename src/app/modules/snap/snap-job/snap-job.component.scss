@@ -1,18 +1,21 @@
+.f-12 {
+	font-size: 12px;
+}
+
+.f-16 {
+	font-size: 16px;
+}
+
+.default-color {
+	color: #0274B3;
+}
+
 .main-snap {
 	margin-top: 40px;
 }
 
 /* =================== main-section ================= */
-.full-width {
-	float: left;
-	width: 100%;
-	background-color: #fff;
-	margin-bottom: 20px;
-	border-left: 1px solid #e5e5e5;
-	border-right: 1px solid #e5e5e5;
-	border-bottom: 1px solid #e5e5e5;
-	border-radius: 14px;
-}
+
 
 .username-dt {
 	float: left;
@@ -28,11 +31,36 @@
 }
 
 .usr-pic {
-	width: 68px;
-    height: 59px;
-    margin-left: 42%;
-    margin-right: 42%;
-    margin-bottom: -25px;
+	width: 94px;
+	height: 94px;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: -45px;
+	margin-inline: auto;
+}
+
+.user-specs .jobTitle {
+	color: rgba(0, 0, 0, 0.50);
+
+	font-size: 10px;
+}
+
+.user-specs .fill-btn {
+	font-weight: 700;
+	border-radius: 50px;
+	background: #0274B3;
+	color: #FFF;
+	font-size: 14px;
+	border: 1px solid #0274B3 !important;
+}
+
+.user-specs .border-btn {
+	border-radius: 50px;
+	border: 1px solid #E0E0E0 !important;
+	color: #000;
+	font-size: 14px;
+	font-weight: 700;
+
 }
 
 .usr-pic>img {
@@ -47,16 +75,14 @@
 }
 
 .user-profile {
-	float: left;
 	width: 100%;
+	border-radius: 18px;
+	overflow: hidden;
 }
 
 .user-specs {
-	margin-top: 68px;
-    width: 100%;
-    border-radius: 15px;
-    padding: 60px 3px 7px 215px
-
+	padding-top: 150px;
+	text-align: center;
 }
 
 .user-specs h3 {
@@ -72,14 +98,6 @@
 	font-size: 14px;
 }
 
-.view-profile {
-	display: flex;
-	border-top: 1px solid #ececec;
-
-	justify-content: space-between;
-
-	margin: 10px;
-}
 
 /* =================== main-ws-sec ================== */
 
@@ -133,13 +151,22 @@
 
 }
 
+.postImages {
+	row-gap: 5px;
+}
+
+.postImages img {
+	width: 100%;
+	object-fit: cover;
+}
+
 /* ================ posts-section ================== */
 
 .posts-section {
 	background: white;
-	padding: 10px;
+
 	margin-bottom: 20px;
-	border-radius: 10px;
+	border-radius: 6px;
 }
 
 .reviewtext {
@@ -184,17 +211,22 @@
 	-o-border-radius: 100px;
 	border-radius: 100px;
 	margin-top: 2px;
-	width: 50px;
-	height: 50px;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 }
 
 .ed-opts {
 	float: right;
 	position: relative;
-	top: 7px;
+	top: -27px;
 	color: #676767;
-	;
+
+
+	.ed-opts-open i {
+		font-size:33px;
+		color: #707070;
+	}
 
 	i {
 		font-size: 13px;
@@ -267,16 +299,58 @@ ul {
 	margin-top: 1px;
 	margin-right: 6px;
 }
-.comment-txt{
+
+.usy-name .input-group {
+	border-radius: 6px;
+	border: 1px solid #ECE8E3;
+}
+
+.usy-name .input-group input::placeholder {
+	color: #DEDEDE !important;
+	font-size: 14px !important;
+}
+
+.action-txt {
+	color: rgba(0, 0, 0, 0.60);
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.usy-name .input-group input {
+	height: 48px;
+	border: none;
+}
+
+.usy-name .input-group img {
+	border-radius: 0 !important;
+	width: 25px;
+}
+
+.usy-name .input-group button:before {
+	content: "";
+	width: 2px;
+	height: 35px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-block: auto;
+	left: 0;
+	background: #ECE8E3;
+}
+
+.comment-txt {
 	color: #707070;
 	font-size: 12px;
 }
+
 .epi2 i {
 	margin-right: 5px;
 }
-.action-txt{
+
+.action-txt {
 	margin: 0px -10px;
 }
+
 #rewivewdata .review-lt {
 	float: left;
 	margin-top: 5px;
@@ -369,34 +443,32 @@ ul {
 	color: #fff;
 }
 
+.timeImg {
+	width: 15px;
+}
+
+.userImg {
+	width: 50;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.post-JobTitle {
+	color: #707070;
+}
+
+.postImages img {
+	height: 150px;
+}
 
 /* ============== job_descp ============ */
 
-.job_descp {
-	float: left;
-	width: 100%;
-}
-
-.job_descp h3 {
-	color: #333;
-	font-size: 16px;
-	font-weight: 600;
-	margin-bottom: 15px;
-}
-
-
-.job_descp>p {
+.job_descp p {
 	color: #191919;
 	font-size: 15px;
 	line-height: 24px;
 	margin-bottom: 20px;
 }
-
-.job_descp>p a {
-	color: var(--color);
-	font-weight: 600;
-}
-
 
 /* ========== job-status-bar ========== */
 

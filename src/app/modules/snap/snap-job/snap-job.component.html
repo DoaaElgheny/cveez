@@ -6,33 +6,64 @@
 		<div class="container">
 			<div class="main-section-data">
 				<div class="row">
-					<div class="col-lg-3 col-md-4 pd-left-none no-pd">
-						<div class="main-left-sidebar no-margin">
-							<div class=" full-width">
-								<div class="user-profile">
-									<div class="username-dt">
-										<div class="usr-pic">
-											<img [src]="currentUser?.imageUrl?currentUser.imageUrl:'https://media.licdn.com/dms/image/D4D03AQFh04MZVayabg/profile-displayphoto-shrink_100_100/0/1699107838969?e=1706140800&v=beta&t=i-h1Q_AFx6unHK3FyXnsAC7xvsqjBdt12kicr1Nfdds'"
-												alt="">
-										</div>
-									</div><!--username-dt end-->
-									<div class="user-specs d-flex flex-column">
-										<h5>{{currentUser?.name}}</h5>
-										<span>UI/UX Designer</span>
+					<div class="col-lg-3 col-md-4 mb-4">
+						<div class="user-profile bg-white">
+							<div class="username-dt">
+								<div class="usr-pic">
+									<img [src]="currentUser?.imageUrl?currentUser.imageUrl:'https://media.licdn.com/dms/image/D4D03AQFh04MZVayabg/profile-displayphoto-shrink_100_100/0/1699107838969?e=1706140800&v=beta&t=i-h1Q_AFx6unHK3FyXnsAC7xvsqjBdt12kicr1Nfdds'"
+										alt="">
+								</div>
+							</div>
+							<!--username-dt end-->
+							<div class="user-specs mb-4">
+								<div>
+									<h5 class="f-16 mt-3">{{currentUser?.name}}</h5>
+									<span class="d-block jobTitle">UI/UX Designer</span>
+								</div>
+								<div class="px-5 mt-5 pb-4">
+									<button class="btn d-block fill-btn w-100">
+										<img src="assets/imgs/icons/Arrow.svg" class="me-2">
+										Sea your posts 20
+									</button>
+									<button class="btn d-block border-btn w-100 mt-3">
+										<img src="assets/imgs/icons/edit.svg" class="me-2">
+										Edit Your Profile
+									</button>
+								</div>
+							</div>
+							<div class="border-top mx-5 pt-4">
+								<div class="d-flex justify-content-between my-3">
+									<h5 class="f-12">Who viewed your profile</h5>
+									<h5 class="f-12 default-color">20</h5>
+								</div>
+								<div class="d-flex justify-content-between my-3">
+									<h5 class="f-12">Saved</h5>
+									<h5 class="f-12 default-color">20</h5>
+								</div>
+								<div class="d-flex justify-content-between my-3">
+									<h5 class="f-12">Appreciations</h5>
+									<h5 class="f-12 default-color">500</h5>
+								</div>
+								<div class="d-flex justify-content-between my-3">
+									<h5 class="f-12">Followers</h5>
+									<h5 class="f-12 default-color">350</h5>
+								</div>
 
-										<button class="mt-3">Sea your posts 20</button>
-										<button class="mt-3">Edit Your Profile</button>
-									</div>
-									<div class="view-profile">
-										<h5 class="mt-5">Who viewed your profile</h5>
-										<h5 class="mt-5">20</h5>
-									</div>
+								<div class="d-flex justify-content-between my-3">
+									<h5 class="f-12">Following</h5>
+									<h5 class="f-12 default-color">600</h5>
+								</div>
 
-								</div><!--user-profile end-->
-
-							</div><!--user-data end-->
-
-						</div><!--main-left-sidebar end-->
+							</div>
+							<div class="text-center py-5">
+								<p class="f-12 mb-0 fw-bold opacity-75">
+									You are now subscribed to the Premium $100
+								</p>
+								<a href="" class="fw-bold default-color f-12">
+									upgrade
+								</a>
+							</div>
+						</div>
 					</div>
 					<div class="col-lg-6 col-md-8 no-pd">
 						<div class="main-ws-sec">
@@ -54,21 +85,25 @@
 								<!--post-st end-->
 							</div><!--post-topbar end-->
 
-							<div class="d-flex flex-column posts-section " *ngFor="let row of data">
+							<div class="posts-section " *ngFor="let row of data">
 
-								<div class="post_topbar">
-									<div class="usy-dt">
-										<img
+								<div class="post_topbar px-5 pt-5">
+									<div class="d-flex">
+										<img class="userImg"
 											[src]="row.userProfile?.attachementFileStorageUrl?row.userProfile?.attachementFileStorageUrl:''">
-										<div class="usy-name">
+										<div class="ms-3">
 											<h3>{{row.userProfile.name}}</h3>
-											<div><span>{{row.userProfile.title}}</span></div>
-											<span><span class="fa fa-clock"></span> 3min ago</span>
+											<span class="d-block post-JobTitle">{{row.userProfile.title}}</span>
+											<span>
+												3min ago •
+												<img src="assets/imgs/global.svg" class="img-fluid timeImg">
+											</span>
 										</div>
 									</div>
 									<div class="ed-opts" *ngIf="row.isOwner">
 										<a class="ed-opts-open" role="button" (click)="row.openMenue=!row.openMenue">
-											<i class="la la-ellipsis-h"></i></a>
+											<i class="la la-ellipsis-h"></i>
+										</a>
 										<ul class="ed-options" *ngIf="row.openMenue">
 											<li><a (click)="openCreatePost(row.id)" role="button"><i
 														class="fa fa-edit"></i>Edit Post</a></li>
@@ -79,82 +114,92 @@
 									</div>
 								</div>
 
-								<div class="job_descp">
-									<p class="mt-5">{{row.content}}
-										<!-- <a href="#" class="mt-5" title="">See translation</a> -->
+								<div class="job_descp mb-3 p-5">
+									<p class="fw-bold mb-3">
+										{{row.content}}
+										<br>
+										<strong class="default-color fw-bold">
+											#Test
+										</strong>
 									</p>
+									<button class="btn default-color fw-bold p-0">
+										See translation
+									</button>
 								</div>
-
-
-								<div class="d-flex justify-content-between">
+								<!-- images -->
+								<div>
+									<div class="row postImages mx-0">
+										<div class="col-lg-6 px-1">
+											<img src="assets/imgs/postImg.png" class="img-fluid">
+										</div>
+										<div class="col-lg-6 px-1">
+											<img src="assets/imgs/postImg2.png" class="img-fluid">
+										</div>
+										<div class="col-lg-4 px-1">
+											<img src="assets/imgs/postImg.png" class="img-fluid">
+										</div>
+										<div class="col-lg-4 px-1">
+											<img src="assets/imgs/postImg2.png" class="img-fluid">
+										</div>
+										<div class="col-lg-4 px-1">
+											<img src="assets/imgs/postImg.png" class="img-fluid">
+										</div>
+									</div>
+								</div>
+								<div class="d-flex justify-content-between p-5 mt-4">
 									<div>
-										<span class="comment-txt"
-											*ngIf="row.numberOfReacts===0">{{row.numberOfComments}} Like</span>
-
+										<span class="comment-txt fw-bold" *ngIf="row.numberOfReacts===0">
+											{{row.numberOfComments}} Like
+										</span>
 									</div>
 									<div>
-										<span class="comment-txt"
-											*ngIf="row.numberOfComments===0">{{row.numberOfComments}}
-											comments</span><span class="comment-txt" *ngIf="row.numberOfReposts===0"> •
-											{{row.numberOfReposts}} reposts</span>
+										<span class="comment-txt fw-bold" *ngIf="row.numberOfComments===0">
+											{{row.numberOfComments}} comments
+										</span>
+										<span class="comment-txt fw-bold" *ngIf="row.numberOfReposts===0"> •
+											{{row.numberOfReposts}} reposts
+										</span>
 									</div>
-
-
-								</div>
-								<hr class="hr-post">
-
-								<div class="d-flex justify-content-between mt-5">
-
-									<div class="d-flex flex-column m-3" role="button">
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-											viewBox="0 0 24 24" fill="none">
-											<g opacity="0.6">
-												<path
-													d="M19.4604 11L15.5504 7.09002C14.7818 6.32038 14.2032 5.38224 13.8604 4.35002L13.3704 2.88002C13.1864 2.33317 12.8357 1.85772 12.3676 1.5205C11.8994 1.18329 11.3373 1.00126 10.7604 1.00002C10.3992 0.998703 10.0414 1.06853 9.70724 1.20552C9.37309 1.3425 9.06919 1.54397 8.8129 1.7984C8.55661 2.05283 8.35294 2.35525 8.21353 2.6884C8.07412 3.02154 8.00169 3.37888 8.00038 3.74002V4.86002C8.00261 5.82832 8.15786 6.79018 8.46038 7.71002L8.89038 9.00002H4.12038C3.55812 9.00002 3.01889 9.22337 2.62131 9.62095C2.22373 10.0185 2.00038 10.5578 2.00038 11.12C2.00176 11.4656 2.08603 11.8058 2.24611 12.112C2.4062 12.4183 2.63743 12.6816 2.92038 12.88C2.63717 13.0734 2.40537 13.333 2.24506 13.6362C2.08476 13.9394 2.00077 14.2771 2.00038 14.62C1.99243 15.0425 2.10975 15.4579 2.33754 15.8138C2.56533 16.1698 2.8934 16.4503 3.28038 16.62C3.10063 16.9229 3.00404 17.2678 3.00038 17.62C2.99951 18.1621 3.20632 18.6839 3.5783 19.0782C3.95028 19.4725 4.45917 19.7093 5.00038 19.74V19.88C5.00038 20.4423 5.22374 20.9815 5.62131 21.3791C6.01889 21.7767 6.55812 22 7.12038 22H14.6104C15.8524 21.9989 17.0775 21.7115 18.1904 21.16L18.5004 21H21.0004V11H19.4604ZM19.0004 19H18.0004L17.2704 19.37C16.4332 19.7816 15.5133 19.9971 14.5804 20H7.72038C7.49723 20.0089 7.27754 19.9428 7.0963 19.8123C6.91507 19.6819 6.78273 19.4945 6.72038 19.28L6.47038 18.41L5.62038 18C5.4246 17.9203 5.25914 17.7805 5.14774 17.6009C5.03635 17.4212 4.98476 17.2108 5.00038 17L5.17038 16L4.41038 15.26C4.24503 15.0985 4.14072 14.8848 4.1152 14.655C4.08967 14.4253 4.14451 14.1939 4.27038 14L4.93038 12.91L4.20038 11.81C4.15861 11.7593 4.12748 11.7006 4.10885 11.6376C4.09022 11.5745 4.08447 11.5084 4.09193 11.4431C4.0994 11.3777 4.11993 11.3146 4.1523 11.2574C4.18468 11.2002 4.22823 11.15 4.28038 11.11C4.37533 11.031 4.49711 10.9916 4.62038 11H11.6704L10.3604 7.08002C10.1215 6.36426 9.99994 5.61458 10.0004 4.86002V3.75002C10.0054 3.5527 10.0861 3.36486 10.2257 3.22529C10.3652 3.08572 10.5531 3.00508 10.7504 3.00002C10.9072 3.00014 11.06 3.0494 11.1874 3.14088C11.3147 3.23236 11.4102 3.36146 11.4604 3.51002L12.0004 5.00002C12.4318 6.31493 13.1607 7.51263 14.1304 8.50002L18.6304 13H19.0004V19Z"
-													fill="black" />
-											</g>
-										</svg>
-										<span>Like</span>
-									</div>
-									<div class="d-flex flex-column"><svg xmlns="http://www.w3.org/2000/svg" width="25"
-											height="24" viewBox="0 0 25 24" fill="none">
-											<g opacity="0.6">
-												<path
-													d="M7.5 9H17.5V10H7.5V9ZM7.5 13H14.5V12H7.5V13ZM23.5 11C23.5148 12.0949 23.2643 13.1772 22.7697 14.1541C22.2751 15.1311 21.5512 15.9738 20.66 16.61L12.5 22V18H8.5C6.64348 18 4.86301 17.2625 3.55025 15.9497C2.2375 14.637 1.5 12.8565 1.5 11C1.5 9.14348 2.2375 7.36301 3.55025 6.05025C4.86301 4.7375 6.64348 4 8.5 4H16.5C18.3565 4 20.137 4.7375 21.4497 6.05025C22.7625 7.36301 23.5 9.14348 23.5 11ZM21.5 11C21.5 9.67392 20.9732 8.40215 20.0355 7.46447C19.0979 6.52678 17.8261 6 16.5 6H8.5C7.17392 6 5.90215 6.52678 4.96447 7.46447C4.02678 8.40215 3.5 9.67392 3.5 11C3.5 12.3261 4.02678 13.5979 4.96447 14.5355C5.90215 15.4732 7.17392 16 8.5 16H14.5V18.28L19.5 15C20.1336 14.5463 20.6469 13.9448 20.9955 13.2477C21.344 12.5507 21.5172 11.7791 21.5 11Z"
-													fill="black" />
-											</g>
-										</svg>
-										<span class="action-txt">Comment</span>
-									</div>
-									<div class="d-flex flex-column"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-											height="24" viewBox="0 0 24 24" fill="none">
-											<path
-												d="M13.96 5H6C5.45 5 5 5.45 5 6V16H3V6C3 4.34 4.34 3 6 3H13.96L12 0H14.37L17 4L14.37 8H12L13.96 5ZM19.5 8H19V18C19 18.55 18.55 19 18 19H10.04L12 16H9.63L7 20L9.63 24H12L10.04 21H18C19.66 21 21 19.66 21 18V8H19.5Z"
-												fill="black" fill-opacity="0.6" />
-										</svg><span class="action-txt">Repost</span></div>
 								</div>
 
-								<div class="post_topbar mt-10">
-									<div class="usy-dt">
-										<img [src]="currentUser?.imageUrl?currentUser.imageUrl:'https://media.licdn.com/dms/image/D4D03AQFh04MZVayabg/profile-displayphoto-shrink_100_100/0/1699107838969?e=1706140800&v=beta&t=i-h1Q_AFx6unHK3FyXnsAC7xvsqjBdt12kicr1Nfdds'"
-											alt="">
-										<div class="usy-name">
-											<!-- <input> -->
-											<div class="input-group mb-3">
-												<input type="text" class="form-control"
-													placeholder="Recipient's username" aria-label="Recipient's username"
-													aria-describedby="basic-addon2">
-												<div class="input-group-append">
-													<button class="btn btn-outline-secondary"
-														type="button">Button</button>
-												</div>
+								<div class="d-flex justify-content-between mt-3 border-top pt-3 px-5">
+									<div class="text-center">
+										<img src="assets/imgs/like.svg" class="img-fluid">
+										<span class="action-txt">
+											Like
+										</span>
+									</div>
+									<div class="text-center">
+										<img src="assets/imgs/comment.svg" class="img-fluid">
+										<span class="action-txt">
+											Comment
+										</span>
+									</div>
+									<div class="text-center">
+										<img src="assets/imgs/repost.svg" class="img-fluid">
+										<span class="action-txt">
+											Repost
+										</span>
+									</div>
+								</div>
+
+								<div class="usy-dt mt-5 px-5 pb-5">
+									<img class="my-auto"
+										[src]="currentUser?.imageUrl?currentUser.imageUrl:'https://media.licdn.com/dms/image/D4D03AQFh04MZVayabg/profile-displayphoto-shrink_100_100/0/1699107838969?e=1706140800&v=beta&t=i-h1Q_AFx6unHK3FyXnsAC7xvsqjBdt12kicr1Nfdds'">
+									<div class="usy-name w-100">
+										<div class="input-group w-100">
+											<input type="text" class="form-control" placeholder="add a comment">
+											<div class="input-group-append">
+												<button class="btn position-relative py-2 m-0" type="button">
+													<img src="assets/imgs/shareImage.svg" class="img-fluid m-0">
+												</button>
 											</div>
 										</div>
-
 									</div>
 
 								</div>
-							</div><!--posts-section end-->
+
+							</div>
 
 						</div>
 
